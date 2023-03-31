@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 
 export default function home() {
-  //  start fungsi fungsi untuk react hook form dan yup validation schema
+  //  start fungsi fungsi untuk react hook form 
   const {
     register,
     handleSubmit,
@@ -25,7 +25,7 @@ export default function home() {
     mode: "onTouched",
   });
   const onSubmit = (data) => console.log(data);
-  //  end fungsi fungsi untuk react hook form dan yup validation schema
+  //  end fungsi fungsi untuk react hook form 
 
   // watch events
   const email = watch("email");
