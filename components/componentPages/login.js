@@ -10,32 +10,31 @@ import TextField from "@mui/material/TextField";
 
 // next required module
 import Link from "next/link";
-// react required module
-import { useMemo } from "react";
 
 // react hook form and yup validation schema required modules
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { data } from "autoprefixer";
 
 export default function home() {
   //  start fungsi fungsi untuk react hook form dan yup validation schema
   const {
     register,
     handleSubmit,
-    formState: { isDirty, isValid },
+    watch,
+    formState: { errors },
   } = useForm({
-    mode: "onChange",
+    mode: "onTouched",
   });
   const onSubmit = (data) => console.log(data);
   //  end fungsi fungsi untuk react hook form dan yup validation schema
 
-  // start fungsi disabled button
-  // const isDisabled = useMemo(() => {
-  //   return !Object.values(data).every((val) => !!val);
-  // }, [data]);
-  // end fungsi disabled button
+  // watch events
+  const email = watch("email");
+  const password = watch("password");
+  // console.log('email', email)
+  // console.log('password', password)
+
+  // handle disabled submit button
+  const isValid = email && password;
 
   return (
     <main className=" p-[20px] lg:py-[5%]">
@@ -78,47 +77,83 @@ export default function home() {
         </Swiper>
 
         <div className=" h-2/3 lg:h-full w-full rounded-r-[10px]">
-          <div className="pt-[35px] flex flex-col items-center">
+          <div className=" pt-[25px]  lg:pt-[35px] flex flex-col items-center">
             <img
               src="/favicon.png"
               alt="logo"
-              className="w-[65px] lg:w-[95px] h-[65px] lg:h-[95px] object-cover"
+              className="w-[60px] lg:w-[90px] h-[60px] lg:h-[90px] object-cover"
             />
             <img
               src="/logotulisan.png"
               alt="logotulisan"
-              className="w-[155px] lg:w-[220px] h-[70px] lg:h-[105px] object-cover"
+              className="w-[150px] lg:w-[215px] h-[65px] lg:h-[100px] object-cover"
             />
           </div>
-          <div className="flex flex-col gap-5 w-full px-[50px] py-[15px]">
+          <div className="flex flex-col  gap-[15px]  px-[50px] py-[10px]">
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col gap-5"
+              className="flex flex-col gap-[15px]"
             >
               <TextField
                 required
-                {...register("email")}
+                {...register("email", {
+                  required: {
+                    value: true,
+                    message: "email name is required",
+                  },
+                  minLength: {
+                    value: 3,
+                    message: "Please enter your email name",
+                  },
+                  maxLength: {
+                    value: 50,
+                    message: "Maximum allowed length is 50 characters ",
+                  },
+                  pattern: {
+                    value: /[a-zA-Z]+/,
+                    message: "Please enter only alphabets",
+                  },
+                })}
                 id="outlined-required email"
                 label="University Email"
                 type="email"
                 defaultValue="john.wick@student.umn.ac.id"
-                // error={emailError}
+                error={errors.email}
+                helperText={errors.email && errors.email.message}
               />
               <TextField
                 required
-                {...register("password")}
+                {...register("password", {
+                  required: {
+                    value: true,
+                    message: "Password is required",
+                  },
+                  minLength: {
+                    value: 3,
+                    message: "Please enter your Password",
+                  },
+                  maxLength: {
+                    value: 20,
+                    message: "Maximum allowed length is 20 characters ",
+                  },
+                  pattern: {
+                    value: /[a-zA-Z]+/,
+                    message: "Please enter only alphabets",
+                  },
+                })}
                 id="outlined-password-input password"
                 label="Password"
                 type="password"
                 autoComplete="current-password"
-                // error={passwordError}
+                error={errors.password}
+                helperText={errors.password && errors.password.message}
               />
               <Button
                 variant="contained"
                 type="submit"
                 size="large"
                 className=" bg-birulogo-sr !capitalize  "
-                disabled={isDirty || !isValid}
+                disabled={!isValid}
               >
                 Login
               </Button>
