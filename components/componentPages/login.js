@@ -14,6 +14,8 @@ import Link from "next/link";
 // react hook form and yup validation schema required modules
 import { useForm } from "react-hook-form";
 
+import { SignIn } from "@/lib/firebase";
+
 export default function home() {
   //  start fungsi fungsi untuk react hook form 
   const {
@@ -24,17 +26,16 @@ export default function home() {
   } = useForm({
     mode: "onTouched",
   });
+  
   const onSubmit = (data) => console.log(data);
   //  end fungsi fungsi untuk react hook form 
 
   // watch events
-  const email = watch("email");
-  const password = watch("password");
-  // console.log('email', email)
-  // console.log('password', password)
+  const watchEmail = watch("email");
+  const watchPassword = watch("password");
 
   // handle disabled submit button
-  const isValid = email && password;
+  const isValid = watchEmail && watchPassword;
 
   return (
     <main className=" p-[20px] lg:py-[5%]">
@@ -152,7 +153,7 @@ export default function home() {
                 variant="contained"
                 type="submit"
                 size="large"
-                className=" bg-birulogo-sr !capitalize  "
+                className=" bg-birulogo-sr !capitalize"
                 disabled={!isValid}
               >
                 Login

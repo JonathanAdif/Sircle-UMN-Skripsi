@@ -39,10 +39,10 @@ function sidebar() {
         <div className="flex flex-col gap-[5px]">
           {/* start menu atas ori  */}
 
-          <Link href="/">
+          <Link href="/global">
             <Button
               className={
-                pathname === "/"
+                pathname === "/global"
                   ? activeClasses
                   : nonActiveClasses
               }
