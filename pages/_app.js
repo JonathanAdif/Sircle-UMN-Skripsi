@@ -14,6 +14,9 @@ const theme = createTheme({
   },
 });
 
+// import modul metod untuk mengetahui user authenticated atau tidak 
+import AuthStateChangeProvider from "@/context/authenticateUser";
+
 export default function App({ Component, pageProps }) {
   return (
     <main className="!bg-graybg-sr !font-poppins">
@@ -42,6 +45,7 @@ export default function App({ Component, pageProps }) {
         ></link>
       </Head>
       <ThemeProvider theme={theme}>
+        <AuthStateChangeProvider />
         <Component {...pageProps} />
       </ThemeProvider>
     </main>

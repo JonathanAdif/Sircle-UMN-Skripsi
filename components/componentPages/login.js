@@ -14,10 +14,11 @@ import Link from "next/link";
 // react hook form and yup validation schema required modules
 import { useForm } from "react-hook-form";
 
-import { SignIn } from "@/lib/firebase";
+import { SignIn, GetSignInErrorMessage } from "@/lib/firebase";
+import { data } from "autoprefixer";
 
 export default function home() {
-  //  start fungsi fungsi untuk react hook form 
+  //  start fungsi fungsi untuk react hook form
   const {
     register,
     handleSubmit,
@@ -26,9 +27,17 @@ export default function home() {
   } = useForm({
     mode: "onTouched",
   });
-  
-  const onSubmit = (data) => console.log(data);
-  //  end fungsi fungsi untuk react hook form 
+
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    try {
+      await SignIn(email, password);
+    } catch (error) {
+      const message = GetSignInErrorMessage(error.code);
+      console.log(message);
+    }
+  };
+  //  end fungsi fungsi untuk react hook form
 
   // watch events
   const watchEmail = watch("email");
@@ -110,10 +119,10 @@ export default function home() {
                     value: 50,
                     message: "Maximum allowed length is 50 characters ",
                   },
-                  pattern: {
-                    value: /[a-zA-Z]+/,
-                    message: "Please enter only alphabets",
-                  },
+                  // pattern: {
+                  //   value: /[a-zA-Z]+/,
+                  //   message: "Please enter only alphabets",
+                  // },
                 })}
                 id="outlined-required email"
                 label="University Email"
@@ -137,10 +146,10 @@ export default function home() {
                     value: 20,
                     message: "Maximum allowed length is 20 characters ",
                   },
-                  pattern: {
-                    value: /[a-zA-Z]+/,
-                    message: "Please enter only alphabets",
-                  },
+                  // pattern: {
+                  //   value: /[a-zA-Z]+/,
+                  //   message: "Please enter only alphabets",
+                  // },
                 })}
                 id="outlined-password-input password"
                 label="Password"
@@ -161,7 +170,7 @@ export default function home() {
             </form>
 
             <div className="w-full text-center font-medium text-birulogo-sr text-[10px] lg:text-xs ">
-              <Link Link href="/forgotPass" className="cursor-pointer">
+              <Link href="/forgotPass" className="cursor-pointer">
                 Forgot Password ?
               </Link>
             </div>
@@ -170,7 +179,8 @@ export default function home() {
       </div>
 
       <div className="w-full text-center mt-5 lg:mt-8 font-medium text-oldgray-sr text-[10px] lg:text-xs">
-        Copyright @ 2023 JA - GK
+        <div>Copyright @ 2023 JA - GK</div>
+        <div>Version 0.1.0</div>
       </div>
     </main>
   );
