@@ -14,8 +14,9 @@ const theme = createTheme({
   },
 });
 
-// import modul metod untuk mengetahui user authenticated atau tidak 
-import AuthStateChangeProvider from "@/context/authenticateUser";
+// import modul metod untuk mengetahui user authenticated atau tidak
+import GlobalContextProvider from "@/state/context/globalContext";
+
 
 export default function App({ Component, pageProps }) {
   return (
@@ -45,8 +46,9 @@ export default function App({ Component, pageProps }) {
         ></link>
       </Head>
       <ThemeProvider theme={theme}>
-        <AuthStateChangeProvider />
-        <Component {...pageProps} />
+        <GlobalContextProvider>
+          <Component {...pageProps} />
+        </GlobalContextProvider>
       </ThemeProvider>
     </main>
   );
