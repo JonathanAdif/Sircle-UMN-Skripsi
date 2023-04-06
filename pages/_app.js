@@ -14,11 +14,15 @@ const theme = createTheme({
   },
 });
 
-// import modul metod untuk mengetahui user authenticated atau tidak
-import GlobalContextProvider from "@/state/context/globalContext";
+// module supabase next
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
+import { useState } from "react";
 
 
 export default function App({ Component, pageProps }) {
+  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+
   return (
     <main className="!bg-graybg-sr !font-poppins">
       <Head>
@@ -46,9 +50,12 @@ export default function App({ Component, pageProps }) {
         ></link>
       </Head>
       <ThemeProvider theme={theme}>
-        <GlobalContextProvider>
+        <SessionContextProvider
+          supabaseClient={supabaseClient}
+          initialSession={pageProps.initialSession}
+        >
           <Component {...pageProps} />
-        </GlobalContextProvider>
+        </SessionContextProvider>
       </ThemeProvider>
     </main>
   );

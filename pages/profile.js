@@ -1,9 +1,7 @@
 import ProfileComponent from "@/components/componentPages/profileComponent";
 
 function profilePage() {
-    return (
-        <ProfileComponent />
-    );
+  return <ProfileComponent />;
 }
 
 export default profilePage;
