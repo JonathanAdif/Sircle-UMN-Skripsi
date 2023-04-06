@@ -97,22 +97,22 @@ function postcontainer() {
       <ButtonGroup
         variant="contained"
         aria-label="outlined primary button group"
-        className="w-full !shadow-none !rounded-none flex flex-row gap-[5px]"
+        className="!w-full !shadow-none !rounded-none !flex !flex-row !gap-[5px]"
       >
         <Button
-          className="w-full text-oldgray-sr py-[10px] hover:bg-birulogo-sr hover:text-white-sr  bg-white-sr capitalize !border-none !shadow-none !rounded-[5px] "
+          className="ctapostbutton"
           startIcon={<i className="fi fi-rr-social-network menu-icon"></i>}
         >
           Like
         </Button>
         <Button
-          className="w-full text-oldgray-sr py-[10px] hover:bg-birulogo-sr hover:text-white-sr  bg-white-sr capitalize !border-none !shadow-none !rounded-[5px] "
+          className="ctapostbutton"
           startIcon={<i className="fi fi-rr-arrows-retweet menu-icon "></i>}
         >
           Resircle
         </Button>
         <Button
-          className="w-full text-oldgray-sr py-[10px] hover:bg-birulogo-sr hover:text-white-sr  bg-white-sr capitalize !border-none !shadow-none !rounded-[5px] "
+          className="ctapostbutton"
           startIcon={<i className="fi fi-rr-comment-alt  menu-icon "></i>}
         >
           Comment

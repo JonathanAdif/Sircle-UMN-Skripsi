@@ -1,6 +1,8 @@
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
+// import { supabase } from "@/lib/supabase";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 // start function untuk button close sidebar
 function sidebar() {
@@ -15,6 +17,11 @@ function sidebar() {
   const activeClasses = "menu-btn-active menu-name";
   const nonActiveClasses = "menu-btn menu-name";
   // end variabel untuk active class
+
+  const supabase = useSupabaseClient();
+  async function GoogleLogout() {
+    await supabase.auth.signOut()
+  }
 
   return (
     <div class="sidebar z-20 font-poppins drop-shadow-navbar fixed top-0 bottom-0 lg:left-0 p-2 w-10/12 lg:w-3/12 overflow-y-auto text-center bg-white-sr hidden lg:block">
@@ -39,10 +46,10 @@ function sidebar() {
         <div className="flex flex-col gap-[5px]">
           {/* start menu atas ori  */}
 
-          <Link href="/global">
+          <Link href="/">
             <Button
               className={
-                pathname === "/global"
+                pathname === "/"
                   ? activeClasses
                   : nonActiveClasses
               }
@@ -119,6 +126,7 @@ function sidebar() {
           <Button
             className="menu-btn menu-name "
             startIcon={<i class="fi fi-rr-sign-out-alt menu-icon"></i>}
+            onClick={GoogleLogout}
           >
             Logout
           </Button>

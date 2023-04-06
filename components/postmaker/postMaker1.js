@@ -41,7 +41,7 @@ function postMaker1() {
           <Button
             variant="outlined"
             onClick={handleOpen}
-            className="w-full pl-[10px] capitalize !justify-start border-oldgray-sr text-gray-sr text-xs lg:text-sm font-normal"
+            className="!w-full !pl-[10px] !capitalize !justify-start !border-oldgray-sr !text-gray-sr !text-xs lg:!text-sm !font-normal"
           >
             Whats going on in your beautiful mind...
           </Button>

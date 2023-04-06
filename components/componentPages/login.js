@@ -6,10 +6,10 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 
 // module untuk google button
 import GoogleButton from "react-google-button";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { supabase } from "@/lib/supabase"; //digunakan karena env dibaca secara manual 
 
 export default function Home() {
-  const supabase = useSupabaseClient;
+
   async function GoogleLogin() {
     await supabase.auth.signInWithOAuth({
       provider: "google",

@@ -5,22 +5,22 @@
 @layer components {
   /* start header sidebar style  */
   .menu-btn {
-    @apply w-full py-[15px] flex flex-row gap-2.5 capitalize items-center rounded-[5px]  hover:bg-birulogo-sr 
-      text-oldgray-sr hover:text-white-sr !justify-start pl-[50px];
+    @apply !w-full !py-[15px] !flex !flex-row !gap-2.5 !capitalize !items-center !rounded-[5px]  hover:!bg-birulogo-sr 
+      !text-oldgray-sr hover:!text-white-sr !justify-start !pl-[50px];
   }
   .menu-btn-active {
-    @apply w-full py-[15px] flex flex-row gap-2.5 capitalize items-center rounded-[5px]  !bg-birulogo-sr !text-white-sr !justify-start pl-[50px] ;
+    @apply !w-full !py-[15px] !flex !flex-row !gap-2.5 !capitalize !items-center !rounded-[5px]  !bg-birulogo-sr !text-white-sr !justify-start !pl-[50px];
   }
   .menu-icon {
-    @apply text-xl h-[25px];
+    @apply !text-xl !h-[25px];
   }
   .menu-name {
-    @apply !text-[14px] lg:!text-[16px] font-semibold;
+    @apply !text-[14px] lg:!text-[16px] !font-semibold;
   }
   .search-area {
-    @apply py-[5px] lg:py-[10px] pl-[15px] pr-10 lg:pr-[120px] duration-300 cursor-pointer bg-white-sr
-      text-oldgray-sr gap-[15px] lg:ml-10 flex items-center rounded-[5px] lg:rounded-[10px] border-[1px] 
-      border-solid border-oldgray-sr;
+    @apply !py-[5px] lg:!py-[10px] !pl-[15px] !pr-10 lg:!pr-[120px] !duration-300 !cursor-pointer !bg-white-sr
+      !text-oldgray-sr !gap-[15px] lg:!ml-10 !flex !items-center !rounded-[5px] lg:!rounded-[10px] !border-[1px] 
+      !border-solid !border-oldgray-sr;
   }
   /* end header sidebar style  */
 
@@ -40,4 +40,9 @@
     @apply w-4/12 hidden lg:block;
   }
   /* end layout style  */
+  /* start post container style  */
+  .ctapostbutton{
+    @apply !w-full !text-oldgray-sr !py-[10px] hover:!bg-birulogo-sr hover:!text-white-sr  !bg-white-sr !capitalize !border-none !shadow-none !rounded-[5px];
+  }
+  /* end post container style  */
 }

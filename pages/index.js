@@ -2,7 +2,7 @@ import Feed from "@/components/componentPages/feed";
 import { useSession } from "@supabase/auth-helpers-react";
 import LoginPage from "./login";
 
-function index() {
+function Index() {
   const session = useSession();
 
 
@@ -13,4 +13,4 @@ function index() {
   return <Feed />;
 }
 
-export default index;
+export default Index;
