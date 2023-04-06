@@ -6,8 +6,16 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 
 // module untuk google button
 import GoogleButton from "react-google-button";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function Home() {
+  const supabase = useSupabaseClient;
+  async function GoogleLogin() {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+  }
+
   return (
     <main className=" p-[20px] lg:py-[5%]">
       <div className=" w-full lg:w-[940px] h-screen lg:h-[525px] bg-white-sr lg:m-auto rounded-[10px] flex lg:flex-row drop-shadow-login2 flex-col">
@@ -64,9 +72,7 @@ export default function Home() {
           <div className=" w-full h-fit flex flex-col items-center px-[50px]">
             <GoogleButton
               className="!w-full !font-poppins "
-              onClick={() => {
-                console.log("Google button clicked");
-              }}
+              onClick={GoogleLogin}
             />
           </div>
           <div className="w-full text-center mt-5 lg:mt-8 font-medium text-oldgray-sr text-[10px] lg:text-xs">
