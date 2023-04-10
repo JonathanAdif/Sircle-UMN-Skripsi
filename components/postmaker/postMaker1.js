@@ -28,16 +28,16 @@ function postMaker1() {
 
   return (
     <>
-      <div className="w-full h-fit px-5 py-[30px] bg-white-sr rounded-[10px] drop-shadow-komponenIsi flex flex-col gap-[15px]">
-        <div className="flex flex-col text-center lg:text-left">
-          <div className="font-bold text-base lg:text-xl text-black-sr">
+      <fragment className="w-full h-fit px-5 py-[30px] bg-white-sr rounded-[10px] drop-shadow-komponenIsi flex flex-col gap-[15px]">
+        <fragment className="flex flex-col text-center lg:text-left">
+          <fragment className="font-bold text-base lg:text-xl text-black-sr">
             <span className="text-birulogo-sr">Hi!</span>, How Are You Today?
-          </div>
-          <div className="font-semibold text-sm lg:text-base text-black-sr">
+          </fragment>
+          <fragment className="font-semibold text-sm lg:text-base text-black-sr">
             Let’s make an awesome post 🎉
-          </div>
-        </div>
-        <div className="w-full h-fit">
+          </fragment>
+        </fragment>
+        <fragment className="w-full h-fit">
           <Button
             variant="outlined"
             onClick={handleOpen}
@@ -45,8 +45,8 @@ function postMaker1() {
           >
             Whats going on in your beautiful mind...
           </Button>
-        </div>
-      </div>
+        </fragment>
+      </fragment>
       {/* start modal  */}
       <Modal
         open={open}
@@ -55,16 +55,16 @@ function postMaker1() {
         aria-describedby="modal-modal-description"
         className="!font-poppins"
       >
-        <div className=" w-11/12 lg:w-6/12 h-fit bg-white-sr m-auto mt-20 px-5 py-[30px] flex flex-col gap-[15px] rounded-[10px]">
+        <fragment className=" w-11/12 lg:w-6/12 h-fit bg-white-sr m-auto mt-20 px-5 py-[30px] flex flex-col gap-[15px] rounded-[10px]">
           <i className="fi fi-rr-cross-circle flex flex-row justify-end text-xl text-birulogo-sr cursor-pointer"></i>
-          <div className="w-full h-fit font-bold text-black-sr text-xl">
+          <fragment className="w-full h-fit font-bold text-black-sr text-xl">
             Go! Write Something Amazing!
-          </div>
+          </fragment>
           <TextareaAutosize
             className="w-full h-fit py-2.5 px-2.5 resize-none"
             placeholder="Whats going on in your beautiful mind..."
           />
-          <div className="flex flex-row justify-between items-center">
+          <fragment className="flex flex-row justify-between items-center">
             {/* start popover area  */}
             <i
               className="fi fi-rr-messages-question !text-xl w-5 h-5 !text-oldgray-sr"
@@ -100,7 +100,7 @@ function postMaker1() {
 
             {/* end popover area  */}
 
-            <div className="flex flex-row gap-[15px] !items-center">
+            <fragment className="flex flex-row gap-[15px] !items-center">
               <IconButton
                 color="primary"
                 aria-label="upload picture"
@@ -116,9 +116,9 @@ function postMaker1() {
               >
                 Post
               </Button>
-            </div>
-          </div>
-        </div>
+            </fragment>
+          </fragment>
+        </fragment>
       </Modal>
       {/* end modal  */}
     </>

@@ -24,26 +24,26 @@ function sidebar() {
   }
 
   return (
-    <div class="sidebar z-20 font-poppins drop-shadow-navbar fixed top-0 bottom-0 lg:left-0 p-2 w-10/12 lg:w-3/12 overflow-y-auto text-center bg-white-sr hidden lg:block">
-      <div class=" w-full flex flex-col items-center py-[50px]">
+    <fragment class="sidebar z-20 font-poppins drop-shadow-navbar fixed top-0 bottom-0 lg:left-0 p-2 w-10/12 lg:w-3/12 overflow-y-auto text-center bg-white-sr hidden lg:block">
+      <fragment class=" w-full flex flex-col items-center py-[50px]">
         <img
           src="/logotulisan.png"
           alt="logotulisan"
           className="w-[155px] lg:w-[220px] h-[70px] lg:h-[105px] object-cover"
         />
-      </div>
+      </fragment>
 
       <i
         className="fi fi-rr-cross-circle absolute top-5 right-5 text-xl text-birulogo-sr cursor-pointer lg:hidden"
         onClick={openSidebar}
       ></i>
 
-      <div className="flex flex-col gap-5">
-        <div class="w-full text-left pl-10 text-black-sr">
+      <fragment className="flex flex-col gap-5">
+        <fragment class="w-full text-left pl-10 text-black-sr">
           <span>Menu</span>
-        </div>
+        </fragment>
 
-        <div className="flex flex-col gap-[5px]">
+        <fragment className="flex flex-col gap-[5px]">
           {/* start menu atas ori  */}
 
           <Link href="/">
@@ -90,15 +90,15 @@ function sidebar() {
           {/* start menu atas tambahan */}
 
           {/* end menu atas tambahan  */}
-        </div>
+        </fragment>
 
-        <div class=" bg-gray-sr h-[1px] w-10/12 px-5 m-auto"></div>
+        <fragment class=" bg-gray-sr h-[1px] w-10/12 px-5 m-auto"></fragment>
 
-        <div class="w-full text-left pl-10 text-black-sr">
+        <fragment class="w-full text-left pl-10 text-black-sr">
           <span>Settings</span>
-        </div>
+        </fragment>
 
-        <div className="flex flex-col gap-[5px]">
+        <fragment className="flex flex-col gap-[5px]">
           {/* start menu bawah tambahan  */}
 
           {/* end menu bawah tambahan  */}
@@ -131,13 +131,13 @@ function sidebar() {
             Logout
           </Button>
           {/* end menu bawah ori  */}
-        </div>
+        </fragment>
 
-        <div class="my-[35px] text-[10px] w-full text-left pl-12 text-black-sr">
+        <fragment class="my-[35px] text-[10px] w-full text-left pl-12 text-black-sr">
           <span>JA & GK 2023. All Rights Reserved.</span>
-        </div>
-      </div>
-    </div>
+        </fragment>
+      </fragment>
+    </fragment>
   );
 }
 

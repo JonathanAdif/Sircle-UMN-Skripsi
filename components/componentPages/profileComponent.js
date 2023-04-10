@@ -9,17 +9,17 @@ function profileComponent() {
     <>
       <Header />
       <Sidebar />
-      <div className="mainLayout2">
+      <fragment className="mainLayout2">
         <ProfileBanner />
-        <div className="flex flex-row gap-5">
-          <div className="mainLeftlayout">
+        <fragment className="flex flex-row gap-5">
+          <fragment className="mainLeftlayout">
             <Postcontainer />
-          </div>
-          <div className="mainRightlayout">
+          </fragment>
+          <fragment className="mainRightlayout">
             <Rightbar2 />
-          </div>
-        </div>
-      </div>
+          </fragment>
+        </fragment>
+      </fragment>
     </>
   );
 }

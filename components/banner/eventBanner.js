@@ -1,8 +1,8 @@
 function eventBanner() {
     return (
-        <div>
+        <fragment>
             Enter
-        </div>
+        </fragment>
     );
 }
 

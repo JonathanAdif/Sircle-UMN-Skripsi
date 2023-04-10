@@ -9,15 +9,15 @@ function feed() {
     <>
       <Header />
       <Sidebar />
-      <div className="mainLayout">
-        <div className="mainLeftlayout">
+      <fragment className="mainLayout">
+        <fragment className="mainLeftlayout">
           <PostMaker1 />
           <Postcontainer />
-        </div>
-        <div className="mainRightlayout">
+        </fragment>
+        <fragment className="mainRightlayout">
           <Rightbar1 />
-        </div>
-      </div>
+        </fragment>
+      </fragment>
     </>
   );
 }

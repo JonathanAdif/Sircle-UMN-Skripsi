@@ -8,32 +8,32 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 
 function postcontainer() {
   return (
-    <div className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-komponenIsi flex flex-col gap-5">
+    <fragment className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-komponenIsi flex flex-col gap-5">
       {/* <!-- start header postingan  --> */}
-      <div className="flex flex-row justify-between items-start">
-        <div className="flex flex-row gap-2.5 items-center">
+      <fragment className="flex flex-row justify-between items-start">
+        <fragment className="flex flex-row gap-2.5 items-center">
           <img
             src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
             className="w-[45px] lg:w-[45px] rounded-full cursor-pointer"
             alt="Avatar"
           />
-          <div>
-            <div className="text-base font-semibold text-black-sr">
+          <fragment>
+            <fragment className="text-base font-semibold text-black-sr">
               Luiz Clint Harry
-            </div>
-            <div className="flex flex-row gap-[2px]">
-              {/* <div className="font-semibold text-xs text-oldgray-sr">
+            </fragment>
+            <fragment className="flex flex-row gap-[2px]">
+              {/* <fragment className="font-semibold text-xs text-oldgray-sr">
               00000078998
-            </div> */}
-              <div className="flex flex-row gap-[2px] text-xs text-oldgray-sr font-normal">
+            </fragment> */}
+              <fragment className="flex flex-row gap-[2px] text-xs text-oldgray-sr font-normal">
                 <span>20</span>Hours Ago
-              </div>
-            </div>
-          </div>
-        </div>
+              </fragment>
+            </fragment>
+          </fragment>
+        </fragment>
 
         <i className="fi fi-rr-bookmark text-xl pt-[7px] cursor-pointer text-oldgray-sr"></i>
-      </div>
+      </fragment>
       {/* <!-- end header postingan  --> */}
 
       {/* <!-- start konten caption isi postingan  --> */}
@@ -78,19 +78,19 @@ function postcontainer() {
       {/* <!-- end komponen slider gambar postingan  --> */}
 
       {/* start status like & comment  */}
-      <div className="flex flex-row justify-between items-center">
-        <div className="flex flex-row items-center gap-2.5 h-fit">
+      <fragment className="flex flex-row justify-between items-center">
+        <fragment className="flex flex-row items-center gap-2.5 h-fit">
           <i className="fi fi-sr-thumbs-up text-xl h-[23px] cursor-pointer text-oldgray-sr "></i>
-          <div className="flex flex-row gap-[2px] font-semibold text-xs text-oldgray-sr">
+          <fragment className="flex flex-row gap-[2px] font-semibold text-xs text-oldgray-sr">
             <span>50</span>Likes
-          </div>
-        </div>
-        <div>
-          <div className="font-semibold text-xs text-oldgray-sr flex flex-row gap-[2px] cursor-pointer">
+          </fragment>
+        </fragment>
+        <fragment>
+          <fragment className="font-semibold text-xs text-oldgray-sr flex flex-row gap-[2px] cursor-pointer">
             <span>20</span>Comments
-          </div>
-        </div>
-      </div>
+          </fragment>
+        </fragment>
+      </fragment>
       {/* end status like & comment  */}
       <hr className="w-full h-[1px] bg-gray-sr"></hr>
       {/* <!-- start button cta postingan  --> */}
@@ -119,7 +119,7 @@ function postcontainer() {
         </Button>
       </ButtonGroup>
       {/* <!-- end button cta postingan --> */}
-    </div>
+    </fragment>
   );
 }
 

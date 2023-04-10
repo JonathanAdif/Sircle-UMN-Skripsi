@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 
 function profileBanner() {
   return (
-    <div className="w-full bg-white-sr drop-shadow-komponenIsi rounded-[10px] h-fit flex flex-col">
+    <fragment className="w-full bg-white-sr drop-shadow-komponenIsi rounded-[10px] h-fit flex flex-col">
       {/* start profile photo  */}
       <img
         src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
@@ -18,38 +18,38 @@ function profileBanner() {
       />
       {/* end banner photo  */}
       {/* start button edit profile area  */}
-      <div className="w-full h-fit flex justify-end p-5 ">
+      <fragment className="w-full h-fit flex justify-end p-5 ">
         <Button
           variant="outlined"
           className="!capitalize !text-birulogo-sr !border-birulogo-sr !text-xs lg:!text-sm !border-[2px] "
         >
           Edit Profile
         </Button>
-      </div>
+      </fragment>
       {/* end button edit profile area  */}
       {/* start profile stat area  */}
-      <div className="pt-[5px] pb-[35px] w-full h-fit">
-        <div className="w-full px-5 h-fit m-auto flex flex-col gap-2.5">
-          <div className="flex flex-col gap-[2px]">
-            <div className="font-bold text-xl lg:text-2xl text-black-sr  ">
+      <fragment className="pt-[5px] pb-[35px] w-full h-fit">
+        <fragment className="w-full px-5 h-fit m-auto flex flex-col gap-2.5">
+          <fragment className="flex flex-col gap-[2px]">
+            <fragment className="font-bold text-xl lg:text-2xl text-black-sr  ">
               Jonathan Christian Adif Sugiarto
-            </div>
-            <div className="font-medium text-sm lg:!text-base text-oldgray-sr flex flex-row gap-2.5">
+            </fragment>
+            <fragment className="font-medium text-sm lg:!text-base text-oldgray-sr flex flex-row gap-2.5">
               <span>Informatika </span>
               <span>|</span>
               <span>00000034563</span>
-            </div>
-          </div>
+            </fragment>
+          </fragment>
           <p className="font-medium text-xs lg:text-sm text-black-sr">
             Lorem ipsum dolor sit amet consectetur. Interdum pretium enim montes
             eu amet fermentum lorem integer. Lorem ipsum dolor sit amet
             consectetur. Interdum pretium enim montes eu amet fermentum lorem
             integer.
           </p>
-        </div>
-      </div>
+        </fragment>
+      </fragment>
       {/* end profile stat area  */}
-    </div>
+    </fragment>
   );
 }
 

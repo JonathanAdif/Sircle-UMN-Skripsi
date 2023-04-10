@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <main className=" p-[20px] lg:py-[5%]">
-      <div className=" w-full lg:w-[940px] h-screen lg:h-[525px] bg-white-sr lg:m-auto rounded-[10px] flex lg:flex-row drop-shadow-login2 flex-col">
+      <fragment className=" w-full lg:w-[940px] h-screen lg:h-[525px] bg-white-sr lg:m-auto rounded-[10px] flex lg:flex-row drop-shadow-login2 flex-col">
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
@@ -56,8 +56,8 @@ export default function Home() {
           </SwiperSlide>
         </Swiper>
 
-        <div className=" h-2/3 lg:h-full w-full rounded-r-[10px] flex flex-col justify-between py-[70px]">
-          <div className="flex flex-col items-center">
+        <fragment className=" h-2/3 lg:h-full w-full rounded-r-[10px] flex flex-col justify-between py-[70px]">
+          <fragment className="flex flex-col items-center">
             <img
               src="/favicon.png"
               alt="logo"
@@ -68,19 +68,19 @@ export default function Home() {
               alt="logotulisan"
               className="w-[150px] lg:w-[215px] h-[65px] lg:h-[100px] object-cover"
             />
-          </div>
-          <div className=" w-full h-fit flex flex-col items-center px-[50px]">
+          </fragment>
+          <fragment className=" w-full h-fit flex flex-col items-center px-[50px]">
             <GoogleButton
               className="!w-full !font-poppins "
               onClick={GoogleLogin}
             />
-          </div>
-          <div className="w-full text-center mt-5 lg:mt-8 font-medium text-oldgray-sr text-[10px] lg:text-xs">
-            <div>Copyright @ 2023 JA - GK</div>
-            <div>Version 0.1.0</div>
-          </div>
-        </div>
-      </div>
+          </fragment>
+          <fragment className="w-full text-center mt-5 lg:mt-8 font-medium text-oldgray-sr text-[10px] lg:text-xs">
+            <fragment>Copyright @ 2023 JA - GK</fragment>
+            <fragment>Version 0.1.0</fragment>
+          </fragment>
+        </fragment>
+      </fragment>
     </main>
   );
 }
