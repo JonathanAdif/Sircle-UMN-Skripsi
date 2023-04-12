@@ -6,20 +6,18 @@ import { Pagination, Navigation } from "swiper";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 
-function postcontainer() {
+import Avatar from "../banner/avatar";
+
+function postcontainer({ content, profiles: profile }) {
   return (
     <fragment className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-komponenIsi flex flex-col gap-5">
       {/* <!-- start header postingan  --> */}
       <fragment className="flex flex-row justify-between items-start">
         <fragment className="flex flex-row gap-2.5 items-center">
-          <img
-            src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
-            className="w-[45px] lg:w-[45px] rounded-full cursor-pointer"
-            alt="Avatar"
-          />
+          <Avatar url={profile.avatar} />
           <fragment>
             <fragment className="text-base font-semibold text-black-sr">
-              Luiz Clint Harry
+              {profile.username}
             </fragment>
             <fragment className="flex flex-row gap-[2px]">
               {/* <fragment className="font-semibold text-xs text-oldgray-sr">
@@ -37,11 +35,7 @@ function postcontainer() {
       {/* <!-- end header postingan  --> */}
 
       {/* <!-- start konten caption isi postingan  --> */}
-      <p className="font-medium text-black-sr text-sm">
-        Halo teman-teman, saya baru saja melakukan suatu proyek yang bagus
-        menurut saya dengan memotret beberapa foto-foto pemandangan yang cukup
-        indah, berikut merupakan hasil dari foto-foto saya.
-      </p>
+      <p className="font-medium text-black-sr text-sm">{content}</p>
       {/* <!-- end konten caption isi postingan  --> */}
 
       {/* <!-- start komponen slider gambar postingan  --> */}

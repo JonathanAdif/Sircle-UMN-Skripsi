@@ -1,7 +1,31 @@
+import Avatar from "../banner/avatar";
+
+import {useSession, useSupabaseClient} from "@supabase/auth-helpers-react";
+import {useEffect, useState} from "react";
+
 function header() {
+
+
   const openSidebar = (event) => {
     document.querySelector(".sidebar").classList.toggle("hidden");
   };
+
+  const [profile,setProfile] = useState(null);
+  const supabase = useSupabaseClient();
+  const session = useSession();
+
+  useEffect(() => {
+   supabase.from('profiles')
+   .select()
+   .eq('id',session.user.id)
+   .then(result => {
+
+    if(result.data.length){
+      setProfile(result.data[0]);
+    }
+  
+    })
+  },[]);
 
   return (
     <fragment class="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-navbar flex items-center justify-between">
@@ -25,14 +49,10 @@ function header() {
       </fragment>
       {/* <!-- end search area  -->  */}
 
-      <fragment class="flex items-center lg:mr-10">
-        <img
-          src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
-          class="w-[30px] lg:w-[45px] rounded-full relative right-6 cursor-pointer"
-          alt="Avatar"
-        />
-        <span class="hidden lg:block text-base font-semibold cursor-pointer">
-          Jonathan Christian Adif Sugiarto
+      <fragment class="flex flex-row items-center lg:mr-10 gap-5">
+        <Avatar url={profile?.avatar}  />
+        <span class="hidden lg:block text-base font-semibold cursor-pointer !capitalize">
+          {profile?.username}
         </span>
       </fragment>
     </fragment>

@@ -5,6 +5,9 @@ import TextareaAutosize from "@mui/base/TextareaAutosize";
 import IconButton from "@mui/material/IconButton";
 import Popover from "@mui/material/Popover";
 
+import {useSession, useSupabaseClient} from "@supabase/auth-helpers-react";
+import {useEffect, useState} from "react";
+
 function postMaker1() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -26,6 +29,32 @@ function postMaker1() {
 
   // end popover
 
+  const [content,setContent] = useState("");
+  const [profile,setProfile] = useState(null);
+  const supabase = useSupabaseClient();
+  const session = useSession();
+
+  useEffect(() => {
+   supabase.from('profiles')
+   .select()
+   .eq('id',session.user.id)
+   .then(result => {
+
+    if(result.data.length){
+      setProfile(result.data[0]);
+    }
+  
+    })
+  },[]);
+
+  function createPost() {
+    supabase.from('posts').insert({
+      writer: session.user.id,
+      content,
+    }).then(response => {
+     console.log(response);
+    });
+  }
   return (
     <>
       <fragment className="w-full h-fit px-5 py-[30px] bg-white-sr rounded-[10px] drop-shadow-komponenIsi flex flex-col gap-[15px]">
@@ -63,6 +92,8 @@ function postMaker1() {
           <TextareaAutosize
             className="w-full h-fit py-2.5 px-2.5 resize-none"
             placeholder="Whats going on in your beautiful mind..."
+            value={content}
+            onChange={e => setContent(e.target.value)}
           />
           <fragment className="flex flex-row justify-between items-center">
             {/* start popover area  */}
@@ -113,6 +144,7 @@ function postMaker1() {
               <Button
                 variant="contained"
                 className="!bg-birulogo-sr !capitalize !py-2 !px-10 "
+                onClick={createPost}
               >
                 Post
               </Button>

@@ -6,10 +6,9 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 
 // module untuk google button
 import GoogleButton from "react-google-button";
-import { supabase } from "@/lib/supabase"; //digunakan karena env dibaca secara manual 
+import { supabase } from "@/lib/supabase"; //digunakan karena env dibaca secara manual
 
 export default function Home() {
-
   async function GoogleLogin() {
     await supabase.auth.signInWithOAuth({
       provider: "google",
@@ -75,7 +74,7 @@ export default function Home() {
               onClick={GoogleLogin}
             />
           </fragment>
-          <fragment className="w-full text-center mt-5 lg:mt-8 font-medium text-oldgray-sr text-[10px] lg:text-xs">
+          <fragment className="w-full text-center mt-5 lg:mt-8 font-medium text-oldgray-sr text-[10px] lg:text-xs flex flex-col">
             <fragment>Copyright @ 2023 JA - GK</fragment>
             <fragment>Version 0.1.0</fragment>
           </fragment>
