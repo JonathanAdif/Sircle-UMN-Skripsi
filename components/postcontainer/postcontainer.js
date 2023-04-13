@@ -8,16 +8,16 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 
 import Avatar from "../banner/avatar";
 
-function postcontainer({ content, profiles: profile }) {
+function postcontainer({ content, profiles}) {
   return (
     <fragment className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-komponenIsi flex flex-col gap-5">
       {/* <!-- start header postingan  --> */}
       <fragment className="flex flex-row justify-between items-start">
         <fragment className="flex flex-row gap-2.5 items-center">
-          <Avatar url={profile.avatar} />
+          <Avatar url={profiles.avatar} />
           <fragment>
-            <fragment className="text-base font-semibold text-black-sr">
-              {profile.username}
+            <fragment className="text-base font-semibold text-black-sr h-fit pr-5 ">
+              {profiles.username}
             </fragment>
             <fragment className="flex flex-row gap-[2px]">
               {/* <fragment className="font-semibold text-xs text-oldgray-sr">

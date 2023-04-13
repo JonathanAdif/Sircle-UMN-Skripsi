@@ -19,7 +19,7 @@
   }
   .search-area {
     @apply !py-[5px] lg:!py-[10px] !pl-[15px] !pr-10 lg:!pr-[120px] !duration-300 !cursor-pointer !bg-white-sr
-      !text-oldgray-sr !gap-[15px] lg:!ml-10 !flex !items-center !rounded-[5px] lg:!rounded-[10px] !border-[1px] 
+      !text-oldgray-sr !gap-[15px] !flex !items-center !rounded-[5px] lg:!rounded-[10px] !border-[1px] 
       !border-solid !border-oldgray-sr;
   }
   /* end header sidebar style  */
