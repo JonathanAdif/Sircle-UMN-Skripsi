@@ -9,7 +9,7 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
 import { useForm } from "react-hook-form";
 
-function postMaker1({ onPost }) {
+function postMaker1({onPost}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -40,6 +40,7 @@ function postMaker1({ onPost }) {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "onTouched",
@@ -55,8 +56,13 @@ function postMaker1({ onPost }) {
           content,
         })
         .then((response) => {
-          if (onPost) {
-            onPost();
+          if (!response.error) {
+            reset({
+              content: ''
+            });
+            if (onPost) {
+              onPost();
+            }
           }
         });
     } catch (error) {
