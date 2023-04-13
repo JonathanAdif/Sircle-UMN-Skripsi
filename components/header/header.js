@@ -28,7 +28,7 @@ function header() {
   },[]);
 
   return (
-    <fragment class="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-navbar flex items-center justify-between pl-5">
+    <fragment class="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-navbar flex items-center justify-between px-5">
       {/* <!-- start sidebar button  --> */}
       <span
         class="relative text-black-sr text-xl cursor-pointer lg:hidden"
@@ -51,9 +51,12 @@ function header() {
 
       <fragment class="flex flex-row items-center gap-5">
         <Avatar url={profile?.avatar}  />
-        <span class="hidden lg:block text-base font-semibold cursor-pointer !capitalize lg:h-fit lg:w-[350px]">
+        <fragment classname = "h-fit ">
+        <span class="hidden lg:block text-base font-semibold cursor-pointer !capitalize lg:h-fit lg:w-[305px] ">
           {profile?.username}
         </span>
+        </fragment>
+        
       </fragment>
     </fragment>
   );
