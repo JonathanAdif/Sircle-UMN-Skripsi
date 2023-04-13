@@ -8,7 +8,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 
 import Avatar from "../banner/avatar";
 
-function postcontainer({ content, profiles}) {
+function postcontainer({ content, profiles }) {
   return (
     <fragment className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-komponenIsi flex flex-col gap-5">
       {/* <!-- start header postingan  --> */}

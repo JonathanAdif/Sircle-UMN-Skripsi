@@ -5,10 +5,11 @@ import TextareaAutosize from "@mui/base/TextareaAutosize";
 import IconButton from "@mui/material/IconButton";
 import Popover from "@mui/material/Popover";
 
-import {useSession, useSupabaseClient} from "@supabase/auth-helpers-react";
-import {useEffect, useState} from "react";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
-function postMaker1() {
+import { useForm } from "react-hook-form";
+
+function postMaker1({ onPost }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -29,32 +30,51 @@ function postMaker1() {
 
   // end popover
 
-  const [content,setContent] = useState("");
-  const [profile,setProfile] = useState(null);
+  // start add post
+
   const supabase = useSupabaseClient();
   const session = useSession();
 
-  useEffect(() => {
-   supabase.from('profiles')
-   .select()
-   .eq('id',session.user.id)
-   .then(result => {
+  //  start fungsi fungsi untuk react hook form
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    mode: "onTouched",
+  });
 
-    if(result.data.length){
-      setProfile(result.data[0]);
+  const createPost = async (data) => {
+    const { content } = data;
+    try {
+      await supabase
+        .from("posts")
+        .insert({
+          writer: session.user.id,
+          content,
+        })
+        .then((response) => {
+          if (onPost) {
+            onPost();
+          }
+        });
+    } catch (error) {
+      console.log(error);
     }
-  
-    })
-  },[]);
+  };
 
-  function createPost() {
-    supabase.from('posts').insert({
-      writer: session.user.id,
-      content,
-    }).then(response => {
-     console.log(response);
-    });
-  }
+  // end add post
+
+  // start disabled button
+  // watch events
+  const watchContent = watch("content");
+
+  // handle disabled submit button
+  const isValid = watchContent;
+
+  // end disabled button
+
   return (
     <>
       <fragment className="w-full h-fit px-5 py-[30px] bg-white-sr rounded-[10px] drop-shadow-komponenIsi flex flex-col gap-[15px]">
@@ -89,67 +109,75 @@ function postMaker1() {
           <fragment className="w-full h-fit font-bold text-black-sr text-xl">
             Go! Write Something Amazing!
           </fragment>
-          <TextareaAutosize
-            className="w-full h-fit py-2.5 px-2.5 resize-none"
-            placeholder="Whats going on in your beautiful mind..."
-            value={content}
-            onChange={e => setContent(e.target.value)}
-          />
-          <fragment className="flex flex-row justify-between items-center">
-            {/* start popover area  */}
-            <i
-              className="fi fi-rr-messages-question !text-xl w-5 h-5 !text-oldgray-sr"
-              aria-owns={openPop ? "mouse-over-popover" : undefined}
-              aria-haspopup="true"
-              onMouseEnter={handlePopoverOpen}
-              onMouseLeave={handlePopoverClose}
-            ></i>
+          <form onSubmit={handleSubmit(createPost)}>
+            <TextareaAutosize
+              className="w-full h-fit py-2.5 px-2.5 resize-none"
+              placeholder="Whats going on in your beautiful mind..."
+              {...register("content", {
+                minLength: {
+                  value: 1,
+                  message: "Please write the content",
+                },
+              })}
+            />
 
-            <Popover
-              id="mouse-over-popover"
-              sx={{
-                pointerEvents: "none",
-              }}
-              open={openPop}
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              onClose={handlePopoverClose}
-              disableRestoreFocus
-            >
-             <ul className="p-2.5">
-              <li>test</li>
-              <li>test</li>
-             </ul>
-            </Popover>
+            <fragment className="flex flex-row justify-between items-center">
+              {/* start popover area  */}
+              <i
+                className="fi fi-rr-messages-question !text-xl w-5 h-5 !text-oldgray-sr"
+                aria-owns={openPop ? "mouse-over-popover" : undefined}
+                aria-haspopup="true"
+                onMouseEnter={handlePopoverOpen}
+                onMouseLeave={handlePopoverClose}
+              ></i>
 
-            {/* end popover area  */}
-
-            <fragment className="flex flex-row gap-[15px] !items-center">
-              <IconButton
-                color="primary"
-                aria-label="upload picture"
-                component="label"
-                className="!p-0"
+              <Popover
+                id="mouse-over-popover"
+                sx={{
+                  pointerEvents: "none",
+                }}
+                open={openPop}
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                onClose={handlePopoverClose}
+                disableRestoreFocus
               >
-                <input hidden accept="image/*" type="file" />
-                <i className="fi fi-rr-picture !text-xl w-5 h-5 !text-oldgray-sr "></i>
-              </IconButton>
-              <Button
-                variant="contained"
-                className="!bg-birulogo-sr !capitalize !py-2 !px-10 "
-                onClick={createPost}
-              >
-                Post
-              </Button>
+                <ul className="p-2.5">
+                  <li>test</li>
+                  <li>test</li>
+                </ul>
+              </Popover>
+
+              {/* end popover area  */}
+
+              <fragment className="flex flex-row gap-[15px] !items-center">
+                <IconButton
+                  color="primary"
+                  aria-label="upload picture"
+                  component="label"
+                  className="!p-0"
+                >
+                  <input hidden accept="image/*" type="file" />
+                  <i className="fi fi-rr-picture !text-xl w-5 h-5 !text-oldgray-sr "></i>
+                </IconButton>
+                <Button
+                  variant="contained"
+                  className="!bg-birulogo-sr !capitalize !py-2 !px-10 disabled:!opacity-25 disabled:!text-white-sr "
+                  type="submit"
+                  disabled={!isValid}
+                >
+                  Post
+                </Button>
+              </fragment>
             </fragment>
-          </fragment>
+          </form>
         </fragment>
       </Modal>
       {/* end modal  */}

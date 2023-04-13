@@ -1,31 +1,28 @@
 import Avatar from "../banner/avatar";
 
-import {useSession, useSupabaseClient} from "@supabase/auth-helpers-react";
-import {useEffect, useState} from "react";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useEffect, useState } from "react";
 
 function header() {
-
-
   const openSidebar = (event) => {
     document.querySelector(".sidebar").classList.toggle("hidden");
   };
 
-  const [profile,setProfile] = useState(null);
+  const [profile, setProfile] = useState(null);
   const supabase = useSupabaseClient();
   const session = useSession();
 
   useEffect(() => {
-   supabase.from('profiles')
-   .select()
-   .eq('id',session.user.id)
-   .then(result => {
-
-    if(result.data.length){
-      setProfile(result.data[0]);
-    }
-  
-    })
-  },[]);
+    supabase
+      .from("profiles")
+      .select()
+      .eq("id", session.user.id)
+      .then((result) => {
+        if (result.data.length) {
+          setProfile(result.data[0]);
+        }
+      });
+  }, []);
 
   return (
     <fragment class="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-navbar flex items-center justify-between px-5">
@@ -50,13 +47,12 @@ function header() {
       {/* <!-- end search area  -->  */}
 
       <fragment class="flex flex-row items-center gap-5">
-        <Avatar url={profile?.avatar}  />
-        <fragment classname = "h-fit ">
-        <span class="hidden lg:block text-base font-semibold cursor-pointer !capitalize lg:h-fit lg:w-[305px] ">
-          {profile?.username}
-        </span>
+        <Avatar url={profile?.avatar} />
+        <fragment classname="h-fit ">
+          <span class="hidden lg:block text-base font-semibold cursor-pointer !capitalize lg:h-fit lg:w-[305px] ">
+            {profile?.username}
+          </span>
         </fragment>
-        
       </fragment>
     </fragment>
   );

@@ -12,15 +12,19 @@ function feed() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    fetchPost();
+  }, []);
+
+  function fetchPost() {
     supabase
       .from("posts")
-      .select('id, content, created_at, profiles(id, avatar, username)')
+      .select("id, content, created_at, profiles(id, avatar, username)")
       .order("created_at", { ascending: false })
       .then((result) => {
-        console.log('posts', result);
+        console.log("posts", result);
         setPosts(result.data);
       });
-  }, []);
+  }
 
   return (
     <>
@@ -28,10 +32,11 @@ function feed() {
       <Sidebar />
       <fragment className="mainLayout">
         <fragment className="mainLeftlayout">
-          <PostMaker1 />
-          {posts?.length > 0 && posts.map((post) => (
-            <Postcontainer key={post.created_at}  {...post} />
-          ))}
+          <PostMaker1 onPost={fetchPost} />
+          {posts?.length > 0 &&
+            posts.map((post) => (
+              <Postcontainer key={post.created_at} {...post} />
+            ))}
         </fragment>
         <fragment className="mainRightlayout">
           <Rightbar1 />

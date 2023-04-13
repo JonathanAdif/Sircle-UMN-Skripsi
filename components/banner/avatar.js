@@ -1,4 +1,4 @@
-function Avatar({url}) {
+function Avatar({ url }) {
   return (
     <img
       src={url}
