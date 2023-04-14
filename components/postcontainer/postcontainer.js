@@ -5,26 +5,38 @@ import { Pagination, Navigation } from "swiper";
 
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import TextareaAutosize from "@mui/base/TextareaAutosize";
 
 import Avatar from "../banner/avatar";
+import ReactTimeAgo from "react-time-ago";
 
-function postcontainer({ content, profiles }) {
+import { useState } from "react";
+
+function postcontainer({ content, profiles: profile, created_at }) {
+
+  // start toggle comment 
+  const [toggle, setToggle] = useState(true);
+  const handleClick = () => {
+    setToggle(!toggle);
+  };
+  // end toggle comment 
+
   return (
     <fragment className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-komponenIsi flex flex-col gap-5">
       {/* <!-- start header postingan  --> */}
       <fragment className="flex flex-row justify-between items-start">
         <fragment className="flex flex-row gap-2.5 items-center">
-          <Avatar url={profiles.avatar} />
+          <Avatar url={profile.avatar} />
           <fragment>
             <fragment className="text-base font-semibold text-black-sr h-fit pr-5 ">
-              {profiles.username}
+              {profile.username}
             </fragment>
             <fragment className="flex flex-row gap-[2px]">
               {/* <fragment className="font-semibold text-xs text-oldgray-sr">
               00000078998
             </fragment> */}
               <fragment className="flex flex-row gap-[2px] text-xs text-oldgray-sr font-normal">
-                <span>20</span>Hours Ago
+                <ReactTimeAgo date={created_at} />
               </fragment>
             </fragment>
           </fragment>
@@ -108,11 +120,23 @@ function postcontainer({ content, profiles }) {
         <Button
           className="ctapostbutton"
           startIcon={<i className="fi fi-rr-comment-alt  menu-icon "></i>}
+          onClick={handleClick}
         >
           Comment
         </Button>
       </ButtonGroup>
       {/* <!-- end button cta postingan --> */}
+      {toggle ? (
+        <fragment className="flex flex-row items-center gap-2.5">
+          <Avatar />
+          <TextareaAutosize
+            className="w-full h-fit py-2.5 px-2.5 resize-none"
+            placeholder="Say something about this post..."
+          />
+        </fragment>
+      ) : (
+        <></>
+      )}
     </fragment>
   );
 }

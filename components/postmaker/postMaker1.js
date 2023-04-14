@@ -9,7 +9,7 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
 import { useForm } from "react-hook-form";
 
-function postMaker1({onPost}) {
+function postMaker1({ onPost }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -58,8 +58,9 @@ function postMaker1({onPost}) {
         .then((response) => {
           if (!response.error) {
             reset({
-              content: ''
+              content: "",
             });
+            setOpen(false);
             if (onPost) {
               onPost();
             }
@@ -110,10 +111,15 @@ function postMaker1({onPost}) {
         aria-describedby="modal-modal-description"
         className="!font-poppins"
       >
-        <fragment className=" w-11/12 lg:w-6/12 h-fit bg-white-sr m-auto mt-20 px-5 py-[30px] flex flex-col gap-[15px] rounded-[10px]">
-          <i className="fi fi-rr-cross-circle flex flex-row justify-end text-xl text-birulogo-sr cursor-pointer"></i>
-          <fragment className="w-full h-fit font-bold text-black-sr text-xl">
-            Go! Write Something Amazing!
+        <fragment className=" w-11/12 lg:w-6/12 h-fit bg-white-sr m-auto mt-20 px-5 py-[30px] flex flex-col gap-[10px] rounded-[10px]">
+          <fragment className="flex flex-row justify-end">
+            <fragment className="w-full h-fit font-bold text-black-sr text-xl">
+              Go! Write Something Amazing!
+            </fragment>
+            <i
+              className="fi fi-rr-cross-circle text-xl text-birulogo-sr cursor-pointer"
+              onClick={handleClose}
+            ></i>
           </fragment>
           <form onSubmit={handleSubmit(createPost)}>
             <TextareaAutosize
