@@ -21,11 +21,11 @@ function header() {
         if (result.data.length) {
           setProfile(result.data[0]);
         }
-      });
+      })
   }, []);
 
   return (
-    <fragment class="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-navbar flex items-center justify-between px-5">
+    <fragment class="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-sm flex items-center justify-between px-5">
       {/* <!-- start sidebar button  --> */}
       <span
         class="relative text-black-sr text-xl cursor-pointer lg:hidden"

@@ -84,7 +84,7 @@ function postMaker1({ onPost }) {
 
   return (
     <>
-      <fragment className="w-full h-fit px-5 py-[30px] bg-white-sr rounded-[10px] drop-shadow-komponenIsi flex flex-col gap-[15px]">
+      <fragment className="w-full h-fit px-5 py-[30px] bg-white-sr rounded-[10px]  drop-shadow-sm flex flex-col gap-[15px]">
         <fragment className="flex flex-col text-center lg:text-left">
           <fragment className="font-bold text-base lg:text-xl text-black-sr">
             <span className="text-birulogo-sr">Hi!</span>, How Are You Today?

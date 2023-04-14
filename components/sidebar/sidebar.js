@@ -24,7 +24,7 @@ function sidebar() {
   }
 
   return (
-    <fragment className="sidebar z-20 font-poppins drop-shadow-navbar fixed top-0 bottom-0 lg:left-0 p-2 w-10/12 lg:w-3/12 overflow-y-auto text-center bg-white-sr hidden lg:block">
+    <fragment className="sidebar z-20 font-poppins drop-shadow-sm fixed top-0 bottom-0 lg:left-0 p-2 w-10/12 lg:w-3/12 overflow-y-auto text-center bg-white-sr hidden lg:block">
       <fragment className=" w-full flex flex-col items-center py-[50px]">
         <img
           src="/logotulisan.png"

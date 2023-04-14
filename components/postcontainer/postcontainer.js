@@ -10,26 +10,29 @@ import TextareaAutosize from "@mui/base/TextareaAutosize";
 import Avatar from "../banner/avatar";
 import ReactTimeAgo from "react-time-ago";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 
-function postcontainer({ content, profiles: profile, created_at }) {
+import { UserContext } from "@/context/userContext";
 
-  // start toggle comment 
-  const [toggle, setToggle] = useState(true);
+function postcontainer({ content, profiles: writerprofile, created_at }) {
+  // start toggle comment
+  const [toggle, setToggle] = useState(false);
   const handleClick = () => {
     setToggle(!toggle);
   };
-  // end toggle comment 
+  // end toggle comment
+
+  const { profile: myProfile } = useContext(UserContext);
 
   return (
-    <fragment className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-komponenIsi flex flex-col gap-5">
+    <fragment className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-sm flex flex-col gap-5">
       {/* <!-- start header postingan  --> */}
       <fragment className="flex flex-row justify-between items-start">
         <fragment className="flex flex-row gap-2.5 items-center">
-          <Avatar url={profile.avatar} />
+          <Avatar url={writerprofile.avatar} />
           <fragment>
             <fragment className="text-base font-semibold text-black-sr h-fit pr-5 ">
-              {profile.username}
+              {writerprofile.username}
             </fragment>
             <fragment className="flex flex-row gap-[2px]">
               {/* <fragment className="font-semibold text-xs text-oldgray-sr">
@@ -128,7 +131,7 @@ function postcontainer({ content, profiles: profile, created_at }) {
       {/* <!-- end button cta postingan --> */}
       {toggle ? (
         <fragment className="flex flex-row items-center gap-2.5">
-          <Avatar />
+          <Avatar url={myProfile?.avatar} />
           <TextareaAutosize
             className="w-full h-fit py-2.5 px-2.5 resize-none"
             placeholder="Say something about this post..."

@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 function rightbar1() {
   return (
     <fragment className="w-4/12 hidden lg:block">
-      <fragment className="w-[300px] h-fit px-[35px] py-[25px] bg-white-sr fixed drop-shadow-komponenIsi rounded-[10px] flex flex-col gap-[15px]">
+      <fragment className="w-[300px] h-fit px-[35px] py-[25px] bg-white-sr fixed drop-shadow-sm rounded-[10px] flex flex-col gap-[15px]">
         <p className="text-center font-bold text-black-sr text-xl">
           Upcoming Events
         </p>
