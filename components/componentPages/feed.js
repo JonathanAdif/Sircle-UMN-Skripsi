@@ -21,9 +21,9 @@ function feed() {
   useEffect(() => {
     fetchPost();
     supabase
-      .from("profiles")
+      .from('profiles')
       .select()
-      .eq("id", session.user.id)
+      .eq('id', session.user.id)
       .then((result) => {
         if (result.data.length) {
           setProfile(result.data[0]);

@@ -14,9 +14,9 @@ function header() {
 
   useEffect(() => {
     supabase
-      .from("profiles")
+      .from('profiles')
       .select()
-      .eq("id", session.user.id)
+      .eq('id', session.user.id)
       .then((result) => {
         if (result.data.length) {
           setProfile(result.data[0]);
@@ -46,7 +46,7 @@ function header() {
       </fragment>
       {/* <!-- end search area  -->  */}
 
-      <fragment class="flex flex-row items-center gap-5">
+      <fragment class="flex flex-row items-center lg:gap-5">
         <Avatar url={profile?.avatar} />
         <fragment classname="h-fit ">
           <span class="hidden lg:block text-base font-semibold cursor-pointer !capitalize lg:h-fit lg:w-[305px] ">
