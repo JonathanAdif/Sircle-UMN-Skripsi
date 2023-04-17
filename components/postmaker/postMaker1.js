@@ -22,6 +22,8 @@ import { FreeMode, Pagination } from "swiper";
 
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import { useState } from "react";
+import Spinner from "../spinner/spinner";
 
 function postMaker1({ onPost }) {
   const [open, setOpen] = React.useState(false);
@@ -87,39 +89,43 @@ function postMaker1({ onPost }) {
 
   // end add post
 
+  const [uploads, setUploads] = useState([]);
+  const [stilluploading, setstillUploading] = useState(false);
+
+  // start add photos to database
+
+  async function addMedia(ev) {
+    const files = ev.target.files;
+    if (files.length > 0) {
+      setstillUploading(true);
+      for (const file of files) {
+        const newName = Date.now() + file.name;
+        const result = await supabase.storage
+          .from("photos")
+          .upload(newName, file);
+        if (result.data) {
+          const url =
+            process.env.NEXT_PUBLIC_SUPABASE_URL +
+            "/storage/v1/object/public/photos/" +
+            result.data.path;
+          setUploads((prevUploads) => [...prevUploads, url]);
+        } else {
+          console.log(result);
+        }
+      }
+      setstillUploading(false);
+    }
+  }
+  // end add photos to database
+
   // start disabled button
   // watch events
   const watchContent = watch("content");
 
   // handle disabled submit button
   const isValid = watchContent;
-
+  // const isValid = watchContent || uploads.length > 0 ;
   // end disabled button
-
-  // start add photos to database
-  function addMedia(ev) {
-    const files = ev.target.files;
-    for (const file of files) {
-      const newName = Date.now() + file.name;
-      supabase.storage
-        .from("photos")
-        .upload(newName, file)
-        .then((result) => {
-          if (result.data) {
-            console.log({
-              url:
-                process.env.NEXT_PUBLIC_SUPABASE_URL +
-                "/storage/v1/object/public/photos/" +
-                result.data.path,
-            });
-          } else {
-            console.log(result);
-          }
-        });
-    }
-    // console.log(ev);
-  }
-  // end add photos to database
 
   return (
     <>
@@ -153,7 +159,7 @@ function postMaker1({ onPost }) {
         <fragment className=" w-11/12 lg:w-6/12 h-fit bg-white-sr m-auto mt-20 px-5 py-[30px] flex flex-col gap-[10px] rounded-[10px]">
           <fragment className="flex flex-row justify-end">
             <fragment className="w-full h-fit font-bold text-black-sr text-xl">
-              Go! Write Something Amazing!
+              Go! Tell Something Amazing!
             </fragment>
             <i
               className="fi fi-rr-cross-circle text-xl text-birulogo-sr cursor-pointer"
@@ -172,7 +178,16 @@ function postMaker1({ onPost }) {
               })}
             />
 
-            <fragment className="px-5">
+            {stilluploading && (
+              <fragment className="!w-full !h-full !m-auto flex flex-row gap-2.5">
+                <span className=" font-normal text-birulogo-sr text-xs ">
+                  Uploading
+                </span>
+                <Spinner />
+              </fragment>
+            )}
+
+            {uploads.length > 0 && (
               <Swiper
                 slidesPerView={3}
                 spaceBetween={5}
@@ -183,66 +198,26 @@ function postMaker1({ onPost }) {
                 modules={[FreeMode, Pagination]}
                 className="mySwiper"
               >
-                <SwiperSlide className="cursor-pointer !w-[200px] !h-[150px] !rounded-[10px]">
-                  <a
-                    data-fancybox="single"
-                    data-download-src="/slider-login/slider 1.jpg"
-                    href="/slider-login/slider 1.jpg"
-                    className="!z-[10000]"
-                  >
-                    <img
-                      src="/slider-login/slider 1.jpg"
-                      alt="slider2"
-                      className="!object-center !object-cover !rounded-[10px]"
-                    />
-                  </a>
-                </SwiperSlide>
-                <SwiperSlide className="cursor-pointer !w-[200px] !h-[150px] !rounded-[10px]">
-                  <a
-                    data-fancybox="single"
-                    data-download-src="/slider-login/slider 2.jpg"
-                    href="/slider-login/slider 2.jpg"
-                    className="!z-[10000]"
-                  >
-                    <img
-                      src="/slider-login/slider 2.jpg"
-                      alt="slider2"
-                      className="!object-center !object-cover !rounded-[10px]"
-                    />
-                  </a>
-                </SwiperSlide>
-                <SwiperSlide className="cursor-pointer !w-[200px] !h-[150px] !rounded-[10px]">
-                  <a
-                    data-fancybox="single"
-                    data-download-src="/slider-login/slider 2.jpg"
-                    href="/slider-login/slider 2.jpg"
-                    className="!z-[10000]"
-                  >
-                    <img
-                      src="/slider-login/slider 2.jpg"
-                      alt="slider2"
-                      className="!object-center !object-cover !rounded-[10px]"
-                    />
-                  </a>
-                </SwiperSlide>
-                <SwiperSlide className="cursor-pointer !w-[200px] !h-[150px] !rounded-[10px]">
-                  <a
-                    data-fancybox="single"
-                    data-download-src="/slider-login/slider 2.jpg"
-                    href="/slider-login/slider 2.jpg"
-                    className="!z-[10000]"
-                  >
-                    <img
-                      src="/slider-login/slider 2.jpg"
-                      alt="slider2"
-                      className="!object-center !object-cover !rounded-[10px]"
-                    />
-                  </a>
-                </SwiperSlide>
+                {uploads.map((upload) => (
+                  <SwiperSlide className="cursor-pointer !rounded-[10px]">
+                    <a
+                      data-fancybox="single"
+                      data-download-src="/slider-login/slider 1.jpg"
+                      href={upload}
+                      className="!z-[100]"
+                    >
+                      <img
+                        src={upload}
+                        alt="slider2"
+                        className="!object-center !object-fill !rounded-[10px] !w-[200px] !h-[150px]"
+                      />
+                    </a>
+                  </SwiperSlide>
+                ))}
               </Swiper>
-            </fragment>
+            )}
 
-            <fragment className="flex flex-row justify-between items-center">
+            <fragment className="flex flex-row justify-between items-center !pt-5">
               {/* start popover area  */}
               <i
                 className="fi fi-rr-messages-question !text-xl w-5 h-5 !text-oldgray-sr"
