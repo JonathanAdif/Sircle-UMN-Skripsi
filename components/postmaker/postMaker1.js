@@ -50,7 +50,7 @@ function postMaker1({ onPost }) {
     const { content } = data;
     try {
       await supabase
-        .from("posts")
+        .from('posts')
         .insert({
           writer: session.user.id,
           content,
@@ -88,7 +88,7 @@ function postMaker1({ onPost }) {
     for (const file of files) {
       const newName = Date.now() + file.name;
       supabase.storage
-        .from("photos")
+        .from('photos')
         .upload(newName, file)
         .then((result) => {
           if (result.data) {
@@ -145,7 +145,7 @@ function postMaker1({ onPost }) {
           </fragment>
           <form onSubmit={handleSubmit(createPost)}>
             <TextareaAutosize
-              className="w-full h-fit py-2.5 px-2.5 resize-none"
+              className="w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none "
               placeholder="Whats going on in your beautiful mind..."
               {...register("content", {
                 minLength: {

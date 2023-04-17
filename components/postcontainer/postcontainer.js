@@ -10,7 +10,7 @@ import TextareaAutosize from "@mui/base/TextareaAutosize";
 import Avatar from "../banner/avatar";
 import ReactTimeAgo from "react-time-ago";
 
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import { UserContext } from "@/context/userContext";
 
@@ -29,8 +29,11 @@ function postcontainer({ content, profiles: writerprofile, created_at }) {
 
   Fancybox.bind('[data-fancybox="single"]', {
     groupAttr: false,
- });
-  
+  });
+
+  useEffect(() => {
+    import("@lottiefiles/lottie-player");
+  });
 
   return (
     <fragment className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-sm flex flex-col gap-5">
@@ -46,7 +49,7 @@ function postcontainer({ content, profiles: writerprofile, created_at }) {
               {/* <fragment className="font-semibold text-xs text-oldgray-sr">
               00000078998
             </fragment> */}
-              <fragment className="flex flex-row gap-[2px] text-xs text-oldgray-sr font-normal">
+              <fragment className="flex flex-row gap-[2px] text-xs text-oldgray-sr !font-normal">
                 <ReactTimeAgo date={created_at} />
               </fragment>
             </fragment>
@@ -60,63 +63,91 @@ function postcontainer({ content, profiles: writerprofile, created_at }) {
       {/* <!-- start konten caption isi postingan  --> */}
       <p className="font-medium text-black-sr text-sm">{content}</p>
       {/* <!-- end konten caption isi postingan  --> */}
+      <fragment>
+        {/* <!-- start komponen slider gambar postingan  --> */}
+        <Swiper
+          pagination={{
+            type: "fraction",
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          className="mySwiper w-full h-fit "
+        >
+          <SwiperSlide className="cursor-pointer z-0 h-[350px]">
+            <a
+              data-fancybox="single"
+              data-download-src="/slider-login/slider 1.jpg"
+              href="/slider-login/slider 1.jpg"
+            >
+              <img
+                src="/slider-login/slider 1.jpg"
+                alt="slider1"
+                className="w-full h-full object-center object-cover"
+              />
+            </a>
+          </SwiperSlide>
 
-      {/* <!-- start komponen slider gambar postingan  --> */}
-      <Swiper
-        pagination={{
-          type: "fraction",
-        }}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-        className="mySwiper w-full h-fit "
-      >
-        <SwiperSlide className="cursor-pointer z-0 h-[350px]">
-          <a data-fancybox="single" data-download-src="/slider-login/slider 1.jpg" href="/slider-login/slider 1.jpg">
-            <img
-              src="/slider-login/slider 1.jpg"
-              alt="slider1"
-              className="w-full h-full object-center object-cover"
-            />
-          </a>
-        </SwiperSlide>
+          <SwiperSlide className="cursor-pointer z-0 h-[350px]">
+            <a
+              data-fancybox="single"
+              data-download-src="/slider-login/slider 2.jpg"
+              href="/slider-login/slider 2.jpg"
+            >
+              <img
+                src="/slider-login/slider 2.jpg"
+                alt="slider2"
+                className="w-full h-full object-center object-cover "
+              />
+            </a>
+          </SwiperSlide>
+          <SwiperSlide className="cursor-pointer z-0 h-[350px]">
+            <a
+              data-fancybox="single"
+              data-download-src="/slider-login/slider 3.jpg"
+              href="/slider-login/slider 3.jpg"
+            >
+              <img
+                src="/slider-login/slider 3.jpg"
+                alt="slider3"
+                className="w-full h-full object-center object-cover"
+              />
+            </a>
+          </SwiperSlide>
+        </Swiper>
+        {/* <!-- end komponen slider gambar postingan  --> */}
 
-        <SwiperSlide className="cursor-pointer z-0 h-[350px]">
-          <a data-fancybox="single" data-download-src="/slider-login/slider 2.jpg" href="/slider-login/slider 2.jpg">
-            <img
-              src="/slider-login/slider 2.jpg"
-              alt="slider2"
-              className="w-full h-full object-center object-cover "
-            />
-          </a>
-        </SwiperSlide>
-        <SwiperSlide className="cursor-pointer z-0 h-[350px]">
-          <a data-fancybox="single" data-download-src="/slider-login/slider 3.jpg" href="/slider-login/slider 3.jpg">
-            <img
-              src="/slider-login/slider 3.jpg"
-              alt="slider3"
-              className="w-full h-full object-center object-cover"
-            />
-          </a>
-        </SwiperSlide>
-      </Swiper>
-      {/* <!-- end komponen slider gambar postingan  --> */}
-
-      {/* start status like & comment  */}
-      <fragment className="flex flex-row justify-between items-center">
-        <fragment className="flex flex-row items-center gap-2.5 h-fit">
-          <i className="fi fi-sr-thumbs-up text-xl h-[23px] cursor-pointer text-oldgray-sr "></i>
-          <fragment className="flex flex-row gap-[2px] font-semibold text-xs text-oldgray-sr">
-            <span>50</span>Likes
+        {/* start status like & comment  */}
+        <fragment className="flex flex-col gap-1.5">
+          <fragment className="flex flex-row justify-between items-center">
+            <fragment className="flex flex-row items-center h-fit">
+              {/* <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_wovxkf33.json"  background="transparent"  speed="1"  style="width: 20px; height: 20px;" hover loop  autoplay></lottie-player> */}
+              <lottie-player
+                id="firstLottie"
+                hover
+                loop
+                speed="1"
+                mode="normal"
+                src="https://assets10.lottiefiles.com/packages/lf20_wovxkf33.json"
+                style={{ width: "50px" }}
+              ></lottie-player>
+              <fragment className="flex flex-row gap-[2px] font-normal text-xs text-oldgray-sr pt-1.5">
+                <span>50</span>Likes
+              </fragment>
+            </fragment>
+            <fragment>
+              <fragment
+                className=" font-normal text-xs text-oldgray-sr flex flex-row gap-[2px] cursor-pointer pt-1.5"
+                onClick={handleClick}
+              >
+                <span>20</span>Comments
+              </fragment>
+            </fragment>
           </fragment>
-        </fragment>
-        <fragment>
-          <fragment className="font-semibold text-xs text-oldgray-sr flex flex-row gap-[2px] cursor-pointer">
-            <span>20</span>Comments
-          </fragment>
+          {/* end status like & comment  */}
+          <hr className="w-full h-[1px] bg-gray-sr"></hr>
         </fragment>
       </fragment>
-      {/* end status like & comment  */}
-      <hr className="w-full h-[1px] bg-gray-sr"></hr>
+
       {/* <!-- start button cta postingan  --> */}
       <ButtonGroup
         variant="contained"
@@ -148,7 +179,7 @@ function postcontainer({ content, profiles: writerprofile, created_at }) {
         <fragment className="flex flex-row items-center gap-2.5">
           <Avatar url={myProfile?.avatar} />
           <TextareaAutosize
-            className="w-full h-fit py-2.5 px-2.5 resize-none"
+            className="w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none !font-normal"
             placeholder="Say something about this post..."
           />
         </fragment>

@@ -59,7 +59,7 @@ function sidebar() {
             </Button>
           </Link>
 
-          <Button
+          {/* <Button
             className="menu-btn menu-name "
             startIcon={<i className="fi fi-rr-users-alt menu-icon"></i>}
           >
@@ -71,7 +71,7 @@ function sidebar() {
             startIcon={<i className="fi fi-rr-users menu-icon"></i>}
           >
             Beranda Teman
-          </Button>
+          </Button> */}
 
           <Button
             className="menu-btn menu-name "
@@ -116,12 +116,12 @@ function sidebar() {
             </Button>
           </Link>
 
-          <Button
+          {/* <Button
             className="menu-btn menu-name "
             startIcon={<i class="fi fi-rr-settings-sliders menu-icon"></i>}
           >
             Settings
-          </Button>
+          </Button> */}
 
           <Button
             className="menu-btn menu-name "

@@ -13,8 +13,7 @@ function header() {
   const session = useSession();
 
   useEffect(() => {
-    supabase
-      .from('profiles')
+    supabase.from('profiles')
       .select()
       .eq('id', session.user.id)
       .then((result) => {

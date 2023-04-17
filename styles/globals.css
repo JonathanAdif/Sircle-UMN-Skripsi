@@ -43,7 +43,7 @@
   /* end layout style  */
   /* start post container style  */
   .ctapostbutton {
-    @apply !w-full !text-oldgray-sr !py-[10px] hover:!bg-birulogo-sr hover:!text-white-sr  !bg-white-sr !capitalize !border-none !shadow-none !rounded-[5px];
+    @apply !w-full !font-medium !text-oldgray-sr !py-[10px] hover:!bg-birulogo-sr hover:!text-white-sr  !bg-white-sr !capitalize !border-none !shadow-none !rounded-[5px];
   }
   /* end post container style  */
 }
