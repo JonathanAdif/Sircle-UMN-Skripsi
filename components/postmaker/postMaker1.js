@@ -9,6 +9,20 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
 import { useForm } from "react-hook-form";
 
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
+
+// import required modules
+import { FreeMode, Pagination } from "swiper";
+
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+
 function postMaker1({ onPost }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -35,7 +49,7 @@ function postMaker1({ onPost }) {
   const supabase = useSupabaseClient();
   const session = useSession();
 
-  //  start fungsi fungsi untuk react hook form 
+  //  start fungsi fungsi untuk react hook form
   const {
     register,
     handleSubmit,
@@ -50,7 +64,7 @@ function postMaker1({ onPost }) {
     const { content } = data;
     try {
       await supabase
-        .from('posts')
+        .from("posts")
         .insert({
           writer: session.user.id,
           content,
@@ -88,14 +102,17 @@ function postMaker1({ onPost }) {
     for (const file of files) {
       const newName = Date.now() + file.name;
       supabase.storage
-        .from('photos')
+        .from("photos")
         .upload(newName, file)
         .then((result) => {
           if (result.data) {
             console.log({
-              url: process.env.NEXT_PUBLIC_SUPABASE_URL + '/storage/v1/object/public/photos/' + result.data.path,
-            })
-          }else{
+              url:
+                process.env.NEXT_PUBLIC_SUPABASE_URL +
+                "/storage/v1/object/public/photos/" +
+                result.data.path,
+            });
+          } else {
             console.log(result);
           }
         });
@@ -131,7 +148,7 @@ function postMaker1({ onPost }) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        className="!font-poppins"
+        className="!font-poppins !z-20"
       >
         <fragment className=" w-11/12 lg:w-6/12 h-fit bg-white-sr m-auto mt-20 px-5 py-[30px] flex flex-col gap-[10px] rounded-[10px]">
           <fragment className="flex flex-row justify-end">
@@ -154,6 +171,76 @@ function postMaker1({ onPost }) {
                 },
               })}
             />
+
+            <fragment className="px-5">
+              <Swiper
+                slidesPerView={3}
+                spaceBetween={5}
+                freeMode={true}
+                pagination={{
+                  dynamicBullets: true,
+                }}
+                modules={[FreeMode, Pagination]}
+                className="mySwiper"
+              >
+                <SwiperSlide className="cursor-pointer !w-[200px] !h-[150px] !rounded-[10px]">
+                  <a
+                    data-fancybox="single"
+                    data-download-src="/slider-login/slider 1.jpg"
+                    href="/slider-login/slider 1.jpg"
+                    className="!z-[10000]"
+                  >
+                    <img
+                      src="/slider-login/slider 1.jpg"
+                      alt="slider2"
+                      className="!object-center !object-cover !rounded-[10px]"
+                    />
+                  </a>
+                </SwiperSlide>
+                <SwiperSlide className="cursor-pointer !w-[200px] !h-[150px] !rounded-[10px]">
+                  <a
+                    data-fancybox="single"
+                    data-download-src="/slider-login/slider 2.jpg"
+                    href="/slider-login/slider 2.jpg"
+                    className="!z-[10000]"
+                  >
+                    <img
+                      src="/slider-login/slider 2.jpg"
+                      alt="slider2"
+                      className="!object-center !object-cover !rounded-[10px]"
+                    />
+                  </a>
+                </SwiperSlide>
+                <SwiperSlide className="cursor-pointer !w-[200px] !h-[150px] !rounded-[10px]">
+                  <a
+                    data-fancybox="single"
+                    data-download-src="/slider-login/slider 2.jpg"
+                    href="/slider-login/slider 2.jpg"
+                    className="!z-[10000]"
+                  >
+                    <img
+                      src="/slider-login/slider 2.jpg"
+                      alt="slider2"
+                      className="!object-center !object-cover !rounded-[10px]"
+                    />
+                  </a>
+                </SwiperSlide>
+                <SwiperSlide className="cursor-pointer !w-[200px] !h-[150px] !rounded-[10px]">
+                  <a
+                    data-fancybox="single"
+                    data-download-src="/slider-login/slider 2.jpg"
+                    href="/slider-login/slider 2.jpg"
+                    className="!z-[10000]"
+                  >
+                    <img
+                      src="/slider-login/slider 2.jpg"
+                      alt="slider2"
+                      className="!object-center !object-cover !rounded-[10px]"
+                    />
+                  </a>
+                </SwiperSlide>
+              </Swiper>
+            </fragment>
 
             <fragment className="flex flex-row justify-between items-center">
               {/* start popover area  */}

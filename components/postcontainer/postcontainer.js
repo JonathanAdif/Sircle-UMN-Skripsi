@@ -82,7 +82,7 @@ function postcontainer({ content, profiles: writerprofile, created_at }) {
               <img
                 src="/slider-login/slider 1.jpg"
                 alt="slider1"
-                className="w-full h-full object-center object-cover"
+                className="!w-full !h-full !object-center !object-cover"
               />
             </a>
           </SwiperSlide>
@@ -96,7 +96,7 @@ function postcontainer({ content, profiles: writerprofile, created_at }) {
               <img
                 src="/slider-login/slider 2.jpg"
                 alt="slider2"
-                className="w-full h-full object-center object-cover "
+                className="!w-full !h-full !object-center !object-cover"
               />
             </a>
           </SwiperSlide>
@@ -109,7 +109,7 @@ function postcontainer({ content, profiles: writerprofile, created_at }) {
               <img
                 src="/slider-login/slider 3.jpg"
                 alt="slider3"
-                className="w-full h-full object-center object-cover"
+                className="!w-full !h-full !object-center !object-cover"
               />
             </a>
           </SwiperSlide>
@@ -120,7 +120,6 @@ function postcontainer({ content, profiles: writerprofile, created_at }) {
         <fragment className="flex flex-col gap-1.5">
           <fragment className="flex flex-row justify-between items-center">
             <fragment className="flex flex-row items-center h-fit">
-              {/* <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_wovxkf33.json"  background="transparent"  speed="1"  style="width: 20px; height: 20px;" hover loop  autoplay></lottie-player> */}
               <lottie-player
                 id="firstLottie"
                 hover
