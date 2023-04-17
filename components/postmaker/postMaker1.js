@@ -35,7 +35,7 @@ function postMaker1({ onPost }) {
   const supabase = useSupabaseClient();
   const session = useSession();
 
-  //  start fungsi fungsi untuk react hook form
+  //  start fungsi fungsi untuk react hook form 
   const {
     register,
     handleSubmit,
@@ -81,6 +81,28 @@ function postMaker1({ onPost }) {
   const isValid = watchContent;
 
   // end disabled button
+
+  // start add photos to database
+  function addMedia(ev) {
+    const files = ev.target.files;
+    for (const file of files) {
+      const newName = Date.now() + file.name;
+      supabase.storage
+        .from("photos")
+        .upload(newName, file)
+        .then((result) => {
+          if (result.data) {
+            console.log({
+              url: process.env.NEXT_PUBLIC_SUPABASE_URL + '/storage/v1/object/public/photos/' + result.data.path,
+            })
+          }else{
+            console.log(result);
+          }
+        });
+    }
+    // console.log(ev);
+  }
+  // end add photos to database
 
   return (
     <>
@@ -176,7 +198,13 @@ function postMaker1({ onPost }) {
                   component="label"
                   className="!p-0"
                 >
-                  <input hidden accept="image/*" type="file" />
+                  <input
+                    hidden
+                    accept="image/*"
+                    type="file"
+                    multiple
+                    onChange={addMedia}
+                  />
                   <i className="fi fi-rr-picture !text-xl w-5 h-5 !text-oldgray-sr "></i>
                 </IconButton>
                 <Button

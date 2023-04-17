@@ -14,6 +14,9 @@ import { useContext, useState } from "react";
 
 import { UserContext } from "@/context/userContext";
 
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+
 function postcontainer({ content, profiles: writerprofile, created_at }) {
   // start toggle comment
   const [toggle, setToggle] = useState(false);
@@ -23,6 +26,11 @@ function postcontainer({ content, profiles: writerprofile, created_at }) {
   // end toggle comment
 
   const { profile: myProfile } = useContext(UserContext);
+
+  Fancybox.bind('[data-fancybox="single"]', {
+    groupAttr: false,
+ });
+  
 
   return (
     <fragment className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-sm flex flex-col gap-5">
@@ -63,25 +71,32 @@ function postcontainer({ content, profiles: writerprofile, created_at }) {
         className="mySwiper w-full h-fit "
       >
         <SwiperSlide className="cursor-pointer z-0 h-[350px]">
-          <img
-            src="/slider-login/slider 1.jpg"
-            alt="slider1"
-            className="w-full h-full object-center object-cover"
-          />
+          <a data-fancybox="single" data-download-src="/slider-login/slider 1.jpg" href="/slider-login/slider 1.jpg">
+            <img
+              src="/slider-login/slider 1.jpg"
+              alt="slider1"
+              className="w-full h-full object-center object-cover"
+            />
+          </a>
+        </SwiperSlide>
+
+        <SwiperSlide className="cursor-pointer z-0 h-[350px]">
+          <a data-fancybox="single" data-download-src="/slider-login/slider 2.jpg" href="/slider-login/slider 2.jpg">
+            <img
+              src="/slider-login/slider 2.jpg"
+              alt="slider2"
+              className="w-full h-full object-center object-cover "
+            />
+          </a>
         </SwiperSlide>
         <SwiperSlide className="cursor-pointer z-0 h-[350px]">
-          <img
-            src="/slider-login/slider 2.jpg"
-            alt="slider2"
-            className="w-full h-full object-center object-cover "
-          />
-        </SwiperSlide>
-        <SwiperSlide className="cursor-pointer z-0 h-[350px]">
-          <img
-            src="/slider-login/slider 3.jpg"
-            alt="slider3"
-            className="w-full h-full object-center object-cover"
-          />
+          <a data-fancybox="single" data-download-src="/slider-login/slider 3.jpg" href="/slider-login/slider 3.jpg">
+            <img
+              src="/slider-login/slider 3.jpg"
+              alt="slider3"
+              className="w-full h-full object-center object-cover"
+            />
+          </a>
         </SwiperSlide>
       </Swiper>
       {/* <!-- end komponen slider gambar postingan  --> */}
