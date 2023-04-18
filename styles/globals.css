@@ -31,7 +31,7 @@
     sm:mt-[100px] lg:mt-[100px] flex flex-row px-[15px] lg:px-[80px] pt-[25px] gap-5;
   }
   .mainLayout2 {
-    @apply w-full z-0 lg:w-9/12 pb-[25px] h-fit lg:float-right mt-[65px] 
+    @apply w-full z-0 lg:w-9/12 pb-[25px] h-fit lg:float-right mt-[65px] !bg-graybg-sr
     sm:mt-[100px] lg:mt-[100px] flex flex-col px-[15px] lg:px-[80px] pt-[25px] gap-5;
   }
   .mainLeftlayout {

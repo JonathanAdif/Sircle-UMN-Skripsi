@@ -3,6 +3,8 @@ import Avatar from "../banner/avatar";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 
+import Link from "next/link";
+
 function header() {
   const openSidebar = (event) => {
     document.querySelector(".sidebar").classList.toggle("hidden");
@@ -48,9 +50,11 @@ function header() {
       <fragment class="flex flex-row items-center lg:gap-5">
         <Avatar url={profile?.avatar} />
         <fragment classname="h-fit ">
+        <Link href={'/profile/' + profile?.id}>
           <span class="hidden lg:block text-base font-semibold cursor-pointer !capitalize lg:h-fit lg:w-[305px] ">
             {profile?.username}
           </span>
+        </Link>
         </fragment>
       </fragment>
     </fragment>

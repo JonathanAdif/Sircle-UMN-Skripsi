@@ -5,6 +5,7 @@ import Rightbar2 from "../rightbar/rightbar2";
 import ProfileBanner from "../banner/profileBanner";
 
 function profileComponent() {
+
   return (
     <>
       <Header />
@@ -13,7 +14,7 @@ function profileComponent() {
         <ProfileBanner />
         <fragment className="flex flex-row gap-5">
           <fragment className="mainLeftlayout">
-            <Postcontainer />
+            {/* <Postcontainer /> */}
           </fragment>
           <fragment className="mainRightlayout">
             <Rightbar2 />

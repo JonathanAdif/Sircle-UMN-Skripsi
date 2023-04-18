@@ -20,9 +20,10 @@ function feed() {
 
   useEffect(() => {
     fetchPost();
-    supabase.from('profiles')
+    supabase
+      .from("profiles")
       .select()
-      .eq('id', session.user.id)
+      .eq("id", session.user.id)
       .then((result) => {
         if (result.data.length) {
           setProfile(result.data[0]);
@@ -32,33 +33,35 @@ function feed() {
 
   function fetchPost() {
     supabase
-      .from('posts')
-      .select('id, content, created_at, photos, videos, profiles(id, avatar, username)')
-      .order('created_at', { ascending: false })
+      .from("posts")
+      .select(
+        "id, content, created_at, photos, videos, profiles(id, avatar, username)"
+      )
+      .order("created_at", { ascending: false })
       .then((result) => {
-        console.log('posts', result);
+        console.log("posts", result);
         setPosts(result.data);
       });
   }
 
   return (
     <>
-      <Header />
-      <Sidebar />
-      <fragment className="mainLayout">
-        <fragment className="mainLeftlayout">
-          <UserContext.Provider value={{ profile }}>
+      <UserContext.Provider value={{ profile }}>
+        <Header />
+        <Sidebar />
+        <fragment className="mainLayout">
+          <fragment className="mainLeftlayout">
             <PostMaker1 onPost={fetchPost} />
             {posts?.length > 0 &&
               posts.map((post) => (
                 <Postcontainer key={post.created_at} {...post} />
               ))}
-          </UserContext.Provider>
+          </fragment>
+          <fragment className="mainRightlayout">
+            <Rightbar1 />
+          </fragment>
         </fragment>
-        <fragment className="mainRightlayout">
-          <Rightbar1 />
-        </fragment>
-      </fragment>
+      </UserContext.Provider>
     </>
   );
 }

@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 
 function profileBanner() {
   return (
-    <fragment className="w-full bg-white-sr drop-shadow-komponenIsi rounded-[10px] h-fit flex flex-col">
+    <fragment className="w-full bg-white-sr drop-shadow-sm rounded-[10px] h-fit flex flex-col">
       {/* start profile photo  */}
       <img
         src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"

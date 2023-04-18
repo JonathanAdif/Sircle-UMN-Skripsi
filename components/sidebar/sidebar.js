@@ -20,7 +20,7 @@ function sidebar() {
 
   const supabase = useSupabaseClient();
   async function GoogleLogout() {
-    await supabase.auth.signOut()
+    await supabase.auth.signOut();
   }
 
   return (
@@ -49,29 +49,13 @@ function sidebar() {
           <Link href="/">
             <Button
               className={
-                pathname === "/"
-                  ? activeClasses
-                  : nonActiveClasses
+                router.pathname == "/" ? activeClasses : nonActiveClasses
               }
               startIcon={<i className="fi fi-rr-world menu-icon"></i>}
             >
-              Beranda Global
+              Beranda
             </Button>
           </Link>
-
-          {/* <Button
-            className="menu-btn menu-name "
-            startIcon={<i className="fi fi-rr-users-alt menu-icon"></i>}
-          >
-            Beranda Prodi
-          </Button>
-
-          <Button
-            className="menu-btn menu-name "
-            startIcon={<i className="fi fi-rr-users menu-icon"></i>}
-          >
-            Beranda Teman
-          </Button> */}
 
           <Button
             className="menu-btn menu-name "
@@ -86,42 +70,13 @@ function sidebar() {
           >
             Event
           </Button>
-          {/* end menu atas ori  */}
-          {/* start menu atas tambahan */}
 
-          {/* end menu atas tambahan  */}
-        </fragment>
-
-        <fragment className=" bg-gray-sr h-[1px] w-10/12 px-5 m-auto"></fragment>
-
-        <fragment className="w-full text-left pl-10 text-black-sr">
-          <span>Settings</span>
-        </fragment>
-
-        <fragment className="flex flex-col gap-[5px]">
-          {/* start menu bawah tambahan  */}
-
-          {/* end menu bawah tambahan  */}
-          {/* start menu bawah ori  */}
-          <Link href="/profile">
-            <Button
-              className={
-                pathname === "/profile"
-                  ? activeClasses
-                  : nonActiveClasses
-              }
-              startIcon={<i class="fi fi-rr-user menu-icon"></i>}
-            >
-              Profile
-            </Button>
-          </Link>
-
-          {/* <Button
+          <Button
             className="menu-btn menu-name "
-            startIcon={<i class="fi fi-rr-settings-sliders menu-icon"></i>}
+            startIcon={<i className="fi fi-rr-bookmark menu-icon"></i>}
           >
-            Settings
-          </Button> */}
+            Saved Post
+          </Button>
 
           <Button
             className="menu-btn menu-name "
@@ -130,10 +85,9 @@ function sidebar() {
           >
             Logout
           </Button>
-          {/* end menu bawah ori  */}
         </fragment>
 
-        <fragment className="my-[35px] text-[10px] w-full text-left pl-12 text-black-sr">
+        <fragment className="my-[15px] text-[10px] w-full text-left pl-12 text-black-sr">
           <span>JA & GK 2023. All Rights Reserved.</span>
         </fragment>
       </fragment>

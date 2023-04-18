@@ -6,6 +6,7 @@ import { Pagination, Navigation } from "swiper";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
+import Link from "next/link";
 
 import Avatar from "../banner/avatar";
 import ReactTimeAgo from "react-time-ago";
@@ -45,16 +46,16 @@ function postcontainer({
     <fragment className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-sm flex flex-col gap-5">
       {/* <!-- start header postingan  --> */}
       <fragment className="flex flex-row justify-between items-start">
+        
         <fragment className="flex flex-row gap-2.5 items-center">
           <Avatar url={writerprofile.avatar} />
           <fragment>
-            <fragment className="text-base font-semibold text-black-sr h-fit pr-5 ">
-              {writerprofile.username}
-            </fragment>
+            <Link href={'/profile/' + writerprofile.id}>
+              <fragment className="text-base font-semibold text-black-sr h-fit pr-5 ">
+                {writerprofile.username}
+              </fragment>
+            </Link>
             <fragment className="flex flex-row gap-[2px]">
-              {/* <fragment className="font-semibold text-xs text-oldgray-sr">
-              00000078998
-            </fragment> */}
               <fragment className="flex flex-row gap-[2px] text-xs text-oldgray-sr !font-normal">
                 <ReactTimeAgo date={created_at} />
               </fragment>
@@ -104,10 +105,7 @@ function postcontainer({
                   // data-download-src="/slider-login/slider 1.jpg"
                   href={video}
                 >
-                  <video
-                    controls
-                    className="!w-full !h-full !object-fill "
-                  >
+                  <video controls className="!w-full !h-full !object-fill ">
                     <source src={video} type="video/mp4" />
                   </video>
                 </a>
