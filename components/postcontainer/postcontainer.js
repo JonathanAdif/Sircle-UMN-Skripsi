@@ -81,7 +81,7 @@ function postcontainer({
         >
           {photos?.length > 0 &&
             photos.map((photo) => (
-              <SwiperSlide className="cursor-pointer z-0 h-[350px]">
+              <SwiperSlide className="!cursor-pointer !z-0 !h-[320px]">
                 <a
                   data-fancybox="single"
                   // data-download-src="/slider-login/slider 1.jpg"
@@ -90,7 +90,7 @@ function postcontainer({
                   <img
                     src={photo}
                     alt="Media"
-                    className="!w-full !h-full !object-center !object-cover"
+                    className="!w-full !h-full !object-center !object-fill"
                   />
                 </a>
               </SwiperSlide>
@@ -98,7 +98,7 @@ function postcontainer({
 
           {videos?.length > 0 &&
             videos.map((video) => (
-              <SwiperSlide className="cursor-pointer z-0 h-[350px]">
+              <SwiperSlide className="!cursor-pointer !z-0 !h-[320px]">
                 <a
                   data-fancybox="single"
                   // data-download-src="/slider-login/slider 1.jpg"
@@ -106,14 +106,13 @@ function postcontainer({
                 >
                   <video
                     controls
-                    className="!w-full !h-full !object-center !object-cover"
+                    className="!w-full !h-full !object-fill "
                   >
                     <source src={video} type="video/mp4" />
                   </video>
                 </a>
               </SwiperSlide>
             ))}
-            
         </Swiper>
         {/* <!-- end komponen slider gambar postingan  --> */}
 

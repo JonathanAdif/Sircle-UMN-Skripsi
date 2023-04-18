@@ -5,6 +5,7 @@
     opacity: 0.7;
     bottom: 0 !important;
     padding: 5px;
+    /* height: fit-content !important; */
 }
 
 .swiper-pagination-bullet{
