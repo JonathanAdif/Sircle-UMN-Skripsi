@@ -17,7 +17,13 @@ import { UserContext } from "@/context/userContext";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
-function postcontainer({ content, profiles: writerprofile, created_at }) {
+function postcontainer({
+  content,
+  profiles: writerprofile,
+  created_at,
+  photos,
+  videos,
+}) {
   // start toggle comment
   const [toggle, setToggle] = useState(false);
   const handleClick = () => {
@@ -73,46 +79,41 @@ function postcontainer({ content, profiles: writerprofile, created_at }) {
           modules={[Pagination, Navigation]}
           className="mySwiper w-full h-fit "
         >
-          <SwiperSlide className="cursor-pointer z-0 h-[350px]">
-            <a
-              data-fancybox="single"
-              data-download-src="/slider-login/slider 1.jpg"
-              href="/slider-login/slider 1.jpg"
-            >
-              <img
-                src="/slider-login/slider 1.jpg"
-                alt="slider1"
-                className="!w-full !h-full !object-center !object-cover"
-              />
-            </a>
-          </SwiperSlide>
+          {photos?.length > 0 &&
+            photos.map((photo) => (
+              <SwiperSlide className="cursor-pointer z-0 h-[350px]">
+                <a
+                  data-fancybox="single"
+                  // data-download-src="/slider-login/slider 1.jpg"
+                  href={photo}
+                >
+                  <img
+                    src={photo}
+                    alt="Media"
+                    className="!w-full !h-full !object-center !object-cover"
+                  />
+                </a>
+              </SwiperSlide>
+            ))}
 
-          <SwiperSlide className="cursor-pointer z-0 h-[350px]">
-            <a
-              data-fancybox="single"
-              data-download-src="/slider-login/slider 2.jpg"
-              href="/slider-login/slider 2.jpg"
-            >
-              <img
-                src="/slider-login/slider 2.jpg"
-                alt="slider2"
-                className="!w-full !h-full !object-center !object-cover"
-              />
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className="cursor-pointer z-0 h-[350px]">
-            <a
-              data-fancybox="single"
-              data-download-src="/slider-login/slider 3.jpg"
-              href="/slider-login/slider 3.jpg"
-            >
-              <img
-                src="/slider-login/slider 3.jpg"
-                alt="slider3"
-                className="!w-full !h-full !object-center !object-cover"
-              />
-            </a>
-          </SwiperSlide>
+          {videos?.length > 0 &&
+            videos.map((video) => (
+              <SwiperSlide className="cursor-pointer z-0 h-[350px]">
+                <a
+                  data-fancybox="single"
+                  // data-download-src="/slider-login/slider 1.jpg"
+                  href={video}
+                >
+                  <video
+                    controls
+                    className="!w-full !h-full !object-center !object-cover"
+                  >
+                    <source src={video} type="video/mp4" />
+                  </video>
+                </a>
+              </SwiperSlide>
+            ))}
+            
         </Swiper>
         {/* <!-- end komponen slider gambar postingan  --> */}
 

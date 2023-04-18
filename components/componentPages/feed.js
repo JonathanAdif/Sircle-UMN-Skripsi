@@ -33,7 +33,7 @@ function feed() {
   function fetchPost() {
     supabase
       .from('posts')
-      .select('id, content, created_at, profiles(id, avatar, username)')
+      .select('id, content, created_at, photos, videos, profiles(id, avatar, username)')
       .order('created_at', { ascending: false })
       .then((result) => {
         console.log('posts', result);

@@ -51,6 +51,10 @@ function postMaker1({ onPost }) {
   const supabase = useSupabaseClient();
   const session = useSession();
 
+  const [photoUploads, setphotoUploads] = useState([]);
+  const [videoUploads, setvideoUploads] = useState([]);
+  const [stilluploading, setstillUploading] = useState(false);
+
   //  start fungsi fungsi untuk react hook form
   const {
     register,
@@ -70,12 +74,16 @@ function postMaker1({ onPost }) {
         .insert({
           writer: session.user.id,
           content,
+          photos: photoUploads,
+          videos: videoUploads,
         })
         .then((response) => {
           if (!response.error) {
             reset({
               content: "",
             });
+            setphotoUploads([]);
+            setvideoUploads([]);
             setOpen(false);
             if (onPost) {
               onPost();
@@ -89,9 +97,7 @@ function postMaker1({ onPost }) {
 
   // end add post
 
-  const [photoUploads, setphotoUploads] = useState([]);
-  const [videoUploads, setvideoUploads] = useState([]);
-  const [stilluploading, setstillUploading] = useState(false);
+
 
   // start add photos to database
   async function addPhoto(ev) {
@@ -204,7 +210,7 @@ function postMaker1({ onPost }) {
             />
 
             {stilluploading && (
-              <fragment className="!w-full !h-full !m-auto flex flex-row gap-2.5">
+              <fragment className="!w-full !h-full !m-auto flex flex-row gap-2.5 pb-2.5">
                 <span className=" font-normal text-birulogo-sr text-xs ">
                   Uploading
                 </span>
