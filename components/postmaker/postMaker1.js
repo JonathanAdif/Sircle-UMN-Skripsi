@@ -89,12 +89,12 @@ function postMaker1({ onPost }) {
 
   // end add post
 
-  const [uploads, setUploads] = useState([]);
+  const [photoUploads, setphotoUploads] = useState([]);
+  const [videoUploads, setvideoUploads] = useState([]);
   const [stilluploading, setstillUploading] = useState(false);
 
   // start add photos to database
-
-  async function addMedia(ev) {
+  async function addPhoto(ev) {
     const files = ev.target.files;
     if (files.length > 0) {
       setstillUploading(true);
@@ -108,7 +108,32 @@ function postMaker1({ onPost }) {
             process.env.NEXT_PUBLIC_SUPABASE_URL +
             "/storage/v1/object/public/photos/" +
             result.data.path;
-          setUploads((prevUploads) => [...prevUploads, url]);
+          setphotoUploads((prevUploads) => [...prevUploads, url]);
+        } else {
+          console.log(result);
+        }
+      }
+      setstillUploading(false);
+    }
+  }
+  // end add photos to database
+
+  // start add photos to database
+  async function addVideo(ev) {
+    const files = ev.target.files;
+    if (files.length > 0) {
+      setstillUploading(true);
+      for (const file of files) {
+        const newName = Date.now() + file.name;
+        const result = await supabase.storage
+          .from("videos")
+          .upload(newName, file);
+        if (result.data) {
+          const url =
+            process.env.NEXT_PUBLIC_SUPABASE_URL +
+            "/storage/v1/object/public/videos/" +
+            result.data.path;
+          setvideoUploads((prevUploads) => [...prevUploads, url]);
         } else {
           console.log(result);
         }
@@ -124,7 +149,7 @@ function postMaker1({ onPost }) {
 
   // handle disabled submit button
   const isValid = watchContent;
-  // const isValid = watchContent || uploads.length > 0 ;
+  // const isValid = watchContent || photoUploads.length > 0 ;
   // end disabled button
 
   return (
@@ -187,35 +212,59 @@ function postMaker1({ onPost }) {
               </fragment>
             )}
 
-            {uploads.length > 0 && (
-              <Swiper
-                slidesPerView={3}
-                spaceBetween={5}
-                freeMode={true}
-                pagination={{
-                  dynamicBullets: true,
-                }}
-                modules={[FreeMode, Pagination]}
-                className="mySwiper"
-              >
-                {uploads.map((upload) => (
-                  <SwiperSlide className="cursor-pointer !rounded-[10px]">
-                    <a
-                      data-fancybox="single"
-                      data-download-src="/slider-login/slider 1.jpg"
-                      href={upload}
-                      className="!z-[100]"
-                    >
-                      <img
-                        src={upload}
-                        alt="slider2"
-                        className="!object-center !object-fill !rounded-[10px] !w-[200px] !h-[150px]"
-                      />
-                    </a>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            )}
+            <Swiper
+              slidesPerView={3}
+              spaceBetween={5}
+              freeMode={true}
+              pagination={{
+                dynamicBullets: true,
+              }}
+              modules={[FreeMode, Pagination]}
+              className="mySwiper"
+            >
+              {photoUploads.length > 0 && (
+                <>
+                  {photoUploads.map((upload) => (
+                    <SwiperSlide className="cursor-pointer !rounded-[10px]">
+                      <a
+                        data-fancybox="single"
+                        // data-download-src="/slider-login/slider 1.jpg"
+                        href={upload}
+                        className="!z-[100]"
+                      >
+                        <img
+                          src={upload}
+                          alt="Media"
+                          className="!object-center !object-fill !rounded-[10px] !w-[200px] !h-[150px]"
+                        />
+                      </a>
+                    </SwiperSlide>
+                  ))}
+                </>
+              )}
+
+              {videoUploads.length > 0 && (
+                <>
+                  {videoUploads.map((upload) => {
+                    console.log(upload);
+                    return (
+                      <SwiperSlide className="cursor-pointer !rounded-[10px]">
+                        <a
+                          data-fancybox="single"
+                          // data-download-src="/slider-login/slider 1.jpg"
+                          href={upload}
+                          className="!z-[100]"
+                        >
+                          <video controls className=" !object-center !object-fill !rounded-[10px] !w-[200px] !h-[150px]">
+                            <source src={upload} type="video/mp4"  />
+                          </video>
+                        </a>
+                      </SwiperSlide>
+                    );
+                  })}
+                </>
+              )}
+            </Swiper>
 
             <fragment className="flex flex-row justify-between items-center !pt-5">
               {/* start popover area  */}
@@ -265,9 +314,24 @@ function postMaker1({ onPost }) {
                     accept="image/*"
                     type="file"
                     multiple
-                    onChange={addMedia}
+                    onChange={addPhoto}
                   />
                   <i className="fi fi-rr-picture !text-xl w-5 h-5 !text-oldgray-sr "></i>
+                </IconButton>
+                <IconButton
+                  color="primary"
+                  aria-label="upload picture"
+                  component="label"
+                  className="!p-0"
+                >
+                  <input
+                    hidden
+                    accept="video/*"
+                    type="file"
+                    multiple
+                    onChange={addVideo}
+                  />
+                  <i className="fi fi-rr-play-alt !text-xl w-5 h-5 !text-oldgray-sr "></i>
                 </IconButton>
                 <Button
                   variant="contained"
