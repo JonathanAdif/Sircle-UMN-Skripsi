@@ -1,14 +1,15 @@
 import Button from "@mui/material/Button";
+import { useContext } from "react";
+import { UserContext } from "@/context/userContext";
+import AvatarProfile from "./avatarProfile";
 
 function profileBanner() {
+  const { profile } = useContext(UserContext);
+
   return (
     <fragment className="w-full bg-white-sr drop-shadow-sm rounded-[10px] h-fit flex flex-col">
       {/* start profile photo  */}
-      <img
-        src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
-        class="w-[150px] lg:w-[180px] rounded-full absolute cursor-pointer top-[145px] lg:top-[115px] left-5 lg:left-[30px] border-[5px] border-white-sr"
-        alt="Avatar"
-      />
+      <AvatarProfile url={profile?.avatar} />
       {/* end profile photo  */}
       {/* start banner photo  */}
       <img
@@ -31,13 +32,11 @@ function profileBanner() {
       <fragment className="pt-[5px] pb-[35px] w-full h-fit">
         <fragment className="w-full px-5 h-fit m-auto flex flex-col gap-2.5">
           <fragment className="flex flex-col gap-[2px]">
-            <fragment className="font-bold text-xl lg:text-2xl text-black-sr  ">
-              Jonathan Christian Adif Sugiarto
+            <fragment className="font-bold text-xl lg:text-2xl !text-black-sr  ">
+              {profile?.username}
             </fragment>
             <fragment className="font-medium text-sm lg:!text-base text-oldgray-sr flex flex-row gap-2.5">
-              <span>Informatika </span>
-              <span>|</span>
-              <span>00000034563</span>
+              <span>jonathan.christian@student.umn.ac.id</span>
             </fragment>
           </fragment>
           <p className="font-medium text-xs lg:text-sm text-black-sr">

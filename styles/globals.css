@@ -5,6 +5,10 @@
 
 @layer components {
   /* start header sidebar style  */
+  body{
+   @apply !bg-graybg-sr;
+  }
+
   .menu-btn {
     @apply !w-full !py-[15px] !flex !flex-row !gap-2.5 !capitalize !items-center !rounded-[5px]  hover:!bg-birulogo-sr 
       !text-oldgray-sr hover:!text-white-sr !justify-start !pl-[50px];
@@ -27,11 +31,11 @@
 
   /*  start layout style  */
   .mainLayout {
-    @apply w-full z-0 lg:w-9/12 pb-[25px] h-fit lg:float-right mt-[65px] !bg-graybg-sr
+    @apply w-full z-0 lg:w-9/12 pb-[25px] h-fit lg:float-right mt-[65px] 
     sm:mt-[100px] lg:mt-[100px] flex flex-row px-[15px] lg:px-[80px] pt-[25px] gap-5;
   }
   .mainLayout2 {
-    @apply w-full z-0 lg:w-9/12 pb-[25px] h-fit lg:float-right mt-[65px] !bg-graybg-sr
+    @apply w-full z-0 lg:w-9/12 pb-[25px] h-fit lg:float-right mt-[65px] 
     sm:mt-[100px] lg:mt-[100px] flex flex-col px-[15px] lg:px-[80px] pt-[25px] gap-5;
   }
   .mainLeftlayout {
