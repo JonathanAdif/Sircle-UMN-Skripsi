@@ -4,7 +4,7 @@ import Postcontainer from "../postcontainer/postcontainer";
 import Rightbar2 from "../rightbar/rightbar2";
 import ProfileBanner from "../banner/profileBanner";
 
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { UserContext } from "@/context/userContext";
@@ -15,6 +15,7 @@ function profileComponent() {
   const router = useRouter();
   const userId = router.query.id;
   const [profile, setProfile] = useState(null);
+  const session = useSession();
 
   useEffect(() => {
     if (!userId) {
@@ -33,11 +34,13 @@ function profileComponent() {
       })
   }, [userId]);
 
+  const myUser = userId === session?.user?.id;
+
   return (
     <>
       <Header />
       <Sidebar />
-      <UserContext.Provider value={{ profile }}>
+      <UserContext.Provider value={{ profile, myUser }}>
       <fragment className="mainLayout2">
         <ProfileBanner />
         <fragment className="flex flex-row gap-5">

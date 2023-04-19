@@ -1,4 +1,4 @@
-import Avatar from "../banner/avatar";
+import Avatar from "../avatarCover/avatar";
 
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";

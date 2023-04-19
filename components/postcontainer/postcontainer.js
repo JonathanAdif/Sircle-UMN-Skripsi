@@ -8,7 +8,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 import Link from "next/link";
 
-import Avatar from "../banner/avatar";
+import Avatar from "../avatarCover/avatar";
 import ReactTimeAgo from "react-time-ago";
 
 import { useContext, useState, useEffect } from "react";
