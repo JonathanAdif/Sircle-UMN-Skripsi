@@ -22,7 +22,7 @@ function header() {
         if (result.data.length) {
           setProfile(result.data[0]);
         }
-      })
+      });
   }, []);
 
   return (
@@ -50,11 +50,11 @@ function header() {
       <fragment class="flex flex-row items-center lg:gap-5">
         <Avatar url={profile?.avatar} />
         <fragment classname="h-fit ">
-        <Link href={'/profile/' + profile?.id}>
-          <span class="hidden lg:block text-base font-semibold cursor-pointer !capitalize lg:h-fit lg:w-[305px] ">
-            {profile?.username}
-          </span>
-        </Link>
+          <Link href={"/profile/" + profile?.id}>
+            <span class="hidden lg:block text-base font-semibold cursor-pointer !capitalize lg:h-fit lg:w-[305px] ">
+              {profile?.username}
+            </span>
+          </Link>
         </fragment>
       </fragment>
     </fragment>

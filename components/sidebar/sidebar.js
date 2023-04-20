@@ -2,7 +2,8 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 // import { supabase } from "@/lib/supabase";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useEffect, useState } from "react";
 
 // start function untuk button close sidebar
 function sidebar() {
@@ -22,6 +23,22 @@ function sidebar() {
   async function GoogleLogout() {
     await supabase.auth.signOut();
   }
+
+  const [profile, setProfile] = useState(null);
+  const session = useSession();
+
+  useEffect(() => {
+    supabase.from('profiles')
+      .select()
+      .eq('id', session.user.id)
+      .then((result) => {
+        if (result.data.length) {
+          setProfile(result.data[0]);
+        }
+      });
+  }, []);
+
+  const theId = '/profile/' + session.user.id;
 
   return (
     <fragment className="sidebar z-20 font-poppins drop-shadow-sm fixed top-0 bottom-0 lg:left-0 p-2 w-10/12 lg:w-3/12 overflow-y-auto text-center bg-white-sr hidden lg:block">
@@ -49,11 +66,24 @@ function sidebar() {
           <Link href="/">
             <Button
               className={
-                router.pathname == "/" ? activeClasses : nonActiveClasses
+                pathname == "/" ? activeClasses : nonActiveClasses
               }
               startIcon={<i className="fi fi-rr-world menu-icon"></i>}
             >
               Beranda
+            </Button>
+          </Link>
+
+          <Link href={theId}>
+            <Button
+              className={
+                pathname == "/profile/"+profile?.id
+                  ? activeClasses
+                  : nonActiveClasses
+              }
+              startIcon={<i class="fi fi-rr-user menu-icon"></i>}
+            >
+              Profile
             </Button>
           </Link>
 

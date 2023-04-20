@@ -29,7 +29,7 @@ function CoverProfile({ url, editable }) {
             type="file"
             //   onChange={addImage}
           />
-          <i className="fi fi-rr-camera !text-xl w-5 h-5 !text-birulogo-sr  "></i>
+          <i className="fi fi-rr-camera !text-xl w-5 h-5 !text-birulogo-sr"></i>
         </IconButton>
       )}
     </fragment>
