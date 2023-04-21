@@ -11,7 +11,11 @@ function profileBanner() {
   return (
     <fragment className="w-full bg-white-sr drop-shadow-sm rounded-[10px] h-fit flex flex-col">
       {/* start profile photo  */}
-      <AvatarProfile url={profile?.avatar} />
+      <AvatarProfile
+        url={profile?.avatar}
+        editable={myUser}
+        onChange={fetchUser}
+      />
       {/* end profile photo  */}
       {/* start banner photo  */}
 
