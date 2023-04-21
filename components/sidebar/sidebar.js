@@ -42,12 +42,14 @@ function sidebar() {
 
   return (
     <fragment className="sidebar z-20 font-poppins drop-shadow-sm fixed top-0 bottom-0 lg:left-0 p-2 w-10/12 lg:w-3/12 overflow-y-auto text-center bg-white-sr hidden lg:block">
-      <fragment className=" w-full flex flex-col items-center py-[50px]">
+      <fragment className=" w-full flex flex-col items-center py-[35px]">
+      <Link href="/">
         <img
           src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/logotulisan.png?t=2023-04-20T14%3A24%3A37.216Z"
           alt="logotulisan"
-          className="w-[155px] lg:w-[220px] h-[70px] lg:h-[105px] object-cover"
+          className="w-[155px] lg:w-[220px] h-[70px] lg:h-[105px] object-cover cursor-pointer"
         />
+      </Link>
       </fragment>
 
       <i
@@ -117,7 +119,7 @@ function sidebar() {
           </Button>
         </fragment>
 
-        <fragment className="my-[15px] text-[10px] w-full text-left pl-12 text-black-sr">
+        <fragment className="text-[10px] w-full text-left pl-12 text-black-sr">
           <span>JA & GK 2023. All Rights Reserved.</span>
         </fragment>
       </fragment>

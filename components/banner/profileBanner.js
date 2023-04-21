@@ -6,7 +6,7 @@ import CoverProfile from "../avatarCover/cover";
 import IconButton from "@mui/material/IconButton";
 
 function profileBanner() {
-  const { profile, myUser } = useContext(UserContext);
+  const { profile, myUser, fetchUser } = useContext(UserContext);
 
   return (
     <fragment className="w-full bg-white-sr drop-shadow-sm rounded-[10px] h-fit flex flex-col">
@@ -15,7 +15,11 @@ function profileBanner() {
       {/* end profile photo  */}
       {/* start banner photo  */}
 
-      <CoverProfile url={profile?.cover} editable={myUser} />
+      <CoverProfile
+        url={profile?.cover}
+        editable={myUser}
+        onChange={fetchUser}
+      />
 
       {/* end banner photo  */}
       {/* start button edit profile area  */}
@@ -24,20 +28,20 @@ function profileBanner() {
       )}
       {myUser && (
         <fragment className="w-full h-fit flex justify-end p-5">
-         <IconButton
-          color="primary"
-          aria-label="edit"
-          component="label"
-          className=" !bg-white-sr"
-        >
-          <input
-            hidden
-            // accept="image/*"
-            // type="file"
-            //   onChange={addImage}
-          />
-          <i className="fi fi-rr-pencil !text-xl w-5 h-5 !text-birulogo-sr"></i>
-        </IconButton>
+          <IconButton
+            color="primary"
+            aria-label="edit"
+            component="label"
+            className=" !bg-white-sr"
+          >
+            <input
+              hidden
+              // accept="image/*"
+              // type="file"
+              //   onChange={addImage}
+            />
+            <i className="fi fi-rr-pencil !text-xl w-5 h-5 !text-birulogo-sr"></i>
+          </IconButton>
         </fragment>
       )}
 

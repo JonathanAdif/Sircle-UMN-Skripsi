@@ -10,7 +10,6 @@ import { useState, useEffect } from "react";
 import { UserContext } from "@/context/userContext";
 
 function profileComponent() {
-
   const supabase = useSupabaseClient();
   const router = useRouter();
   const userId = router.query.id;
@@ -21,9 +20,14 @@ function profileComponent() {
     if (!userId) {
       return;
     }
-    supabase.from('profiles')
+    fetchUser()
+  }, [userId]);
+
+  function fetchUser() {
+    supabase
+      .from("profiles")
       .select()
-      .eq('id', userId)
+      .eq("id", userId)
       .then((result) => {
         if (result.error) {
           throw result.error;
@@ -31,8 +35,8 @@ function profileComponent() {
         if (result.data) {
           setProfile(result.data[0]);
         }
-      })
-  }, [userId]);
+      });
+  }
 
   const myUser = userId === session?.user?.id;
 
@@ -40,18 +44,18 @@ function profileComponent() {
     <>
       <Header />
       <Sidebar />
-      <UserContext.Provider value={{ profile, myUser }}>
-      <fragment className="mainLayout2">
-        <ProfileBanner />
-        <fragment className="flex flex-row gap-5">
-          <fragment className="mainLeftlayout">
-            {/* <Postcontainer /> */}
-          </fragment>
-          <fragment className="mainRightlayout">
-            <Rightbar2 />
+      <UserContext.Provider value={{ profile, myUser, fetchUser }}>
+        <fragment className="mainLayout2">
+          <ProfileBanner />
+          <fragment className="flex flex-row gap-5">
+            <fragment className="mainLeftlayout">
+              {/* <Postcontainer /> */}
+            </fragment>
+            <fragment className="mainRightlayout">
+              <Rightbar2 />
+            </fragment>
           </fragment>
         </fragment>
-      </fragment>
       </UserContext.Provider>
     </>
   );

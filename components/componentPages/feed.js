@@ -20,9 +20,10 @@ function feed() {
 
   useEffect(() => {
     fetchPost();
-    supabase.from('profiles')
+    supabase
+      .from("profiles")
       .select()
-      .eq('id', session.user.id)
+      .eq("id", session.user.id)
       .then((result) => {
         if (result.data.length) {
           setProfile(result.data[0]);
@@ -32,13 +33,13 @@ function feed() {
 
   function fetchPost() {
     supabase
-      .from('posts')
+      .from("posts")
       .select(
-        'id, content, created_at, photos, videos, profiles(id, avatar, username)'
+        "id, content, created_at, photos, videos, profiles(id, avatar, username)"
       )
-      .order('created_at', { ascending: false })
+      .order("created_at", { ascending: false })
       .then((result) => {
-        console.log('posts', result);
+        console.log("posts", result);
         setPosts(result.data);
       });
   }

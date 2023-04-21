@@ -97,8 +97,6 @@ function postMaker1({ onPost }) {
 
   // end add post
 
-
-
   // start add photos to database
   async function addPhoto(ev) {
     const files = ev.target.files;
@@ -261,8 +259,11 @@ function postMaker1({ onPost }) {
                           href={upload}
                           className="!z-[100]"
                         >
-                          <video controls className=" !object-center !object-fill !rounded-[10px] !w-[200px] !h-[150px]">
-                            <source src={upload} type="video/mp4"  />
+                          <video
+                            controls
+                            className=" !object-center !object-fill !rounded-[10px] !w-[200px] !h-[150px]"
+                          >
+                            <source src={upload} type="video/mp4" />
                           </video>
                         </a>
                       </SwiperSlide>

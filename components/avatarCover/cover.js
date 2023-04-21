@@ -1,21 +1,69 @@
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import IconButton from "@mui/material/IconButton";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useState } from "react";
+import Spinner from "../spinner/spinner";
 
-function CoverProfile({ url, editable }) {
+function CoverProfile({ url, editable, onChange }) {
   Fancybox.bind('[data-fancybox="single"]', {
     groupAttr: false,
   });
 
+  const supabase = useSupabaseClient();
+  const [stilluploading, setstillUploading] = useState(false);
+  const session = useSession();
+
+  async function coverUpdate(ev) {
+    const file = ev.target.files?.[0];
+    if (file) {
+      setstillUploading(true);
+      const newName = Date.now() + file.name;
+      const { data, error } = await supabase.storage
+        .from("covers")
+        .upload(newName, file);
+
+      setstillUploading(false);
+      if (error) throw error;
+      if (data) {
+        const url =
+          process.env.NEXT_PUBLIC_SUPABASE_URL +
+          "/storage/v1/object/public/covers/" +
+          data.path;
+        supabase
+          .from("profiles")
+          .update({
+            cover: url,
+          })
+          .eq("id", session.user.id)
+          .then((result) => {
+            if (!result.error && onChange) {
+              onChange();
+            }
+          });
+      }
+    }
+  }
+
   return (
-    <fragment className="!w-full !h-[225px] !rounded-[10px]  ">
+    <fragment className="!w-full !h-[225px] !rounded-[10px] !z-0 ">
       <a data-fancybox="single" href={url}>
         <img
-          src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/default-cover.jpg?t=2023-04-20T14%3A30%3A42.502Z"
+          src={url}
           alt="cover"
           className="w-full h-full !rounded-[10px]  object-center object-cover cursor-pointer"
         />
       </a>
+
+      {stilluploading && (
+        <fragment className=" !absolute !h-[225px] !w-full !rounded-[10px] opacity-90 bg-white-sr !top-0 ">
+          <span className=" font-normal justify-center  !w-full !h-full text-birulogo-sr text-xs flex flex-col items-center">
+            Uploading
+            <Spinner />
+          </span>
+        </fragment>
+      )}
+
       {editable && (
         <IconButton
           color="primary"
@@ -23,12 +71,7 @@ function CoverProfile({ url, editable }) {
           component="label"
           className=" !absolute !top-5 !right-5 !bg-white-sr !p-2.5"
         >
-          <input
-            hidden
-            accept="image/*"
-            type="file"
-            //   onChange={addImage}
-          />
+          <input hidden accept="image/*" type="file" onChange={coverUpdate} />
           <i className="fi fi-rr-camera !text-xl w-5 h-5 !text-birulogo-sr"></i>
         </IconButton>
       )}
