@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }) {
         <title>
           Sircle - Social Community of Multimedia Nusantara University
         </title>
-        <link rel="icon" href="/favicon.png" />
+        <link rel="icon" href="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/favicon.png?t=2023-04-20T14%3A22%3A50.785Z" />
         {/* googlefonts */}
         <link
           href="https://fonts.googleapis.com/css?family=Baloo+2:regular,500,600,700,800"

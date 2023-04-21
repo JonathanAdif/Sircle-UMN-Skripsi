@@ -11,7 +11,7 @@ function CoverProfile({ url, editable }) {
     <fragment className="!w-full !h-[225px] !rounded-[10px]  ">
       <a data-fancybox="single" href={url}>
         <img
-          src="/slider-login/slider 3.jpg"
+          src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/default-cover.jpg?t=2023-04-20T14%3A30%3A42.502Z"
           alt="cover"
           className="w-full h-full !rounded-[10px]  object-center object-cover cursor-pointer"
         />

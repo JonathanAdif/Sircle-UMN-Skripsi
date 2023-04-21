@@ -44,7 +44,7 @@ function sidebar() {
     <fragment className="sidebar z-20 font-poppins drop-shadow-sm fixed top-0 bottom-0 lg:left-0 p-2 w-10/12 lg:w-3/12 overflow-y-auto text-center bg-white-sr hidden lg:block">
       <fragment className=" w-full flex flex-col items-center py-[50px]">
         <img
-          src="/logotulisan.png"
+          src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/logotulisan.png?t=2023-04-20T14%3A24%3A37.216Z"
           alt="logotulisan"
           className="w-[155px] lg:w-[220px] h-[70px] lg:h-[105px] object-cover"
         />
@@ -66,7 +66,7 @@ function sidebar() {
           <Link href="/">
             <Button
               className={
-                pathname == "/" ? activeClasses : nonActiveClasses
+                router.pathname == "/" ? activeClasses : nonActiveClasses
               }
               startIcon={<i className="fi fi-rr-world menu-icon"></i>}
             >

@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { UserContext } from "@/context/userContext";
 import AvatarProfile from "../avatarCover/avatarProfile";
 import CoverProfile from "../avatarCover/cover";
+import IconButton from "@mui/material/IconButton";
 
 function profileBanner() {
   const { profile, myUser } = useContext(UserContext);
@@ -18,14 +19,28 @@ function profileBanner() {
 
       {/* end banner photo  */}
       {/* start button edit profile area  */}
-      <fragment className="w-full h-fit flex justify-end p-5 ">
-        <Button
-          variant="outlined"
-          className="!capitalize !text-birulogo-sr !border-birulogo-sr !text-xs lg:!text-sm !border-[2px] "
+      {!myUser && (
+        <fragment className="w-full h-fit flex justify-end p-9 "></fragment>
+      )}
+      {myUser && (
+        <fragment className="w-full h-fit flex justify-end p-5">
+         <IconButton
+          color="primary"
+          aria-label="edit"
+          component="label"
+          className=" !bg-white-sr"
         >
-          Edit Profile
-        </Button>
-      </fragment>
+          <input
+            hidden
+            // accept="image/*"
+            // type="file"
+            //   onChange={addImage}
+          />
+          <i className="fi fi-rr-pencil !text-xl w-5 h-5 !text-birulogo-sr"></i>
+        </IconButton>
+        </fragment>
+      )}
+
       {/* end button edit profile area  */}
       {/* start profile stat area  */}
       <fragment className="pt-[5px] pb-[35px] w-full h-fit">

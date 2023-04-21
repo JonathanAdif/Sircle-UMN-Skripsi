@@ -8,7 +8,7 @@ function rightbar1() {
           Upcoming Events
         </p>
         <fragment>
-          <img className="rounded-[10px]" src="/slider-login/slider 2.jpg" alt="" />
+          <img className="rounded-[10px]" src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/login-slider2" alt="" />
         </fragment>
 
         <fragment className="flex flex-col" >

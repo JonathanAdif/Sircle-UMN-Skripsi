@@ -34,21 +34,21 @@ export default function Home() {
         >
           <SwiperSlide>
             <img
-              src="/slider-login/slider 1.jpg"
+              src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/login-slider1?t=2023-04-21T00%3A33%3A58.278Z"
               alt="slider1"
               className="w-full h-full object-center object-cover"
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
-              src="/slider-login/slider 2.jpg"
+              src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/login-slider2?t=2023-04-21T00%3A34%3A22.123Z"
               alt="slider2"
               className="w-full h-full object-center object-cover "
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
-              src="/slider-login/slider 3.jpg"
+              src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/login-slider3?t=2023-04-20T14%3A23%3A53.661Z"
               alt="slider3"
               className="w-full h-full object-center object-cover"
             />
@@ -58,12 +58,12 @@ export default function Home() {
         <fragment className=" h-2/3 lg:h-full w-full rounded-r-[10px] flex flex-col justify-between py-[70px]">
           <fragment className="flex flex-col items-center">
             <img
-              src="/favicon.png"
+              src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/favicon.png?t=2023-04-20T14%3A22%3A50.785Z"
               alt="logo"
               className="w-[60px] lg:w-[90px] h-[60px] lg:h-[90px] object-cover"
             />
             <img
-              src="/logotulisan.png"
+              src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/logotulisan.png?t=2023-04-20T14%3A24%3A37.216Z"
               alt="logotulisan"
               className="w-[150px] lg:w-[215px] h-[65px] lg:h-[100px] object-cover"
             />
