@@ -4,6 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useState } from "react";
 import Spinner from "../spinner/spinner";
+import { uploadProfileSectionImage } from "@/helper/userHelper";
 
 function CoverProfile({ url, editable, onChange }) {
   Fancybox.bind('[data-fancybox="single"]', {
@@ -18,30 +19,15 @@ function CoverProfile({ url, editable, onChange }) {
     const file = ev.target.files?.[0];
     if (file) {
       setstillUploading(true);
-      const newName = Date.now() + file.name;
-      const { data, error } = await supabase.storage
-        .from("covers")
-        .upload(newName, file);
-
+      await uploadProfileSectionImage(
+        supabase,
+        session.user.id,
+        file,
+        "covers",
+        "cover"
+      );
       setstillUploading(false);
-      if (error) throw error;
-      if (data) {
-        const url =
-          process.env.NEXT_PUBLIC_SUPABASE_URL +
-          "/storage/v1/object/public/covers/" +
-          data.path;
-        supabase
-          .from("profiles")
-          .update({
-            cover: url,
-          })
-          .eq("id", session.user.id)
-          .then((result) => {
-            if (!result.error && onChange) {
-              onChange();
-            }
-          });
-      }
+      if (onChange) onChange();
     }
   }
 

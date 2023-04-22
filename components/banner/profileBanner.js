@@ -1,4 +1,3 @@
-import Button from "@mui/material/Button";
 import { useContext } from "react";
 import { UserContext } from "@/context/userContext";
 import AvatarProfile from "../avatarCover/avatarProfile";
