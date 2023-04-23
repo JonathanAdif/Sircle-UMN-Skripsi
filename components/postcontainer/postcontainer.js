@@ -176,8 +176,8 @@ function postcontainer({
         <fragment className="flex flex-row items-center gap-2.5">
           <Avatar url={myProfile?.avatar} />
           <TextareaAutosize
-            className="w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none !font-normal"
-            placeholder="Say something about this post..."
+            className="w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none !font-normal "
+            placeholder={'comment as ' + myProfile?.username + ' ...'}
           />
         </fragment>
       ) : (
