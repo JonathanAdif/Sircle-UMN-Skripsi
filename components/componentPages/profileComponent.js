@@ -44,7 +44,7 @@ function profileComponent() {
     <>
       <Header />
       <Sidebar />
-      <UserContext.Provider value={{ profile, myUser, fetchUser }}>
+      <UserContext.Provider value={{ profile, myUser, fetchUser, setProfile }}>
         <fragment className="mainLayout2">
           <ProfileBanner />
           <fragment className="flex flex-row gap-5">
