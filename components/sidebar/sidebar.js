@@ -72,7 +72,7 @@ function sidebar() {
               }
               startIcon={<i className="fi fi-rr-world menu-icon"></i>}
             >
-              Beranda
+              Global
             </Button>
           </Link>
 
@@ -93,7 +93,7 @@ function sidebar() {
             className="menu-btn menu-name "
             startIcon={<i className="fi fi-rr-bell menu-icon"></i>}
           >
-            Notifikasi
+            Notification
           </Button>
 
           <Button

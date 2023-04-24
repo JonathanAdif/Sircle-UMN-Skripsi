@@ -15,9 +15,10 @@ function header() {
   const session = useSession();
 
   useEffect(() => {
-    supabase.from('profiles')
+    supabase
+      .from("profiles")
       .select()
-      .eq('id', session.user.id)
+      .eq("id", session.user.id)
       .then((result) => {
         if (result.data.length) {
           setProfile(result.data[0]);
@@ -47,16 +48,16 @@ function header() {
       </fragment>
       {/* <!-- end search area  -->  */}
 
-      <fragment class="flex flex-row items-center lg:gap-5">
-        <Avatar url={profile?.avatar} />
-        <fragment classname="h-fit ">
-          <Link href={"/profile/" + profile?.id}>
-            <span class="hidden lg:block text-base font-semibold cursor-pointer !capitalize lg:h-fit lg:w-[305px] ">
+      <Link href={"/profile/" + profile?.id}>
+        <fragment class="flex flex-row items-center lg:gap-5">
+          <Avatar url={profile?.avatar} />
+          <fragment classname="h-fit ">
+            <span class="hidden lg:block text-base font-semibold cursor-pointer !capitalize lg:h-fit lg:max-w-[305px]  ">
               {profile?.username}
             </span>
-          </Link>
+          </fragment>
         </fragment>
-      </fragment>
+      </Link>
     </fragment>
   );
 }

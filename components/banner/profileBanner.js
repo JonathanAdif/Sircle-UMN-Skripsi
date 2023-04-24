@@ -26,8 +26,7 @@ function profileBanner() {
     mode: "onTouched",
   });
 
-  const editPost = async (data) => {
-    const { username, bio } = data;
+  const editPost = async () => {
     try {
       await supabase
         .from("profiles")

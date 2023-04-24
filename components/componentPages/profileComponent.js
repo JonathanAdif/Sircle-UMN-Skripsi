@@ -14,13 +14,14 @@ function profileComponent() {
   const router = useRouter();
   const userId = router.query.id;
   const [profile, setProfile] = useState(null);
+  const [posts, setPosts] = useState([]);
   const session = useSession();
 
   useEffect(() => {
     if (!userId) {
       return;
     }
-    fetchUser()
+    fetchUser();
   }, [userId]);
 
   function fetchUser() {
@@ -40,6 +41,38 @@ function profileComponent() {
 
   const myUser = userId === session?.user?.id;
 
+  // start function buat masukin post ke profile page 
+
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+
+    loadPosts().then(() => {});
+  }, [userId]);
+
+  async function loadPosts() {
+    const posts = await userPosts(userId);
+    const profile = await userProfile(userId);
+    setPosts(posts);
+    setProfile(profile);
+  }
+
+  async function userPosts(userId) {
+    const { data } = await supabase
+      .from("posts")
+      .select("id, content, created_at, writer")
+      .eq("writer", userId);
+    return data;
+  }
+
+  async function userProfile(userId) {
+    const { data } = await supabase.from("profiles").select().eq("id", userId);
+    return data?.[0];
+  }
+
+  // end function buat masukin post ke profile page 
+
   return (
     <>
       <Header />
@@ -49,7 +82,14 @@ function profileComponent() {
           <ProfileBanner />
           <fragment className="flex flex-row gap-5">
             <fragment className="mainLeftlayout">
-              {/* <Postcontainer /> */}
+              {posts?.length > 0 &&
+                posts.map((post) => (
+                  <Postcontainer
+                    key={post.created_at}
+                    {...post}
+                    profiles={profile}
+                  />
+                ))}
             </fragment>
             <fragment className="mainRightlayout">
               <Rightbar2 />
