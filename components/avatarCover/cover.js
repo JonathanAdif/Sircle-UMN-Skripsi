@@ -32,7 +32,7 @@ function CoverProfile({ url, editable, onChange }) {
   }
 
   return (
-    <fragment className="!w-full !h-[225px] !rounded-[10px] !z-0 ">
+    <div className="!w-full !h-[225px] !rounded-[10px] !z-0 ">
       <a data-fancybox="single" href={url}>
         <img
           src={url}
@@ -42,12 +42,12 @@ function CoverProfile({ url, editable, onChange }) {
       </a>
 
       {stilluploading && (
-        <fragment className=" !absolute !h-[225px] !w-full !rounded-[10px] opacity-90 bg-white-sr !top-0 ">
+        <div className=" !absolute !h-[225px] !w-full !rounded-[10px] opacity-90 bg-white-sr !top-0 ">
           <span className=" font-normal justify-center  !w-full !h-full text-birulogo-sr text-xs flex flex-col items-center">
             Uploading
             <Spinner />
           </span>
-        </fragment>
+        </div>
       )}
 
       {editable && (
@@ -61,7 +61,7 @@ function CoverProfile({ url, editable, onChange }) {
           <i className="fi fi-rr-camera !text-xl w-5 h-5 !text-birulogo-sr"></i>
         </IconButton>
       )}
-    </fragment>
+    </div>
   );
 }
 

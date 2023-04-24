@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { UserContext } from "@/context/userContext";
+import { UserProfileContext } from "@/context/userprofileContext";
 import AvatarProfile from "../avatarCover/avatarProfile";
 import CoverProfile from "../avatarCover/cover";
 import IconButton from "@mui/material/IconButton";
@@ -10,7 +10,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useSession } from "@supabase/auth-helpers-react";
 
 function profileBanner() {
-  const { profile, myUser, fetchUser, setProfile } = useContext(UserContext);
+  const { profile, myUser, fetchUser, setProfile } = useContext(UserProfileContext);
   const [editSection, seteditSection] = useState(false);
   const [username, setName] = useState("");
   const [bio, setBio] = useState("");
@@ -54,7 +54,7 @@ function profileBanner() {
   // end disabled button
 
   return (
-    <fragment className="w-full bg-white-sr drop-shadow-sm rounded-[10px] h-fit flex flex-col">
+    <div className="w-full bg-white-sr drop-shadow-sm rounded-[10px] h-fit flex flex-col">
       {/* start profile photo  */}
       <AvatarProfile
         url={profile?.avatar}
@@ -73,10 +73,10 @@ function profileBanner() {
       {/* end banner photo  */}
       <form onSubmit={handleSubmit(editPost)} className="flex  flex-col-reverse">
         {/* start profile stat area  */}
-        <fragment className="pt-[5px] pb-[35px] w-full h-fit">
-          <fragment className="w-full px-5 h-fit m-auto flex flex-col gap-2.5">
-            <fragment className="flex flex-col gap-[2px]">
-              <fragment className="font-bold text-xl lg:text-2xl !text-black-sr  ">
+        <div className="pt-[5px] pb-[35px] w-full h-fit">
+          <div className="w-full px-5 h-fit m-auto flex flex-col gap-2.5">
+            <div className="flex flex-col gap-[2px]">
+              <div className="font-bold text-xl lg:text-2xl !text-black-sr  ">
                 {!editSection && profile?.username}
                 {editSection && (
                   <Input
@@ -93,8 +93,8 @@ function profileBanner() {
                     value={username}
                   />
                 )}
-              </fragment>
-              <fragment className="!font-medium !text-sm lg:!text-base !text-oldgray-sr !flex !flex-row !gap-2.5">
+              </div>
+              <div className="!font-medium !text-sm lg:!text-base !text-oldgray-sr !flex !flex-row !gap-2.5">
                 {!editSection && profile?.email}
 
                 {editSection && (
@@ -104,8 +104,8 @@ function profileBanner() {
                     className="!font-medium !text-sm lg:!text-base !text-oldgray-sr !w-2/3"
                   />
                 )}
-              </fragment>
-            </fragment>
+              </div>
+            </div>
             <p className="font-medium text-xs lg:text-sm text-black-sr">
               {!editSection && profile?.bio}
 
@@ -124,18 +124,18 @@ function profileBanner() {
                 />
               )}
             </p>
-          </fragment>
-        </fragment>
+          </div>
+        </div>
         {/* end profile stat area  */}
 
         {/* start button edit profile area  */}
-        <fragment>
+        <div>
           {!myUser && (
-            <fragment className="w-full h-fit flex justify-end p-9 "></fragment>
+            <div className="w-full h-fit flex justify-end p-9 "></div>
           )}
 
           {myUser && !editSection && (
-            <fragment className="w-full h-fit flex justify-end p-5">
+            <div className="w-full h-fit flex justify-end p-5">
               <IconButton
                 color="primary"
                 aria-label="edit"
@@ -149,11 +149,11 @@ function profileBanner() {
               >
                 <i className="fi fi-rr-pencil !text-xl w-5 h-5 !text-birulogo-sr"></i>
               </IconButton>
-            </fragment>
+            </div>
           )}
 
           {myUser && editSection && (
-            <fragment className="w-full h-fit flex justify-end p-5 flex-row gap-2.5">
+            <div className="w-full h-fit flex justify-end p-5 flex-row gap-2.5">
               <Button
                 disabled={!isValid}
                 type="submit"
@@ -170,13 +170,13 @@ function profileBanner() {
               >
                 Cancel
               </Button>
-            </fragment>
+            </div>
           )}
-        </fragment>
+        </div>
 
         {/* end button edit profile area  */}
       </form>
-    </fragment>
+    </div>
   );
 }
 

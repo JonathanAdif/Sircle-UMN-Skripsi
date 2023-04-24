@@ -158,16 +158,16 @@ function postMaker1({ onPost }) {
 
   return (
     <>
-      <fragment className="w-full h-fit px-5 py-[30px] bg-white-sr rounded-[10px]  drop-shadow-sm flex flex-col gap-[15px]">
-        <fragment className="flex flex-col text-center lg:text-left">
-          <fragment className="font-bold text-base lg:text-xl text-black-sr">
+      <div className="w-full h-fit px-5 py-[30px] bg-white-sr rounded-[10px]  drop-shadow-sm flex flex-col gap-[15px]">
+        <div className="flex flex-col text-center lg:text-left">
+          <div className="font-bold text-base lg:text-xl text-black-sr">
             <span className="text-birulogo-sr">Hi!</span>, How Are You Today?
-          </fragment>
-          <fragment className="font-semibold text-sm lg:text-base text-black-sr">
+          </div>
+          <div className="font-semibold text-sm lg:text-base text-black-sr">
             Let’s make an awesome post 🎉
-          </fragment>
-        </fragment>
-        <fragment className="w-full h-fit">
+          </div>
+        </div>
+        <div className="w-full h-fit">
           <Button
             variant="outlined"
             onClick={handleOpen}
@@ -175,8 +175,8 @@ function postMaker1({ onPost }) {
           >
             Whats going on in your beautiful mind...
           </Button>
-        </fragment>
-      </fragment>
+        </div>
+      </div>
       {/* start modal  */}
       <Modal
         open={open}
@@ -185,16 +185,16 @@ function postMaker1({ onPost }) {
         aria-describedby="modal-modal-description"
         className="!font-poppins !z-20"
       >
-        <fragment className=" w-11/12 lg:w-6/12 h-fit bg-white-sr m-auto mt-20 px-5 py-[30px] flex flex-col gap-[10px] rounded-[10px]">
-          <fragment className="flex flex-row justify-end">
-            <fragment className="w-full h-fit font-bold text-black-sr text-xl">
+        <div className=" w-11/12 lg:w-6/12 h-fit bg-white-sr m-auto mt-20 px-5 py-[30px] flex flex-col gap-[10px] rounded-[10px]">
+          <div className="flex flex-row justify-end">
+            <div className="w-full h-fit font-bold text-black-sr text-xl">
               Go! Tell Something Amazing!
-            </fragment>
+            </div>
             <i
               className="fi fi-rr-cross-circle text-xl text-birulogo-sr cursor-pointer"
               onClick={handleClose}
             ></i>
-          </fragment>
+          </div>
           <form onSubmit={handleSubmit(createPost)}>
             <TextareaAutosize
               className="w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none "
@@ -208,12 +208,12 @@ function postMaker1({ onPost }) {
             />
 
             {stilluploading && (
-              <fragment className="!w-full !h-full !m-auto flex flex-row gap-2.5 pb-2.5">
+              <div className="!w-full !h-full !m-auto flex flex-row gap-2.5 pb-2.5">
                 <span className=" font-normal text-birulogo-sr text-xs ">
                   Uploading
                 </span>
                 <Spinner />
-              </fragment>
+              </div>
             )}
 
             <Swiper
@@ -273,7 +273,7 @@ function postMaker1({ onPost }) {
               )}
             </Swiper>
 
-            <fragment className="flex flex-row justify-between items-center !pt-5">
+            <div className="flex flex-row justify-between items-center !pt-5">
               {/* start popover area  */}
               <i
                 className="fi fi-rr-messages-question !text-xl w-5 h-5 !text-oldgray-sr"
@@ -309,7 +309,7 @@ function postMaker1({ onPost }) {
 
               {/* end popover area  */}
 
-              <fragment className="flex flex-row gap-[15px] !items-center">
+              <div className="flex flex-row gap-[15px] !items-center">
                 <IconButton
                   color="primary"
                   aria-label="upload picture"
@@ -348,10 +348,10 @@ function postMaker1({ onPost }) {
                 >
                   Post
                 </Button>
-              </fragment>
-            </fragment>
+              </div>
+            </div>
           </form>
-        </fragment>
+        </div>
       </Modal>
       {/* end modal  */}
     </>

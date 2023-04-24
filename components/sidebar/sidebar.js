@@ -41,8 +41,8 @@ function sidebar() {
   const theId = '/profile/' + session.user.id;
 
   return (
-    <fragment className="sidebar z-20 font-poppins drop-shadow-sm fixed top-0 bottom-0 lg:left-0 p-2 w-10/12 lg:w-3/12 overflow-y-auto text-center bg-white-sr hidden lg:block">
-      <fragment className=" w-full flex flex-col items-center py-[35px]">
+    <div className="sidebar z-20 font-poppins drop-shadow-sm fixed top-0 bottom-0 lg:left-0 p-2 w-10/12 lg:w-3/12 overflow-y-auto text-center bg-white-sr hidden lg:block">
+      <div className=" w-full flex flex-col items-center py-[35px]">
       <Link href="/">
         <img
           src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/logotulisan.png?t=2023-04-20T14%3A24%3A37.216Z"
@@ -50,19 +50,19 @@ function sidebar() {
           className="w-[155px] lg:w-[220px] h-[70px] lg:h-[105px] object-cover cursor-pointer"
         />
       </Link>
-      </fragment>
+      </div>
 
       <i
         className="fi fi-rr-cross-circle absolute top-5 right-5 text-xl text-birulogo-sr cursor-pointer lg:hidden"
         onClick={openSidebar}
       ></i>
 
-      <fragment className="flex flex-col gap-5">
-        <fragment className="w-full text-left pl-10 text-black-sr">
+      <div className="flex flex-col gap-5">
+        <div className="w-full text-left pl-10 text-black-sr">
           <span>Menu</span>
-        </fragment>
+        </div>
 
-        <fragment className="flex flex-col gap-[5px]">
+        <div className="flex flex-col gap-[5px]">
           {/* start menu atas ori  */}
 
           <Link href="/">
@@ -83,7 +83,7 @@ function sidebar() {
                   ? activeClasses
                   : nonActiveClasses
               }
-              startIcon={<i class="fi fi-rr-user menu-icon"></i>}
+              startIcon={<i className="fi fi-rr-user menu-icon"></i>}
             >
               Profile
             </Button>
@@ -112,18 +112,18 @@ function sidebar() {
 
           <Button
             className="menu-btn menu-name "
-            startIcon={<i class="fi fi-rr-sign-out-alt menu-icon"></i>}
+            startIcon={<i className="fi fi-rr-sign-out-alt menu-icon"></i>}
             onClick={GoogleLogout}
           >
             Logout
           </Button>
-        </fragment>
+        </div>
 
-        <fragment className="text-[10px] w-full text-left pl-12 text-black-sr">
+        <div className="text-[10px] w-full text-left pl-12 text-black-sr">
           <span>JA & GK 2023. All Rights Reserved.</span>
-        </fragment>
-      </fragment>
-    </fragment>
+        </div>
+      </div>
+    </div>
   );
 }
 

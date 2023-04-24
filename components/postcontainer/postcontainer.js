@@ -43,34 +43,33 @@ function postcontainer({
   });
 
   return (
-    <fragment className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-sm flex flex-col gap-5">
+    <div className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-sm flex flex-col gap-5">
       {/* <!-- start header postingan  --> */}
-      <fragment className="flex flex-row justify-between items-start">
-        
-        <fragment className="flex flex-row gap-2.5 items-center">
+      <div className="flex flex-row justify-between items-start">
+        <div className="flex flex-row gap-2.5 items-center">
           <Avatar url={writerprofile.avatar} />
-          <fragment>
-            <Link href={'/profile/' + writerprofile.id}>
-              <fragment className="text-base font-semibold text-black-sr h-fit pr-5 ">
+          <div>
+            <Link href={"/profile/" + writerprofile.id}>
+              <div className="text-base font-semibold text-black-sr h-fit pr-5 ">
                 {writerprofile.username}
-              </fragment>
+              </div>
             </Link>
-            <fragment className="flex flex-row gap-[2px]">
-              <fragment className="flex flex-row gap-[2px] text-xs text-oldgray-sr !font-normal">
-                <ReactTimeAgo date={created_at} />
-              </fragment>
-            </fragment>
-          </fragment>
-        </fragment>
+            <div className="flex flex-row gap-[2px]">
+              <div className="flex flex-row gap-[2px] text-xs text-oldgray-sr !font-normal">
+                <ReactTimeAgo date={new Date(created_at).getTime()} />
+              </div>
+            </div>
+          </div>
+        </div>
 
         <i className="fi fi-rr-bookmark text-xl pt-[7px] cursor-pointer text-oldgray-sr"></i>
-      </fragment>
+      </div>
       {/* <!-- end header postingan  --> */}
 
       {/* <!-- start konten caption isi postingan  --> */}
       <p className="font-medium text-black-sr text-sm">{content}</p>
       {/* <!-- end konten caption isi postingan  --> */}
-      <fragment>
+      <div>
         {/* <!-- start komponen slider gambar postingan  --> */}
         <Swiper
           pagination={{
@@ -115,9 +114,9 @@ function postcontainer({
         {/* <!-- end komponen slider gambar postingan  --> */}
 
         {/* start status like & comment  */}
-        <fragment className="flex flex-col gap-1.5">
-          <fragment className="flex flex-row justify-between items-center">
-            <fragment className="flex flex-row items-center h-fit">
+        <div className="flex flex-col gap-1.5">
+          <div className="flex flex-row justify-between items-center">
+            <div className="flex flex-row items-center h-fit">
               <lottie-player
                 id="firstLottie"
                 hover
@@ -127,23 +126,23 @@ function postcontainer({
                 src="https://assets10.lottiefiles.com/packages/lf20_wovxkf33.json"
                 style={{ width: "50px" }}
               ></lottie-player>
-              <fragment className="flex flex-row gap-[2px] font-normal text-xs text-oldgray-sr pt-1.5">
+              <div className="flex flex-row gap-[2px] font-normal text-xs text-oldgray-sr pt-1.5">
                 <span>50</span>Likes
-              </fragment>
-            </fragment>
-            <fragment>
-              <fragment
+              </div>
+            </div>
+            <div>
+              <div
                 className=" font-normal text-xs text-oldgray-sr flex flex-row gap-[2px] cursor-pointer pt-1.5"
                 onClick={handleClick}
               >
                 <span>20</span>Comments
-              </fragment>
-            </fragment>
-          </fragment>
+              </div>
+            </div>
+          </div>
           {/* end status like & comment  */}
           <hr className="w-full h-[1px] bg-gray-sr"></hr>
-        </fragment>
-      </fragment>
+        </div>
+      </div>
 
       {/* <!-- start button cta postingan  --> */}
       <ButtonGroup
@@ -173,17 +172,17 @@ function postcontainer({
       </ButtonGroup>
       {/* <!-- end button cta postingan --> */}
       {toggle ? (
-        <fragment className="flex flex-row items-center gap-2.5">
+        <div className="flex flex-row items-center gap-2.5">
           <Avatar url={myProfile?.avatar} />
           <TextareaAutosize
             className="w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none !font-normal "
-            placeholder={'comment as ' + myProfile?.username + ' ...'}
+            placeholder={"comment as " + myProfile?.username + " ..."}
           />
-        </fragment>
+        </div>
       ) : (
         <></>
       )}
-    </fragment>
+    </div>
   );
 }
 

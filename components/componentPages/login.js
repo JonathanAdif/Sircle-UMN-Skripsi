@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <main className=" p-[20px] lg:py-[5%]">
-      <fragment className=" w-full lg:w-[940px] h-screen lg:h-[525px] bg-white-sr lg:m-auto rounded-[10px] flex lg:flex-row drop-shadow-login2 flex-col">
+      <div className=" w-full lg:w-[940px] h-screen lg:h-[525px] bg-white-sr lg:m-auto rounded-[10px] flex lg:flex-row drop-shadow-login2 flex-col">
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
@@ -55,8 +55,8 @@ export default function Home() {
           </SwiperSlide>
         </Swiper>
 
-        <fragment className=" h-2/3 lg:h-full w-full rounded-r-[10px] flex flex-col justify-between py-[70px]">
-          <fragment className="flex flex-col items-center">
+        <div className=" h-2/3 lg:h-full w-full rounded-r-[10px] flex flex-col justify-between py-[70px]">
+          <div className="flex flex-col items-center">
             <img
               src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/favicon.png?t=2023-04-20T14%3A22%3A50.785Z"
               alt="logo"
@@ -67,19 +67,19 @@ export default function Home() {
               alt="logotulisan"
               className="w-[150px] lg:w-[215px] h-[65px] lg:h-[100px] object-cover"
             />
-          </fragment>
-          <fragment className=" w-full h-fit flex flex-col items-center px-[50px]">
+          </div>
+          <div className=" w-full h-fit flex flex-col items-center px-[50px]">
             <GoogleButton
               className="!w-full !font-poppins "
               onClick={GoogleLogin}
             />
-          </fragment>
-          <fragment className="w-full text-center mt-5 lg:mt-8 font-medium text-oldgray-sr text-[10px] lg:text-xs flex flex-col">
-            <fragment>Copyright @ 2023 JA - GK</fragment>
-            <fragment>Version 0.1.0</fragment>
-          </fragment>
-        </fragment>
-      </fragment>
+          </div>
+          <div className="w-full text-center mt-5 lg:mt-8 font-medium text-oldgray-sr text-[10px] lg:text-xs flex flex-col">
+            <div>Copyright @ 2023 JA - GK</div>
+            <div>Version 0.1.0</div>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }

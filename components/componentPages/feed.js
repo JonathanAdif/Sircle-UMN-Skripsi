@@ -48,8 +48,8 @@ function feed() {
     <>
       <Header />
       <Sidebar />
-      <fragment className="mainLayout">
-        <fragment className="mainLeftlayout">
+      <div className="mainLayout">
+        <div className="mainLeftlayout">
           <UserContext.Provider value={{ profile }}>
             <PostMaker1 onPost={fetchPost} />
             {posts?.length > 0 &&
@@ -57,11 +57,11 @@ function feed() {
                 <Postcontainer key={post.created_at} {...post} />
               ))}
           </UserContext.Provider>
-        </fragment>
-        <fragment className="mainRightlayout">
+        </div>
+        <div className="mainRightlayout">
           <Rightbar1 />
-        </fragment>
-      </fragment>
+        </div>
+      </div>
     </>
   );
 }

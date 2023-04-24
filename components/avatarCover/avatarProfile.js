@@ -33,7 +33,7 @@ function AvatarProfile({ url, editable, onChange }) {
   }
 
   return (
-    <fragment>
+    <div>
       <a data-fancybox="single" href={url}>
         <img
           src={url}
@@ -72,16 +72,16 @@ function AvatarProfile({ url, editable, onChange }) {
             />
           </a>
           {stilluploading && (
-            <fragment className=" !absolute  left-0 right-0 top-0 bottom-0 bg-white-sr rounded-full opacity-70 z-0">
+            <div className=" !absolute  left-0 right-0 top-0 bottom-0 bg-white-sr rounded-full opacity-70 z-0">
               <span className=" font-normal justify-center  !w-full !h-full text-birulogo-sr text-xs flex flex-col items-center">
                 Uploading
                 <Spinner />
               </span>
-            </fragment>
+            </div>
           )}
         </Badge>
       )}
-    </fragment>
+    </div>
   );
 }
 
