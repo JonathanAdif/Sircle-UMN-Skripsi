@@ -127,7 +127,7 @@ function postcontainer({
                 style={{ width: "50px" }}
               ></lottie-player>
               <div className="flex flex-row gap-[2px] font-normal text-xs text-oldgray-sr pt-1.5">
-                <span>50</span>Likes
+                <span>0</span>Likes
               </div>
             </div>
             <div>
@@ -135,7 +135,7 @@ function postcontainer({
                 className=" font-normal text-xs text-oldgray-sr flex flex-row gap-[2px] cursor-pointer pt-1.5"
                 onClick={handleClick}
               >
-                <span>20</span>Comments
+                <span>0</span>Comments
               </div>
             </div>
           </div>

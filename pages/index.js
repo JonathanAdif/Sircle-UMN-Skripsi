@@ -1,16 +1,9 @@
 import Feed from "@/components/componentPages/feed";
-import { useSession } from "@supabase/auth-helpers-react";
-import LoginPage from "./login";
+import withProtected from "@/route-protection/protected";
 
-function Index() {
-  const session = useSession();
-
-
-  if(!session){
-    return <LoginPage/>
-  }
-
+const Index = () =>  {
+ 
   return <Feed />;
 }
 
-export default Index;
+export default withProtected(Index)
