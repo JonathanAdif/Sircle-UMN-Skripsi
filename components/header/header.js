@@ -27,7 +27,7 @@ function header() {
   }, []);
 
   return (
-    <fragment class="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-sm flex items-center justify-between px-5">
+    <fragment class="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-sm flex items-center justify-between px-5 lg:px-[50px]">
       {/* <!-- start sidebar button  --> */}
       <span
         class="relative text-black-sr text-xl cursor-pointer lg:hidden"
@@ -43,7 +43,7 @@ function header() {
         <input
           type="text"
           placeholder="Search"
-          class="text-[14px] lg:text-base ml-2 w-[132px] lg:w-[250px] text-gray-sr bg-transparent focus:outline-none"
+          class="text-[14px] lg:text-base ml-2 w-[150px] lg:w-[200px] text-gray-sr bg-transparent focus:outline-none"
         />
       </fragment>
       {/* <!-- end search area  -->  */}
