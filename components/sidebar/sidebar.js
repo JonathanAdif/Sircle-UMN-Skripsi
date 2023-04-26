@@ -28,9 +28,10 @@ function sidebar() {
   const session = useSession();
 
   useEffect(() => {
-    supabase.from('profiles')
+    supabase
+      .from("profiles")
       .select()
-      .eq('id', session.user.id)
+      .eq("id", session.user.id)
       .then((result) => {
         if (result.data.length) {
           setProfile(result.data[0]);
@@ -38,18 +39,18 @@ function sidebar() {
       });
   }, []);
 
-  const theId = '/profile/' + session.user.id;
+  const theId = "/profile/" + session.user.id;
 
   return (
     <div className="sidebar z-20 font-poppins drop-shadow-sm fixed top-0 bottom-0 lg:left-0 p-2 w-10/12 lg:w-3/12 overflow-y-auto text-center bg-white-sr hidden lg:block">
       <div className=" w-full flex flex-col items-center py-[35px]">
-      <Link href="/">
-        <img
-          src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/logotulisan.png?t=2023-04-20T14%3A24%3A37.216Z"
-          alt="logotulisan"
-          className="w-[155px] lg:w-[220px] h-[70px] lg:h-[105px] object-cover cursor-pointer"
-        />
-      </Link>
+        <Link href="/">
+          <img
+            src="https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/logotulisan.png?t=2023-04-20T14%3A24%3A37.216Z"
+            alt="logotulisan"
+            className="w-[155px] lg:w-[220px] h-[70px] lg:h-[105px] object-cover cursor-pointer"
+          />
+        </Link>
       </div>
 
       <i
@@ -79,7 +80,7 @@ function sidebar() {
           <Link href={theId}>
             <Button
               className={
-                pathname == "/profile/"+profile?.id
+                pathname == "/profile/" + profile?.id
                   ? activeClasses
                   : nonActiveClasses
               }
@@ -96,12 +97,16 @@ function sidebar() {
             Notification
           </Button>
 
-          <Button
-            className="menu-btn menu-name "
-            startIcon={<i className="fi fi-rr-calendar-star menu-icon"></i>}
-          >
-            Event
-          </Button>
+          <Link href="/event">
+            <Button
+              className={
+                router.pathname == "/event" ? activeClasses : nonActiveClasses
+              }
+              startIcon={<i className="fi fi-rr-calendar-star menu-icon"></i>}
+            >
+              Event
+            </Button>
+          </Link>
 
           <Button
             className="menu-btn menu-name "

@@ -1,4 +1,4 @@
-function eventBanner() {
+function EventBanner() {
     return (
         <div>
             Enter
@@ -6,4 +6,4 @@ function eventBanner() {
     );
 }
 
-export default eventBanner;
+export default EventBanner;

@@ -1,10 +1,15 @@
 import ProfileComponent from "@/components/componentPages/profileComponent";
-import withProtected from "@/route-protection/protected";
+import { useSession } from "@supabase/auth-helpers-react";
+import LoginPage from "@/pages/login";
 
-const idprofilePage = () => {
+function idprofilePage() {
+  const session = useSession();
 
+  if (!session) {
+    return <LoginPage />;
+  }
 
   return <ProfileComponent />;
 }
 
-export default withProtected(idprofilePage)
+export default idprofilePage;

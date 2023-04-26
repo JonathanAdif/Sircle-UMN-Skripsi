@@ -1,9 +1,15 @@
 import Home from "@/components/componentPages/login";
-import withunProtected from "@/route-protection/unprotected";
+import { useSession } from "@supabase/auth-helpers-react";
+import Index from "@/pages/.";
 
-const LoginPage  = () =>  {
+function LoginPage() {
+  const session = useSession();
+
+  if (session) {
+    return <Index />;
+  }
 
   return <Home />;
 }
 
-export default withunProtected(LoginPage) 
+export default LoginPage;
