@@ -3,7 +3,7 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import IconButton from "@mui/material/IconButton";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useState } from "react";
-import Spinner from "../spinner/spinner";
+import Spinner from "../addition/spinner";
 import { uploadProfileSectionImage } from "@/helper/userHelper";
 
 function CoverProfile({ url, editable, onChange }) {

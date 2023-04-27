@@ -6,7 +6,7 @@ import Avatar from "@mui/material/Avatar";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useState } from "react";
 import { uploadProfileSectionImage } from "@/helper/userHelper";
-import Spinner from "../spinner/spinner";
+import Spinner from "../addition/spinner";
 
 function AvatarProfile({ url, editable, onChange }) {
   Fancybox.bind('[data-fancybox="single"]', {

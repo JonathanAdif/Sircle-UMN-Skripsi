@@ -23,7 +23,7 @@ import { FreeMode, Pagination } from "swiper";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { useState } from "react";
-import Spinner from "../spinner/spinner";
+import Spinner from "../addition/spinner";
 
 function postMaker1({ onPost }) {
   const [open, setOpen] = React.useState(false);
