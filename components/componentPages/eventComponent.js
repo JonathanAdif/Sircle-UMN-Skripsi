@@ -13,9 +13,9 @@ function EventComponentPage() {
       <div className="mainLayout2">
         <EventBanner />
 
-        <div className="flex flex-col gap-[30px]">
+        <div className="flex w-full h-fit flex-col gap-[30px]">
 
-          <div className=" !w-full flex flex-row items-center  justify-evenly  flex-wrap gap-5">
+          <div className=" !w-full h-fit flex items-center  justify-evenly  flex-wrap gap-5">
             <EventPostCard />
             <EventPostCard />
             <EventPostCard />
