@@ -1,7 +1,6 @@
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import Postcontainer from "../postcontainer/postcontainer";
-import Rightbar2 from "../rightbar/rightbar2";
 import ProfileBanner from "../banner/profileBanner";
 
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
@@ -36,6 +35,7 @@ function profileComponent() {
     const { data } = await supabase
       .from("posts")
       .select("id, content, created_at, writer")
+      .order("created_at", { ascending: false })
       .eq("writer", userId);
     return data;
   }
@@ -67,7 +67,22 @@ function profileComponent() {
               ))}
           </div>
           <div className="mainRightlayout">
-            <Rightbar2 />
+            <div className="hidden lg:block px-[35px] py-[25px] bg-white-sr drop-shadow-sm rounded-[10px]">
+              <div className="flex flex-col w-full h-fit  gap-2.5 ">
+                <div className="flex flex-row w-full justify-between h-fit">
+                  <div>Post</div>
+                  <div>{posts?.length}</div>
+                </div>
+                <div className="flex flex-row w-full justify-between h-fit">
+                  <div>Followers</div>
+                  <div>100</div>
+                </div>
+                <div className="flex flex-row w-full justify-between h-fit">
+                  <div>Following</div>
+                  <div>1000</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

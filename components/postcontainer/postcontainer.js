@@ -18,7 +18,10 @@ import { UserContext } from "@/context/userContext";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+
 function postcontainer({
+  id,
   content,
   profiles: writerprofile,
   created_at,
@@ -32,14 +35,55 @@ function postcontainer({
   };
   // end toggle comment
 
+  const supabase = useSupabaseClient();
+
+  const [likes, setLikes] = useState([]);
+
   const { profile: myProfile } = useContext(UserContext);
+
+  const likedButton = "!w-full !font-medium !text-white-sr !py-[10px]  hover:!bg-birulogo-sr hover:!text-white-sr   !bg-birulogo-sr !capitalize !border-none !shadow-none !rounded-[5px]";
+  const nonlikedButton = "ctapostbutton";
+
+  useEffect(() => {
+    fetchLikes();
+    import("@lottiefiles/lottie-player");
+  });
+
+  function fetchLikes() {
+    supabase
+      .from("likes")
+      .select()
+      .eq("post_id", id)
+      .then((result) => setLikes(result.data));
+  }
+
+  const ihaveLike = !!likes.find((like) => like.user_id === myProfile?.id);
+
+  function likeToggle() {
+    if (ihaveLike) {
+      supabase
+        .from("likes")
+        .delete()
+        .eq("post_id", id)
+        .eq("user_id", myProfile.id)
+        .then(() => {
+          fetchLikes();
+        });
+      return;
+    }
+    supabase
+      .from("likes")
+      .insert({
+        post_id: id,
+        user_id: myProfile.id,
+      })
+      .then((result) => {
+        fetchLikes();
+      });
+  }
 
   Fancybox.bind('[data-fancybox="single"]', {
     groupAttr: false,
-  });
-
-  useEffect(() => {
-    import("@lottiefiles/lottie-player");
   });
 
   return (
@@ -126,8 +170,9 @@ function postcontainer({
                 src="https://assets10.lottiefiles.com/packages/lf20_wovxkf33.json"
                 style={{ width: "50px" }}
               ></lottie-player>
-              <div className="flex flex-row gap-[2px] font-normal text-xs text-oldgray-sr pt-1.5">
-                <span>0</span>Likes
+              <div className="flex flex-row gap-[5px] font-normal text-xs text-oldgray-sr pt-1.5">
+                <span>{likes?.length}</span>
+                <span>Likes</span>
               </div>
             </div>
             <div>
@@ -151,8 +196,9 @@ function postcontainer({
         className="!w-full !shadow-none !rounded-none !flex !flex-row !gap-[5px]"
       >
         <Button
-          className="ctapostbutton"
+          className={ihaveLike ? likedButton : nonlikedButton}
           startIcon={<i className="fi fi-rr-social-network menu-icon"></i>}
+          onClick={likeToggle}
         >
           Like
         </Button>
