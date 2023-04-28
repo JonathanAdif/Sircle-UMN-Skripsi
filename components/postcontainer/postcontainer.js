@@ -5,7 +5,6 @@ import { Pagination, Navigation } from "swiper";
 
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import TextareaAutosize from "@mui/base/TextareaAutosize";
 import Link from "next/link";
 
 import Avatar from "../avatarCover/avatar";
@@ -20,14 +19,14 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
-// icon 
-import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+// icon
+import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
-import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
-import LoopOutlinedIcon from '@mui/icons-material/LoopOutlined';
+import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
+import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined";
 
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 
 function postcontainer({
   id,
@@ -46,17 +45,21 @@ function postcontainer({
 
   const supabase = useSupabaseClient();
 
+  const [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState("");
   const [likes, setLikes] = useState([]);
 
   const { profile: myProfile } = useContext(UserContext);
 
-  const likedButton = "!w-full !font-medium !text-birulogo-sr !fill-birulogo-sr  !py-[10px]  hover:!bg-birulogo-sr hover:!text-white-sr   !bg-white-sr !capitalize !border-none !shadow-none !rounded-[5px]";
+  const likedButton =
+    "!w-full !font-medium !text-birulogo-sr !fill-birulogo-sr  !py-[10px]  hover:!bg-birulogo-sr hover:!text-white-sr   !bg-white-sr !capitalize !border-none !shadow-none !rounded-[5px]";
   const nonlikedButton = "ctapostbutton";
 
   useEffect(() => {
     fetchLikes();
+    fetchComments();
     import("@lottiefiles/lottie-player");
-  });
+  }, [myProfile?.id]);
 
   function fetchLikes() {
     supabase
@@ -66,10 +69,18 @@ function postcontainer({
       .then((result) => setLikes(result.data));
   }
 
-  const ihaveLike = !!likes.find((like) => like.user_id === myProfile?.id);
+  function fetchComments() {
+    supabase
+      .from("posts")
+      .select("*, profiles(*)")
+      .eq("parent", id)
+      .then((result) => setComments(result.data));
+  }
+
+  const isLikedByMe = !!likes.find((like) => like.user_id === myProfile?.id);
 
   function likeToggle() {
-    if (ihaveLike) {
+    if (isLikedByMe) {
       supabase
         .from("likes")
         .delete()
@@ -95,6 +106,22 @@ function postcontainer({
     groupAttr: false,
   });
 
+  function postComment(ev) {
+    ev.preventDefault();
+    supabase
+      .from("posts")
+      .insert({
+        content: commentText,
+        writer: myProfile.id,
+        parent: id,
+      })
+      .then((result) => {
+        console.log(result);
+        fetchComments();
+        setCommentText("");
+      });
+  }
+
   return (
     <div className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-sm flex flex-col gap-5">
       {/* <!-- start header postingan  --> */}
@@ -115,7 +142,10 @@ function postcontainer({
           </div>
         </div>
 
-        <BookmarkBorderOutlinedIcon className=" cursor-pointer mt-[3px] text-oldgray-sr" sx={{ fontSize: {xs:20, lg:25} }}/>
+        <BookmarkBorderOutlinedIcon
+          className=" cursor-pointer mt-[3px] text-oldgray-sr"
+          sx={{ fontSize: { xs: 20, lg: 25 } }}
+        />
       </div>
       {/* <!-- end header postingan  --> */}
 
@@ -186,10 +216,11 @@ function postcontainer({
             </div>
             <div>
               <div
-                className=" font-normal text-xs text-oldgray-sr flex flex-row gap-[2px] cursor-pointer pt-1.5"
+                className=" font-normal text-xs text-oldgray-sr flex flex-row gap-[5px] cursor-pointer pt-1.5"
                 onClick={handleClick}
               >
-                <span>0</span>Comments
+                <span>{comments.length}</span>
+                <span>Comments</span>
               </div>
             </div>
           </div>
@@ -205,21 +236,27 @@ function postcontainer({
         className="!w-full !shadow-none !rounded-none !flex !flex-row !items-center !gap-[5px]"
       >
         <Button
-          className={ihaveLike ? likedButton : nonlikedButton}
-          startIcon={ihaveLike ? <ThumbUpIcon className="menu-icon" color="birulogo-sr"/>  : <ThumbUpOutlinedIcon className="menu-icon"/>  }
+          className={isLikedByMe ? likedButton : nonlikedButton}
+          startIcon={
+            isLikedByMe ? (
+              <ThumbUpIcon className="menu-icon" color="birulogo-sr" />
+            ) : (
+              <ThumbUpOutlinedIcon className="menu-icon" />
+            )
+          }
           onClick={likeToggle}
         >
           Like
         </Button>
         <Button
           className="ctapostbutton"
-          startIcon={<LoopOutlinedIcon className="menu-icon"/>}
+          startIcon={<LoopOutlinedIcon className="menu-icon" />}
         >
           Resircle
         </Button>
         <Button
           className="ctapostbutton"
-          startIcon={<CommentOutlinedIcon className="menu-icon"/>}
+          startIcon={<CommentOutlinedIcon className="menu-icon" />}
           onClick={handleClick}
         >
           Comment
@@ -227,12 +264,42 @@ function postcontainer({
       </ButtonGroup>
       {/* <!-- end button cta postingan --> */}
       {toggle ? (
-        <div className="flex flex-row items-center gap-2.5">
-          <Avatar url={myProfile?.avatar} />
-          <TextareaAutosize
-            className="w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none !font-normal "
-            placeholder={"comment as " + myProfile?.username + " ..."}
-          />
+        <div className="flex flex-col gap-[15px]">
+          <div className="flex flex-row items-center gap-2.5 !w-full h-fit">
+            <Avatar url={myProfile?.avatar} />
+            <form onSubmit={postComment} className="w-full h-fit">
+              <input
+                className="!w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none !font-normal "
+                placeholder={"comment as " + myProfile?.username + " ..."}
+                value={commentText}
+                onChange={(ev) => setCommentText(ev.target.value)}
+              />
+            </form>
+          </div>
+          <div>
+            {comments.length > 0 &&
+              comments.map((comment) => (
+                <div key={comment.id} className="mt-2 flex gap-2 items-center">
+                  <Avatar url={comment.profiles.avatar} />
+                  <div className=" bg-gray-sr bg-opacity-20 w-full py-2 px-4 rounded-[10px]">
+                    <div className="flex flex-row justify-between">
+                      <Link href={"/profile/" + comment.profiles.id}>
+                        <span className="hover:underline font-semibold mr-1">
+                          {comment.profiles.username}
+                        </span>
+                      </Link>
+                      <span className="text-sm text-gray-400">
+                        <ReactTimeAgo
+                          timeStyle={"twitter"}
+                          date={new Date(comment.created_at).getTime()}
+                        />
+                      </span>
+                    </div>
+                    <p className="text-sm">{comment.content}</p>
+                  </div>
+                </div>
+              ))}
+          </div>
         </div>
       ) : (
         <></>

@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+// icon
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+
 function EventBanner() {
   const [startDate, setStartDate] = useState(new Date());
 
@@ -18,12 +21,16 @@ function EventBanner() {
           placeholder="Search"
           className=" font-normal text-base text-gray-sr bg-transparent focus:outline-none"
         />
-        <div className="flex flex-row items-center gap-2.5">
-          <i className="fi fi-rr-calendar menu-icon !text-oldgray-sr"></i>
+        <div className="!flex !flex-row !items-center gap-2.5">
+          <CalendarMonthIcon
+            className="!text-oldgray-sr"
+            sx={{ fontSize: { xs: 20, lg: 25 } }}
+          />
+
           <ReactDatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}
-            className=" font-normal text-base text-black-sr bg-transparent w-[150px] focus:outline-none cursor-pointer"
+            className=" !font-normal !text-base !text-black-sr !bg-transparent !w-[150px] focus:!outline-none !cursor-pointer"
           />
         </div>
 
