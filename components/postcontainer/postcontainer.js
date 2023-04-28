@@ -288,7 +288,7 @@ function postcontainer({
                           {comment.profiles.username}
                         </span>
                       </Link>
-                      <span className="text-sm text-gray-400">
+                      <span className="text-sm text-oldgray-sr">
                         <ReactTimeAgo
                           timeStyle={"twitter"}
                           date={new Date(comment.created_at).getTime()}

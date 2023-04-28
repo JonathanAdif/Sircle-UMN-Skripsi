@@ -34,7 +34,8 @@ function profileComponent() {
   async function userPosts(userId) {
     const { data } = await supabase
       .from("posts")
-      .select("id, content, created_at, writer")
+      .select("id, content, created_at, photos, videos, writer")
+      .is('parent', null)
       .order("created_at", { ascending: false })
       .eq("writer", userId);
     return data;

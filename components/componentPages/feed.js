@@ -20,21 +20,16 @@ function feed() {
 
   useEffect(() => {
     fetchPost();
-  }, []);
-
-  useEffect(() => {
-    if (!session?.user?.id) {
-      return;
-    }
-    supabase.from('profiles')
+    supabase
+      .from("profiles")
       .select()
-      .eq('id', session.user.id)
-      .then(result => {
+      .eq("id", session.user.id)
+      .then((result) => {
         if (result.data.length) {
           setProfile(result.data[0]);
         }
-      })
-  }, [session?.user?.id]);
+      });
+  }, []);
 
   function fetchPost() {
     supabase
@@ -44,7 +39,7 @@ function feed() {
       )
       .is('parent', null)
       .order("created_at", { ascending: false })
-      .then(result => {
+      .then((result) => {
         console.log("posts", result);
         setPosts(result.data);
       });
@@ -58,9 +53,10 @@ function feed() {
         <div className="mainLeftlayout">
           <UserContext.Provider value={{ profile }}>
             <PostMaker1 onPost={fetchPost} />
-            {posts?.length > 0 && posts.map(post => (
-          <Postcontainer key={post.id} {...post} />
-        ))}
+            {posts?.length > 0 &&
+              posts.map((post) => (
+                <Postcontainer key={post.id} {...post} />
+              ))}
           </UserContext.Provider>
         </div>
         <div className="mainRightlayout">
