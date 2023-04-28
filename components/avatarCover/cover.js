@@ -6,6 +6,9 @@ import { useState } from "react";
 import Spinner from "../addition/spinner";
 import { uploadProfileSectionImage } from "@/helper/userHelper";
 
+// icon
+import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
+
 function CoverProfile({ url, editable, onChange }) {
   Fancybox.bind('[data-fancybox="single"]', {
     groupAttr: false,
@@ -58,7 +61,10 @@ function CoverProfile({ url, editable, onChange }) {
           className=" !absolute !top-5 !right-5 !bg-white-sr !p-2.5"
         >
           <input hidden accept="image/*" type="file" onChange={coverUpdate} />
-          <i className="fi fi-rr-camera !text-xl w-5 h-5 !text-birulogo-sr"></i>
+          <CameraAltOutlinedIcon
+            className=" !text-birulogo-sr"
+            sx={{ fontSize: { xs: 20, lg: 25 } }}
+          />
         </IconButton>
       )}
     </div>

@@ -9,8 +9,12 @@ import { useForm } from "react-hook-form";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useSession } from "@supabase/auth-helpers-react";
 
+// icon
+import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
+
 function profileBanner() {
-  const { profile, myUser, fetchUser, setProfile } = useContext(UserProfileContext);
+  const { profile, myUser, fetchUser, setProfile } =
+    useContext(UserProfileContext);
   const [editSection, seteditSection] = useState(false);
   const [username, setName] = useState("");
   const [bio, setBio] = useState("");
@@ -71,7 +75,10 @@ function profileBanner() {
       />
 
       {/* end banner photo  */}
-      <form onSubmit={handleSubmit(editPost)} className="flex  flex-col-reverse">
+      <form
+        onSubmit={handleSubmit(editPost)}
+        className="flex  flex-col-reverse"
+      >
         {/* start profile stat area  */}
         <div className="pt-[5px] pb-[35px] w-full h-fit">
           <div className="w-full px-5 h-fit m-auto flex flex-col gap-2.5">
@@ -147,7 +154,10 @@ function profileBanner() {
                   setBio(profile.bio);
                 }}
               >
-                <i className="fi fi-rr-pencil !text-xl w-5 h-5 !text-birulogo-sr"></i>
+                <ModeEditOutlinedIcon
+                  className=" !text-birulogo-sr"
+                  sx={{ fontSize: { xs: 20, lg: 25 } }}
+                />
               </IconButton>
             </div>
           )}

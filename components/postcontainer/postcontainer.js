@@ -20,6 +20,15 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
+// icon 
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+
+import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
+import LoopOutlinedIcon from '@mui/icons-material/LoopOutlined';
+
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+
 function postcontainer({
   id,
   content,
@@ -41,7 +50,7 @@ function postcontainer({
 
   const { profile: myProfile } = useContext(UserContext);
 
-  const likedButton = "!w-full !font-medium !text-white-sr !py-[10px]  hover:!bg-birulogo-sr hover:!text-white-sr   !bg-birulogo-sr !capitalize !border-none !shadow-none !rounded-[5px]";
+  const likedButton = "!w-full !font-medium !text-birulogo-sr !fill-birulogo-sr  !py-[10px]  hover:!bg-birulogo-sr hover:!text-white-sr   !bg-white-sr !capitalize !border-none !shadow-none !rounded-[5px]";
   const nonlikedButton = "ctapostbutton";
 
   useEffect(() => {
@@ -106,7 +115,7 @@ function postcontainer({
           </div>
         </div>
 
-        <i className="fi fi-rr-bookmark text-xl pt-[7px] cursor-pointer text-oldgray-sr"></i>
+        <BookmarkBorderOutlinedIcon className=" cursor-pointer mt-[3px] text-oldgray-sr" sx={{ fontSize: {xs:20, lg:25} }}/>
       </div>
       {/* <!-- end header postingan  --> */}
 
@@ -193,24 +202,24 @@ function postcontainer({
       <ButtonGroup
         variant="contained"
         aria-label="outlined primary button group"
-        className="!w-full !shadow-none !rounded-none !flex !flex-row !gap-[5px]"
+        className="!w-full !shadow-none !rounded-none !flex !flex-row !items-center !gap-[5px]"
       >
         <Button
           className={ihaveLike ? likedButton : nonlikedButton}
-          startIcon={<i className="fi fi-rr-social-network menu-icon"></i>}
+          startIcon={ihaveLike ? <ThumbUpIcon className="menu-icon" color="birulogo-sr"/>  : <ThumbUpOutlinedIcon className="menu-icon"/>  }
           onClick={likeToggle}
         >
           Like
         </Button>
         <Button
           className="ctapostbutton"
-          startIcon={<i className="fi fi-rr-arrows-retweet menu-icon "></i>}
+          startIcon={<LoopOutlinedIcon className="menu-icon"/>}
         >
           Resircle
         </Button>
         <Button
           className="ctapostbutton"
-          startIcon={<i className="fi fi-rr-comment-alt  menu-icon "></i>}
+          startIcon={<CommentOutlinedIcon className="menu-icon"/>}
           onClick={handleClick}
         >
           Comment

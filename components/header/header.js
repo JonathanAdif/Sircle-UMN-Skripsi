@@ -4,6 +4,10 @@ import { UserContext } from "@/context/userContext";
 
 import Link from "next/link";
 
+// Icon
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+
 function header() {
   const openSidebar = (event) => {
     document.querySelector(".sidebar").classList.toggle("hidden");
@@ -18,13 +22,13 @@ function header() {
         className="relative text-black-sr text-xl cursor-pointer lg:hidden"
         onClick={openSidebar}
       >
-        <i className="fi fi-rr-menu-burger"></i>
+        <MenuOutlinedIcon />
       </span>
       {/* <!-- end sidebar button  --> */}
 
       {/* <!-- start search area  --> */}
       <div className="search-area">
-        <i className="fi fi-rr-search w-[15px] lg:w-5 h-[15px] lg:h-5"></i>
+        <SearchOutlinedIcon className="menu-icon" />
         <input
           type="text"
           placeholder="Search"

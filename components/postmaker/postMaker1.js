@@ -25,6 +25,12 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { useState } from "react";
 import Spinner from "../addition/spinner";
 
+// icon
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
+import SlideshowOutlinedIcon from "@mui/icons-material/SlideshowOutlined";
+
 function postMaker1({ onPost }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -190,10 +196,12 @@ function postMaker1({ onPost }) {
             <div className="w-full h-fit font-bold text-black-sr text-xl">
               Go! Tell Something Amazing!
             </div>
-            <i
-              className="fi fi-rr-cross-circle text-xl text-birulogo-sr cursor-pointer"
+
+            <CancelOutlinedIcon
+              className=" text-birulogo-sr cursor-pointer"
+              sx={{ fontSize: { xs: 20, lg: 25 } }}
               onClick={handleClose}
-            ></i>
+            />
           </div>
           <form onSubmit={handleSubmit(createPost)}>
             <TextareaAutosize
@@ -273,15 +281,17 @@ function postMaker1({ onPost }) {
               )}
             </Swiper>
 
-            <div className="flex flex-row justify-between items-center !pt-5">
+            <div className="!flex !flex-row !justify-between !items-center !pt-5">
               {/* start popover area  */}
-              <i
-                className="fi fi-rr-messages-question !text-xl w-5 h-5 !text-oldgray-sr"
+
+              <HelpOutlineOutlinedIcon
+                className=" !text-oldgray-sr "
+                sx={{ fontSize: { xs: 20, lg: 25 } }}
                 aria-owns={openPop ? "mouse-over-popover" : undefined}
                 aria-haspopup="true"
                 onMouseEnter={handlePopoverOpen}
                 onMouseLeave={handlePopoverClose}
-              ></i>
+              />
 
               <Popover
                 id="mouse-over-popover"
@@ -309,37 +319,46 @@ function postMaker1({ onPost }) {
 
               {/* end popover area  */}
 
-              <div className="flex flex-row gap-[15px] !items-center">
-                <IconButton
-                  color="primary"
-                  aria-label="upload picture"
-                  component="label"
-                  className="!p-0"
-                >
-                  <input
-                    hidden
-                    accept="image/*"
-                    type="file"
-                    multiple
-                    onChange={addPhoto}
-                  />
-                  <i className="fi fi-rr-picture !text-xl w-5 h-5 !text-oldgray-sr "></i>
-                </IconButton>
-                <IconButton
-                  color="primary"
-                  aria-label="upload picture"
-                  component="label"
-                  className="!p-0"
-                >
-                  <input
-                    hidden
-                    accept="video/*"
-                    type="file"
-                    multiple
-                    onChange={addVideo}
-                  />
-                  <i className="fi fi-rr-play-alt !text-xl w-5 h-5 !text-oldgray-sr "></i>
-                </IconButton>
+              <div className="flex flex-row gap-5 !items-center">
+                <div className="flex flex-row gap-[5px] !items-center">
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="label"
+                    className="!p-0"
+                  >
+                    <input
+                      hidden
+                      accept="image/*"
+                      type="file"
+                      multiple
+                      onChange={addPhoto}
+                    />
+                    <ImageOutlinedIcon
+                      className="!text-oldgray-sr"
+                      sx={{ fontSize: { xs: 20, lg: 25 } }}
+                    />
+                  </IconButton>
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="label"
+                    className="!p-0"
+                  >
+                    <input
+                      hidden
+                      accept="video/*"
+                      type="file"
+                      multiple
+                      onChange={addVideo}
+                    />
+                    <SlideshowOutlinedIcon
+                      className="!text-oldgray-sr"
+                      sx={{ fontSize: { xs: 20, lg: 25 } }}
+                    />
+                  </IconButton>
+                </div>
+
                 <Button
                   variant="contained"
                   className="!bg-birulogo-sr !capitalize !py-2 !px-10 disabled:!opacity-25 disabled:!text-white-sr "

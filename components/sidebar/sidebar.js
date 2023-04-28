@@ -5,6 +5,15 @@ import { useRouter } from "next/router";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 
+// icon
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import LocalActivityOutlinedIcon from "@mui/icons-material/LocalActivityOutlined";
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+
 // start function untuk button close sidebar
 function sidebar() {
   const openSidebar = (event) => {
@@ -53,10 +62,11 @@ function sidebar() {
         </Link>
       </div>
 
-      <i
-        className="fi fi-rr-cross-circle absolute top-5 right-5 text-xl text-birulogo-sr cursor-pointer lg:hidden"
+      <CancelOutlinedIcon
+        className=" !absolute !top-5 !right-5 !text-birulogo-sr !cursor-pointer lg:!hidden"
+        sx={{ fontSize: 20 }}
         onClick={openSidebar}
-      ></i>
+      />
 
       <div className="flex flex-col gap-5">
         <div className="w-full text-left pl-10 text-black-sr">
@@ -71,7 +81,9 @@ function sidebar() {
               className={
                 router.pathname == "/" ? activeClasses : nonActiveClasses
               }
-              startIcon={<i className="fi fi-rr-world menu-icon"></i>}
+              startIcon={
+                <PublicOutlinedIcon sx={{ fontSize: { xs: 20, lg: 25 } }} />
+              }
             >
               Global
             </Button>
@@ -84,7 +96,9 @@ function sidebar() {
                   ? activeClasses
                   : nonActiveClasses
               }
-              startIcon={<i className="fi fi-rr-user menu-icon"></i>}
+              startIcon={
+                <PersonOutlinedIcon sx={{ fontSize: { xs: 20, lg: 25 } }} />
+              }
             >
               Profile
             </Button>
@@ -92,7 +106,11 @@ function sidebar() {
 
           <Button
             className="menu-btn menu-name "
-            startIcon={<i className="fi fi-rr-bell menu-icon"></i>}
+            startIcon={
+              <NotificationsNoneOutlinedIcon
+                sx={{ fontSize: { xs: 20, lg: 25 } }}
+              />
+            }
           >
             Notification
           </Button>
@@ -102,7 +120,11 @@ function sidebar() {
               className={
                 router.pathname == "/event" ? activeClasses : nonActiveClasses
               }
-              startIcon={<i className="fi fi-rr-calendar-star menu-icon"></i>}
+              startIcon={
+                <LocalActivityOutlinedIcon
+                  sx={{ fontSize: { xs: 20, lg: 25 } }}
+                />
+              }
             >
               Event
             </Button>
@@ -110,14 +132,20 @@ function sidebar() {
 
           <Button
             className="menu-btn menu-name "
-            startIcon={<i className="fi fi-rr-bookmark menu-icon"></i>}
+            startIcon={
+              <BookmarkBorderOutlinedIcon
+                sx={{ fontSize: { xs: 20, lg: 25 } }}
+              />
+            }
           >
             Saved Post
           </Button>
 
           <Button
             className="menu-btn menu-name "
-            startIcon={<i className="fi fi-rr-sign-out-alt menu-icon"></i>}
+            startIcon={
+              <LogoutOutlinedIcon sx={{ fontSize: { xs: 20, lg: 25 } }} />
+            }
             onClick={GoogleLogout}
           >
             Logout

@@ -2,6 +2,9 @@ import * as React from "react";
 import Dialog from "@mui/material/Dialog";
 import Slide from "@mui/material/Slide";
 
+// icon 
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -44,10 +47,7 @@ function EventPostCard() {
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <i
-          className="fi fi-rr-cross-circle text-xl text-birulogo-sr cursor-pointer"
-          onClick={handleClose}
-        ></i>
+        <CancelOutlinedIcon className=" text-birulogo-sr cursor-pointer" sx={{ fontSize: {xs:20, lg:25} }} onClick={handleClose}/>
       </Dialog>
     </>
   );

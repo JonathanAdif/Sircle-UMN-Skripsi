@@ -8,7 +8,6 @@ module.exports = {
     extend: {
       fontFamily: {
         poppins: ['"Poppins"', "sans-serif"],
-        baloo: ['"Baloo 2"'],
       },
       colors: {
         "white-sr": "#FEFEFE",

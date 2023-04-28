@@ -8,6 +8,9 @@ import { useState } from "react";
 import { uploadProfileSectionImage } from "@/helper/userHelper";
 import Spinner from "../addition/spinner";
 
+// icon
+import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
+
 function AvatarProfile({ url, editable, onChange }) {
   Fancybox.bind('[data-fancybox="single"]', {
     groupAttr: false,
@@ -60,7 +63,10 @@ function AvatarProfile({ url, editable, onChange }) {
                 type="file"
                 onChange={avatarUpdate}
               />
-              <i className="fi fi-rr-camera !text-xl !w-5 !h-5  !text-birulogo-sr"></i>
+              <CameraAltOutlinedIcon
+                className=" !text-birulogo-sr"
+                sx={{ fontSize: { xs: 20, lg: 25 } }}
+              />
             </IconButton>
           }
         >

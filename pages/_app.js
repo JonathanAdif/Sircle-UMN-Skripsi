@@ -43,22 +43,9 @@ export default function App({ Component, pageProps }) {
         />
         {/* googlefonts */}
         <link
-          href="https://fonts.googleapis.com/css?family=Baloo+2:regular,500,600,700,800"
-          rel="stylesheet"
-        />
-        <link
           href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
           rel="stylesheet"
         />
-        {/* flaticon */}
-        <link
-          rel="stylesheet"
-          href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
-        ></link>
       </Head>
       <ThemeProvider theme={theme}>
         <SessionContextProvider
