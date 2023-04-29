@@ -17,7 +17,7 @@ import { UserContext } from "@/context/userContext";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
 // icon
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
@@ -27,6 +27,7 @@ import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined";
 
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 
 function postcontainer({
   id,
@@ -36,6 +37,7 @@ function postcontainer({
   photos,
   videos,
 }) {
+  const session = useSession();
   // start toggle comment
   const [toggle, setToggle] = useState(false);
   const handleClick = () => {
@@ -73,11 +75,14 @@ function postcontainer({
     supabase
       .from("posts")
       .select("*, profiles(*)")
+      .order("created_at", { ascending: false })
       .eq("parent", id)
       .then((result) => setComments(result.data));
   }
 
   const isLikedByMe = !!likes.find((like) => like.user_id === myProfile?.id);
+
+  const myPost = writerprofile.id === session?.user?.id;
 
   function likeToggle() {
     if (isLikedByMe) {
@@ -142,10 +147,18 @@ function postcontainer({
           </div>
         </div>
 
-        <BookmarkBorderOutlinedIcon
-          className=" cursor-pointer mt-[3px] text-oldgray-sr"
-          sx={{ fontSize: { xs: 20, lg: 25 } }}
-        />
+        <div>
+          <BookmarkBorderOutlinedIcon
+            className=" cursor-pointer mt-[3px] text-oldgray-sr"
+            sx={{ fontSize: { xs: 20, lg: 25 } }}
+          />
+          {myPost && (
+            <MoreVertOutlinedIcon
+              className="  cursor-pointer mt-[3px] text-oldgray-sr"
+              sx={{ fontSize: { xs: 20, lg: 25 } }}
+            />
+          )}
+        </div>
       </div>
       {/* <!-- end header postingan  --> */}
 
@@ -281,8 +294,8 @@ function postcontainer({
               comments.map((comment) => (
                 <div key={comment.id} className="mt-2 flex gap-2 items-center">
                   <Avatar url={comment.profiles.avatar} />
-                  <div className=" bg-gray-sr bg-opacity-20 w-full py-2 px-4 rounded-[10px]">
-                    <div className="flex flex-row justify-between">
+                  <div className=" bg-gray-sr bg-opacity-20 py-2 px-4 rounded-[10px]">
+                    <div className="flex flex-row gap-2.5">
                       <Link href={"/profile/" + comment.profiles.id}>
                         <span className="hover:underline font-semibold mr-1">
                           {comment.profiles.username}
