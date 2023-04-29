@@ -6,11 +6,13 @@ import { Pagination, Navigation } from "swiper";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Link from "next/link";
+import IconButton from "@mui/material/IconButton";
 
 import Avatar from "../avatarCover/avatar";
+import List from "../addition/list";
 import ReactTimeAgo from "react-time-ago";
 
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 
 import { UserContext } from "@/context/userContext";
 
@@ -27,7 +29,11 @@ import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined";
 
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
+import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
+
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 
 function postcontainer({
   id,
@@ -50,12 +56,17 @@ function postcontainer({
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const [likes, setLikes] = useState([]);
+  const [isSaved,setIsSaved] = useState(false);
 
   const { profile: myProfile } = useContext(UserContext);
 
   const likedButton =
     "!w-full !font-medium !text-birulogo-sr !fill-birulogo-sr  !py-[10px]  hover:!bg-birulogo-sr hover:!text-white-sr   !bg-white-sr !capitalize !border-none !shadow-none !rounded-[5px]";
   const nonlikedButton = "ctapostbutton";
+  const likesnull =
+    "flex flex-row gap-[5px] font-normal text-xs text-oldgray-sr pt-1.5";
+  const likesnotnull =
+    "flex flex-row gap-[5px] font-normal text-xs text-oldgray-sr pt-1.5 cursor-pointer";
 
   useEffect(() => {
     fetchLikes();
@@ -127,6 +138,56 @@ function postcontainer({
       });
   }
 
+  // start dialog
+
+  const [open, setOpen] = useState(false);
+  const [scroll, setScroll] = useState("paper");
+
+  const handleClickOpen = (scrollType) => () => {
+    setOpen(true);
+    setScroll(scrollType);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const descriptionElementRef = useRef(null);
+  useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
+
+  // end dialog
+
+  function saveToggle() {
+    if (isSaved) {
+      supabase
+        .from("savedpost")
+        .delete()
+        .eq("post_id", id)
+        .eq("user_id", myProfile?.id)
+        .then((result) => {
+          setIsSaved(false);
+        });
+    }
+    if (!isSaved) {
+      supabase
+        .from("savedpost")
+        .insert({
+          user_id: myProfile.id,
+          post_id: id,
+        })
+        .then((result) => {
+          setIsSaved(true);
+        });
+    }
+  }
+
   return (
     <div className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-sm flex flex-col gap-5">
       {/* <!-- start header postingan  --> */}
@@ -141,17 +202,28 @@ function postcontainer({
             </Link>
             <div className="flex flex-row gap-[2px]">
               <div className="flex flex-row gap-[2px] text-xs text-oldgray-sr !font-normal">
-                <ReactTimeAgo date={new Date(created_at).getTime()} />
+                <ReactTimeAgo
+                  timeStyle={"twitter"}
+                  date={new Date(created_at).getTime()}
+                />
               </div>
             </div>
           </div>
         </div>
 
         <div>
-          <BookmarkBorderOutlinedIcon
-            className=" cursor-pointer mt-[3px] text-oldgray-sr"
-            sx={{ fontSize: { xs: 20, lg: 25 } }}
-          />
+          <IconButton
+            color="primary"
+            aria-label="bookmark"
+            component="label"
+            onClick={saveToggle}
+          >
+            <BookmarkBorderOutlinedIcon
+              className=" cursor-pointer mt-[3px] text-oldgray-sr"
+              sx={{ fontSize: { xs: 20, lg: 25 } }}
+            />
+          </IconButton>
+
           {myPost && (
             <MoreVertOutlinedIcon
               className="  cursor-pointer mt-[3px] text-oldgray-sr"
@@ -222,7 +294,10 @@ function postcontainer({
                 src="https://assets10.lottiefiles.com/packages/lf20_wovxkf33.json"
                 style={{ width: "50px" }}
               ></lottie-player>
-              <div className="flex flex-row gap-[5px] font-normal text-xs text-oldgray-sr pt-1.5">
+              <div
+                className={likes?.length > 0 ? likesnotnull : likesnull}
+                onClick={handleClickOpen("paper")}
+              >
                 <span>{likes?.length}</span>
                 <span>Likes</span>
               </div>
@@ -316,6 +391,20 @@ function postcontainer({
         </div>
       ) : (
         <></>
+      )}
+      {likes?.length > 0 && (
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          scroll={scroll}
+          aria-labelledby="scroll-dialog-title"
+          aria-describedby="scroll-dialog-description"
+        >
+          <DialogTitle id="scroll-dialog-title">Likes</DialogTitle>
+          <DialogContent dividers={scroll === "paper"}>
+            <List />
+          </DialogContent>
+        </Dialog>
       )}
     </div>
   );

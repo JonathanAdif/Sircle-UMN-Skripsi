@@ -130,16 +130,22 @@ function sidebar() {
             </Button>
           </Link>
 
-          <Button
-            className="menu-btn menu-name "
-            startIcon={
-              <BookmarkBorderOutlinedIcon
-                sx={{ fontSize: { xs: 20, lg: 25 } }}
-              />
-            }
-          >
-            Saved Post
-          </Button>
+          <Link href="/savedPost">
+            <Button
+              className={
+                router.pathname == "/savedPost"
+                  ? activeClasses
+                  : nonActiveClasses
+              }
+              startIcon={
+                <BookmarkBorderOutlinedIcon
+                  sx={{ fontSize: { xs: 20, lg: 25 } }}
+                />
+              }
+            >
+              Saved Post
+            </Button>
+          </Link>
 
           <Button
             className="menu-btn menu-name "
