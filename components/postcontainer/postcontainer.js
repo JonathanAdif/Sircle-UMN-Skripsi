@@ -29,12 +29,15 @@ import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined";
 
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+
+import Popover from "@mui/material/Popover";
 
 function postcontainer({
   id,
@@ -205,6 +208,40 @@ function postcontainer({
     }
   }
 
+ const deletingPost = async () => {
+   const {data, error} = await supabase
+    .from("posts")
+    .delete()
+    .eq("id", id)
+    .eq("writer", myProfile.id)
+    
+    if(error){
+      console.log(error)
+    }
+
+    if(data){
+      console.log(data)
+    }
+
+  }
+
+  // start open popper
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handlepopperClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlepopperClose = () => {
+    setAnchorEl(null);
+  };
+
+  const openPop = Boolean(anchorEl);
+  const idPop = openPop ? "simple-popover" : undefined;
+
+  // end open popper
+
   return (
     <div className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-sm flex flex-col gap-5">
       {/* <!-- start header postingan  --> */}
@@ -228,7 +265,7 @@ function postcontainer({
           </div>
         </div>
 
-        <div>
+        <div className="flex flex-row !p-0">
           <IconButton
             color="primary"
             aria-label="bookmark"
@@ -237,22 +274,51 @@ function postcontainer({
           >
             {isSaved ? (
               <BookmarkIcon
-              className=" cursor-pointer mt-[3px] text-birulogo-sr"
-              sx={{ fontSize: { xs: 20, lg: 25 } }}
-            />
+                className=" cursor-pointer  text-birulogo-sr"
+                sx={{ fontSize: { xs: 20, lg: 25 } }}
+              />
             ) : (
               <BookmarkBorderOutlinedIcon
-              className=" cursor-pointer mt-[3px] text-oldgray-sr"
-              sx={{ fontSize: { xs: 20, lg: 25 } }}
-            />
+                className=" cursor-pointer text-oldgray-sr"
+                sx={{ fontSize: { xs: 20, lg: 25 } }}
+              />
             )}
           </IconButton>
 
           {myPost && (
-            <MoreVertOutlinedIcon
-              className="  cursor-pointer mt-[3px] text-oldgray-sr"
-              sx={{ fontSize: { xs: 20, lg: 25 } }}
-            />
+            <div>
+              <IconButton
+                color="primary"
+                aria-label="menu"
+                component="label"
+                onClick={handlepopperClick}
+              >
+                <MoreVertOutlinedIcon
+                  className="  cursor-pointer  text-oldgray-sr"
+                  sx={{ fontSize: { xs: 20, lg: 25 } }}
+                />
+              </IconButton>
+
+              <Popover
+                id={idPop}
+                open={openPop}
+                anchorEl={anchorEl}
+                onClose={handlepopperClose}
+                className=" !left-[-65px] "
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+              >
+                <Button
+                  className="ctapostbutton"
+                  startIcon={<DeleteForeverOutlinedIcon className="menu-icon" />}
+                  onClick={deletingPost}
+                >
+                  Delete Post
+                </Button>
+              </Popover>
+            </div>
           )}
         </div>
       </div>
