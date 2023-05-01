@@ -29,6 +29,7 @@ import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined";
 
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 
 import Dialog from "@mui/material/Dialog";
@@ -56,7 +57,7 @@ function postcontainer({
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const [likes, setLikes] = useState([]);
-  const [isSaved,setIsSaved] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
   const { profile: myProfile } = useContext(UserContext);
 
@@ -72,7 +73,23 @@ function postcontainer({
     fetchLikes();
     fetchComments();
     import("@lottiefiles/lottie-player");
+    if (myProfile?.id) fetchIsSaved();
   }, [myProfile?.id]);
+
+  function fetchIsSaved() {
+    supabase
+      .from("savedpost")
+      .select()
+      .eq("post_id", id)
+      .eq("user_id", myProfile?.id)
+      .then((result) => {
+        if (result.data.length > 0) {
+          setIsSaved(true);
+        } else {
+          setIsSaved(false);
+        }
+      });
+  }
 
   function fetchLikes() {
     supabase
@@ -218,10 +235,17 @@ function postcontainer({
             component="label"
             onClick={saveToggle}
           >
-            <BookmarkBorderOutlinedIcon
+            {isSaved ? (
+              <BookmarkIcon
+              className=" cursor-pointer mt-[3px] text-birulogo-sr"
+              sx={{ fontSize: { xs: 20, lg: 25 } }}
+            />
+            ) : (
+              <BookmarkBorderOutlinedIcon
               className=" cursor-pointer mt-[3px] text-oldgray-sr"
               sx={{ fontSize: { xs: 20, lg: 25 } }}
             />
+            )}
           </IconButton>
 
           {myPost && (
