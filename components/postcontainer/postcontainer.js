@@ -194,6 +194,7 @@ function postcontainer({
         .then((result) => {
           setIsSaved(false);
         });
+        window.location.reload(false);
     }
     if (!isSaved) {
       supabase
@@ -222,6 +223,8 @@ function postcontainer({
     if(data){
       console.log(data)
     }
+
+    window.location.reload(false);
 
   }
 
