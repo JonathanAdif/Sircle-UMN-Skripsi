@@ -5,7 +5,10 @@ import ProfileBanner from "../banner/profileBanner";
 
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
+
+import { UserContext } from "@/context/userContext";
+import { UserProfileContext } from "@/context/userprofileContext";
 
 function profileComponent() {
   const supabase = useSupabaseClient();
@@ -13,6 +16,18 @@ function profileComponent() {
   const userId = router.query.id;
   const [profile, setProfile] = useState(null);
   const [posts, setPosts] = useState([]);
+  const [follow, setFollow] = useState([]);
+
+  const [following, setFollowing] = useState([]);
+
+  const { profile: myProfile } = useContext(UserContext);
+
+  const {
+    profile: otherProfile,
+    myUser,
+    fetchUser,
+    setProfile: setUserProfile,
+  } = useContext(UserProfileContext);
 
   // start function buat masukin post ke profile page
 
@@ -20,9 +35,13 @@ function profileComponent() {
     if (!userId) {
       return;
     }
-
     loadPosts().then(() => {});
-  }, [userId]);
+    fetchfollowers();
+    if (userId != myProfile?.id) {
+      return;
+    }
+    fetchfollowing();
+  }, [myProfile?.id, userId]);
 
   async function loadPosts() {
     const posts = await userPosts(userId);
@@ -35,7 +54,7 @@ function profileComponent() {
     const { data } = await supabase
       .from("posts")
       .select("id, content, created_at, photos, videos, writer")
-      .is('parent', null)
+      .is("parent", null)
       .order("created_at", { ascending: false })
       .eq("writer", userId);
     return data;
@@ -48,13 +67,59 @@ function profileComponent() {
 
   // end function buat masukin post ke profile page
 
+  function fetchfollowers() {
+    supabase
+      .from("followers")
+      .select()
+      .eq("follow_id", userId)
+      .then((result) => setFollow(result.data));
+  }
+
+  function fetchfollowing() {
+    supabase
+      .from("followers")
+      .select()
+      .eq("user_id", myProfile?.id)
+      .then((result) => setFollowing(result.data));
+  }
+
+  const isFollowedByMe = !!follow?.find(
+    (follows) => follows.user_id === myProfile?.id
+  );
+
+  function followToggle() {
+    if (isFollowedByMe) {
+      supabase
+        .from("followers")
+        .delete()
+
+        .eq("user_id", myProfile.id)
+        .eq("follow_id", userId)
+        .then(() => {
+          fetchfollowers();
+          fetchfollowing();
+        });
+      return;
+    }
+    supabase
+      .from("followers")
+      .insert({
+        user_id: myProfile.id,
+        follow_id: userId,
+      })
+      .then((result) => {
+        fetchfollowers();
+        fetchfollowing();
+      });
+  }
+
   return (
     <>
       <Header />
       <Sidebar />
 
       <div className="mainLayout2">
-        <ProfileBanner />
+        <ProfileBanner follow={followToggle} />
 
         <div className="flex flex-row gap-5">
           <div className="mainLeftlayout">
@@ -76,11 +141,11 @@ function profileComponent() {
                 </div>
                 <div className="flex flex-row w-full justify-between h-fit">
                   <div>Followers</div>
-                  <div>100</div>
+                  <div>{follow?.length}</div>
                 </div>
                 <div className="flex flex-row w-full justify-between h-fit">
                   <div>Following</div>
-                  <div>1000</div>
+                  <div>{following?.length}</div>
                 </div>
               </div>
             </div>

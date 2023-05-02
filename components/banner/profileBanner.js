@@ -12,7 +12,7 @@ import { useSession } from "@supabase/auth-helpers-react";
 // icon
 import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 
-function profileBanner() {
+function profileBanner({follow}) {
   const { profile, myUser, fetchUser, setProfile } =
     useContext(UserProfileContext);
   const [editSection, seteditSection] = useState(false);
@@ -138,7 +138,15 @@ function profileBanner() {
         {/* start button edit profile area  */}
         <div>
           {!myUser && (
-            <div className="w-full h-fit flex justify-end p-9 "></div>
+            <div className="w-full h-fit flex justify-end p-5 ">
+              <Button
+                variant="contained"
+                className="!bg-birulogo-sr  disabled:!opacity-25 disabled:!text-white-sr !capitalize "
+                onClick={follow}
+              >
+                Follow
+              </Button>
+            </div>
           )}
 
           {myUser && !editSection && (

@@ -35,7 +35,7 @@ import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
 import Popover from "@mui/material/Popover";
 
@@ -194,7 +194,7 @@ function postcontainer({
         .then((result) => {
           setIsSaved(false);
         });
-        window.location.reload(false);
+      window.location.reload(false);
     }
     if (!isSaved) {
       supabase
@@ -209,24 +209,23 @@ function postcontainer({
     }
   }
 
- const deletingPost = async () => {
-   const {data, error} = await supabase
-    .from("posts")
-    .delete()
-    .eq("id", id)
-    .eq("writer", myProfile.id)
-    
-    if(error){
-      console.log(error)
+  const deletingPost = async () => {
+    const { data, error } = await supabase
+      .from("posts")
+      .delete()
+      .eq("id", id)
+      .eq("writer", myProfile.id);
+
+    if (error) {
+      console.log(error);
     }
 
-    if(data){
-      console.log(data)
+    if (data) {
+      console.log(data);
     }
 
     window.location.reload(false);
-
-  }
+  };
 
   // start open popper
 
@@ -315,7 +314,9 @@ function postcontainer({
               >
                 <Button
                   className="ctapostbutton"
-                  startIcon={<DeleteForeverOutlinedIcon className="menu-icon" />}
+                  startIcon={
+                    <DeleteForeverOutlinedIcon className="menu-icon" />
+                  }
                   onClick={deletingPost}
                 >
                   Delete Post
@@ -429,12 +430,14 @@ function postcontainer({
         >
           Like
         </Button>
-        <Button
-          className="ctapostbutton"
-          startIcon={<LoopOutlinedIcon className="menu-icon" />}
-        >
-          Resircle
-        </Button>
+        {!myPost && (
+          <Button
+            className="ctapostbutton"
+            startIcon={<LoopOutlinedIcon className="menu-icon" />}
+          >
+            Resircle
+          </Button>
+        )}
         <Button
           className="ctapostbutton"
           startIcon={<CommentOutlinedIcon className="menu-icon" />}
