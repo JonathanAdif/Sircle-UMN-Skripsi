@@ -3,7 +3,7 @@ import Sidebar from "../sidebar/sidebar";
 import Postcontainer from "../postcontainer/postcontainer";
 import ProfileBanner from "../banner/profileBanner";
 
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { useContext, useState, useEffect, useRef } from "react";
 
@@ -17,6 +17,7 @@ function profileComponent() {
   const [profile, setProfile] = useState(null);
   const [posts, setPosts] = useState([]);
   const [follow, setFollow] = useState([]);
+  const session = useSession();
 
   const [following, setFollowing] = useState([]);
 
@@ -32,16 +33,12 @@ function profileComponent() {
   // start function buat masukin post ke profile page
 
   useEffect(() => {
-    if (!userId) {
-      return;
+    if (userId) {
+      loadPosts().then(() => {});
+      fetchfollowers();
     }
-    loadPosts().then(() => {});
-    fetchfollowers();
-    if (userId != myProfile?.id) {
-      return;
-    }
-    fetchfollowing();
-  }, [myProfile?.id, userId]);
+    return;
+  }, [userId]);
 
   async function loadPosts() {
     const posts = await userPosts(userId);
@@ -66,6 +63,17 @@ function profileComponent() {
   }
 
   // end function buat masukin post ke profile page
+
+  useEffect(() => {
+    if (userId) {
+      loadPosts().then(() => {});
+      fetchfollowers();
+    }
+    if (userId == myProfile?.id) {
+      fetchfollowing();
+    }
+    return;
+  }, [myProfile?.id, userId]);
 
   function fetchfollowers() {
     supabase
@@ -143,10 +151,12 @@ function profileComponent() {
                   <div>Followers</div>
                   <div>{follow?.length}</div>
                 </div>
-                <div className="flex flex-row w-full justify-between h-fit">
-                  <div>Following</div>
-                  <div>{following?.length}</div>
-                </div>
+                {userId == myProfile?.id && (
+                  <div className="flex flex-row w-full justify-between h-fit">
+                    <div>Following</div>
+                    <div>{following?.length}</div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
