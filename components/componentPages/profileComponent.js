@@ -119,7 +119,7 @@ function profileComponent() {
       <Sidebar />
 
       <div className="mainLayout2">
-        <ProfileBanner follow={followToggle} />
+        <ProfileBanner follow={followToggle} followstat={isFollowedByMe} />
 
         <div className="flex flex-row gap-5">
           <div className="mainLeftlayout">

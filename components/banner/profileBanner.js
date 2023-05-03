@@ -9,10 +9,14 @@ import { useForm } from "react-hook-form";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useSession } from "@supabase/auth-helpers-react";
 
-// icon
-import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 
-function profileBanner({follow}) {
+
+// icon
+import PersonAddAlt1OutlinedIcon from '@mui/icons-material/PersonAddAlt1Outlined';
+import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
+
+function profileBanner({follow, followstat}) {
   const { profile, myUser, fetchUser, setProfile } =
     useContext(UserProfileContext);
   const [editSection, seteditSection] = useState(false);
@@ -20,6 +24,9 @@ function profileBanner({follow}) {
   const [bio, setBio] = useState("");
   const supabase = useSupabaseClient();
   const session = useSession();
+
+  const hasfollow = "!bg-green-600  disabled:!opacity-25 disabled:!text-white-sr !capitalize";
+  const notfollow = "!bg-birulogo-sr  disabled:!opacity-25 disabled:!text-white-sr !capitalize";
 
   const {
     register,
@@ -141,10 +148,11 @@ function profileBanner({follow}) {
             <div className="w-full h-fit flex justify-end p-5 ">
               <Button
                 variant="contained"
-                className="!bg-birulogo-sr  disabled:!opacity-25 disabled:!text-white-sr !capitalize "
+                className={followstat ? hasfollow : notfollow }
+                startIcon={followstat ? <CheckOutlinedIcon   className="menu-icon" /> : <PersonAddAlt1OutlinedIcon  className="menu-icon" />}
                 onClick={follow}
               >
-                Follow
+                {followstat ? "Following" : "follow"}
               </Button>
             </div>
           )}
