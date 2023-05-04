@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { UserProfileContext } from "@/context/userprofileContext";
+import { globalContext } from "@/context/globalContext";
 import AvatarProfile from "../avatarCover/avatarProfile";
 import CoverProfile from "../avatarCover/cover";
 import IconButton from "@mui/material/IconButton";
@@ -18,7 +18,7 @@ import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 
 function profileBanner({follow, followstat}) {
   const { profile, myUser, fetchUser, setProfile } =
-    useContext(UserProfileContext);
+    useContext(globalContext);
   const [editSection, seteditSection] = useState(false);
   const [username, setName] = useState("");
   const [bio, setBio] = useState("");

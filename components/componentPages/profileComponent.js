@@ -2,13 +2,12 @@ import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import Postcontainer from "../postcontainer/postcontainer";
 import ProfileBanner from "../banner/profileBanner";
-import { useContext} from "react";
+import { useContext } from "react";
 
 import { UserContext } from "@/context/userContext";
-import { UserProfileContext } from "@/context/userprofileContext";
+import { globalContext } from "@/context/globalContext";
 
 function profileComponent() {
-
   const { profile: myProfile } = useContext(UserContext);
 
   const {
@@ -19,9 +18,7 @@ function profileComponent() {
     profile,
     posts,
     userId,
-  } = useContext(UserProfileContext);
- 
-
+  } = useContext(globalContext);
 
   return (
     <>

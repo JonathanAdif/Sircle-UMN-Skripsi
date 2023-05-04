@@ -6,7 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Avatar from "../avatarCover/avatar";
 import Button from "@mui/material/Button";
 import { useContext } from "react";
-import { UserProfileContext } from "@/context/userprofileContext";
+import { globalContext } from "@/context/globalContext";
 // icon
 import PersonAddAlt1OutlinedIcon from "@mui/icons-material/PersonAddAlt1Outlined";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
@@ -25,7 +25,7 @@ function Listprp({
   const notfollow =
     "!bg-birulogo-sr  disabled:!opacity-25 disabled:!text-white-sr !capitalize";
 
-  //   const { followToggle, isFollowedByMe,  userId } = useContext(UserProfileContext);
+  //   const { followToggle, isFollowedByMe,  userId } = useContext(globalContext);
 
   return (
     <List sx={{ width: "100%", maxWidth: 750, bgcolor: "background.paper" }}>

@@ -15,7 +15,7 @@ import ReactTimeAgo from "react-time-ago";
 import { useContext, useState, useEffect, useRef } from "react";
 
 import { UserContext } from "@/context/userContext";
-import { UserProfileContext } from "@/context/userprofileContext";
+import { globalContext } from "@/context/globalContext";
 
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
@@ -66,7 +66,7 @@ function postcontainer({
   const [isSaved, setIsSaved] = useState(false);
 
   const { profile: myProfile } = useContext(UserContext);
-  const { profile } = useContext(UserProfileContext);
+  const { profile } = useContext(globalContext);
 
   const likedButton =
     "!w-full !font-medium !text-birulogo-sr !fill-birulogo-sr  !py-[10px]  hover:!bg-birulogo-sr hover:!text-white-sr   !bg-white-sr !capitalize !border-none !shadow-none !rounded-[5px]";

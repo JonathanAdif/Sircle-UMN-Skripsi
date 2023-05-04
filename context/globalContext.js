@@ -3,7 +3,7 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { UserContext } from "@/context/userContext";
 
-export const UserProfileContext = createContext({});
+export const globalContext = createContext({});
 
 export function UserProfileContextProvider({ children }) {
   const session = useSession();
@@ -128,7 +128,7 @@ useEffect(() => {
   // end fungsi fungsi follow unfollow 
 
   return (
-    <UserProfileContext.Provider
+    <globalContext.Provider
       value={{
         profiles,
         myUser,
@@ -146,6 +146,6 @@ useEffect(() => {
       }}
     >
       {children}
-    </UserProfileContext.Provider>
+    </globalContext.Provider>
   );
 }

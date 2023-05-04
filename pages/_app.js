@@ -26,7 +26,7 @@ TimeAgo.addDefaultLocale(en);
 
 // context
 import { UserContextProvider } from "@/context/userContext";
-import { UserProfileContextProvider } from "@/context/userprofileContext";
+import { UserProfileContextProvider } from "@/context/globalContext";
 
 export default function App({ Component, pageProps }) {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());

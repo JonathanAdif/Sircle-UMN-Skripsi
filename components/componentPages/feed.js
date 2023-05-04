@@ -8,7 +8,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useContext, useEffect, useState } from "react";
 
 import { UserContext } from "@/context/userContext";
-import { UserProfileContext } from "@/context/userprofileContext";
+import { globalContext } from "@/context/globalContext";
 
 function feed() {
   const supabase = useSupabaseClient();
@@ -19,7 +19,7 @@ function feed() {
   const {
     followToggle,
     isFollowedByMe,
-  } = useContext(UserProfileContext);
+  } = useContext(globalContext);
 
   useEffect(() => {
     fetchPost();
