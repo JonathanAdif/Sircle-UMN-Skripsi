@@ -15,6 +15,7 @@ import ReactTimeAgo from "react-time-ago";
 import { useContext, useState, useEffect, useRef } from "react";
 
 import { UserContext } from "@/context/userContext";
+import { UserProfileContext } from "@/context/userprofileContext";
 
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
@@ -46,6 +47,8 @@ function postcontainer({
   created_at,
   photos,
   videos,
+  follow,
+  followstat,
 }) {
   const session = useSession();
   // start toggle comment
@@ -63,6 +66,7 @@ function postcontainer({
   const [isSaved, setIsSaved] = useState(false);
 
   const { profile: myProfile } = useContext(UserContext);
+  const { profile } = useContext(UserProfileContext);
 
   const likedButton =
     "!w-full !font-medium !text-birulogo-sr !fill-birulogo-sr  !py-[10px]  hover:!bg-birulogo-sr hover:!text-white-sr   !bg-white-sr !capitalize !border-none !shadow-none !rounded-[5px]";
@@ -97,7 +101,8 @@ function postcontainer({
   function fetchLikes() {
     supabase
       .from("likes")
-      .select()
+      .select("*, profiles(id, avatar, username)")
+      .order("created_at", { ascending: false })
       .eq("post_id", id)
       .then((result) => setLikes(result.data));
   }
@@ -498,7 +503,17 @@ function postcontainer({
         >
           <DialogTitle id="scroll-dialog-title">Likes</DialogTitle>
           <DialogContent dividers={scroll === "paper"}>
-            <List />
+            {likes?.length > 0 &&
+              likes.map((like) => (
+                <List
+                  listAvatar={like.profiles?.avatar}
+                  listUsername={like.profiles.username}
+                  profileLike={like.user_id}
+                  myLike={like.user_id === myProfile?.id}
+                  followButton={follow}
+                  followStat={followstat}
+                />
+              ))}
           </DialogContent>
         </Dialog>
       )}

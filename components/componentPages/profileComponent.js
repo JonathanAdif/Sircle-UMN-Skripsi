@@ -2,124 +2,26 @@ import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import Postcontainer from "../postcontainer/postcontainer";
 import ProfileBanner from "../banner/profileBanner";
-
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useRouter } from "next/router";
-import { useContext, useState, useEffect, useRef } from "react";
+import { useContext} from "react";
 
 import { UserContext } from "@/context/userContext";
 import { UserProfileContext } from "@/context/userprofileContext";
 
 function profileComponent() {
-  const supabase = useSupabaseClient();
-  const router = useRouter();
-  const userId = router.query.id;
-  const [profile, setProfile] = useState(null);
-  const [posts, setPosts] = useState([]);
-  const [follow, setFollow] = useState([]);
-  const session = useSession();
-
-  const [following, setFollowing] = useState([]);
 
   const { profile: myProfile } = useContext(UserContext);
 
   const {
-    profile: otherProfile,
-    myUser,
-    fetchUser,
-    setProfile: setUserProfile,
+    followToggle,
+    following,
+    isFollowedByMe,
+    follow,
+    profile,
+    posts,
+    userId,
   } = useContext(UserProfileContext);
+ 
 
-  // start function buat masukin post ke profile page
-
-  useEffect(() => {
-    if (userId) {
-      loadPosts().then(() => {});
-      fetchfollowers();
-    }
-    return;
-  }, [userId]);
-
-  async function loadPosts() {
-    const posts = await userPosts(userId);
-    const profile = await userProfile(userId);
-    setPosts(posts);
-    setProfile(profile);
-  }
-
-  async function userPosts(userId) {
-    const { data } = await supabase
-      .from("posts")
-      .select("id, content, created_at, photos, videos, writer")
-      .is("parent", null)
-      .order("created_at", { ascending: false })
-      .eq("writer", userId);
-    return data;
-  }
-
-  async function userProfile(userId) {
-    const { data } = await supabase.from("profiles").select().eq("id", userId);
-    return data?.[0];
-  }
-
-  // end function buat masukin post ke profile page
-
-  useEffect(() => {
-    if (userId) {
-      loadPosts().then(() => {});
-      fetchfollowers();
-    }
-    if (userId == myProfile?.id) {
-      fetchfollowing();
-    }
-    return;
-  }, [myProfile?.id, userId]);
-
-  function fetchfollowers() {
-    supabase
-      .from("followers")
-      .select()
-      .eq("follow_id", userId)
-      .then((result) => setFollow(result.data));
-  }
-
-  function fetchfollowing() {
-    supabase
-      .from("followers")
-      .select()
-      .eq("user_id", myProfile?.id)
-      .then((result) => setFollowing(result.data));
-  }
-
-  const isFollowedByMe = !!follow?.find(
-    (follows) => follows.user_id === myProfile?.id
-  );
-
-  function followToggle() {
-    if (isFollowedByMe) {
-      supabase
-        .from("followers")
-        .delete()
-
-        .eq("user_id", myProfile.id)
-        .eq("follow_id", userId)
-        .then(() => {
-          fetchfollowers();
-          fetchfollowing();
-        });
-      return;
-    }
-    supabase
-      .from("followers")
-      .insert({
-        user_id: myProfile.id,
-        follow_id: userId,
-      })
-      .then((result) => {
-        fetchfollowers();
-        fetchfollowing();
-      });
-  }
 
   return (
     <>
