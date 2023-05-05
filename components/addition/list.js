@@ -55,7 +55,7 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
         .eq("follow_id", profileLike)
         .then(() => {
           fetchfollowers();
-          // fetchfollowing();
+          fetchfollowing();
         });
       return;
     }
@@ -67,7 +67,7 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
       })
       .then((result) => {
         fetchfollowers();
-        // fetchfollowing();
+        fetchfollowing();
       });
   }
 

@@ -139,7 +139,7 @@ useEffect(() => {
         isFollowedByMe,
         fetchfollowers,
         follow,
-        // fetchfollowing,
+        fetchfollowing,
         userId,
         profile,
         posts,
