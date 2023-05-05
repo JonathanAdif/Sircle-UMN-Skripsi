@@ -99,7 +99,7 @@ function postcontainer({
   function fetchLikes() {
     supabase
       .from("likes")
-      .select("*, profiles(id, avatar, username)")
+      .select("*, profiles(*)")
       .order("created_at", { ascending: false })
       .eq("post_id", id)
       .then((result) => setLikes(result.data));
@@ -501,7 +501,7 @@ function postcontainer({
         >
           <DialogTitle id="scroll-dialog-title">Likes</DialogTitle>
           <DialogContent dividers={scroll === "paper"}>
-            {likes?.length > 0 &&
+            {likes.length > 0 &&
               likes.map((like) => (
                 <List
                   key={like.id}
