@@ -83,45 +83,45 @@ useEffect(() => {
   function fetchfollowers() {
     supabase
       .from("followers")
-      .select()
+      .select("*")
       .eq("follow_id", userId)
       .then((result) => setFollow(result.data));
-  }
-
-  function fetchfollowing() {
-    supabase
-      .from("followers")
-      .select()
-      .eq("user_id", myProfile?.id)
-      .then((result) => setFollowing(result.data));
   }
 
   const isFollowedByMe = !!follow?.find(
     (follows) => follows.user_id === myProfile?.id
   );
 
+  function fetchfollowing() {
+    supabase
+      .from("followers")
+      .select("*")
+      .eq("user_id", myProfile?.id)
+      .then((result) => setFollowing(result.data));
+  }
+
+ 
+
   function followToggle() {
     if (isFollowedByMe) {
       supabase
         .from("followers")
         .delete()
-        .eq("user_id", myProfile.id)
+        .eq("user_id", myProfile?.id)
         .eq("follow_id", userId)
         .then(() => {
-          fetchfollowers();
-          fetchfollowing();
+          fetchfollowers() && fetchfollowing();
         });
       return;
     }
     supabase
       .from("followers")
       .insert({
-        user_id: myProfile.id,
+        user_id: myProfile?.id,
         follow_id: userId,
       })
       .then((result) => {
-        fetchfollowers();
-        fetchfollowing();
+        fetchfollowers() && fetchfollowing();
       });
   }
 
@@ -139,10 +139,11 @@ useEffect(() => {
         isFollowedByMe,
         fetchfollowers,
         follow,
-        fetchfollowing,
+        // fetchfollowing,
         userId,
         profile,
         posts,
+        supabase,
       }}
     >
       {children}

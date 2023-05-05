@@ -47,8 +47,6 @@ function postcontainer({
   created_at,
   photos,
   videos,
-  follow,
-  followstat,
 }) {
   const session = useSession();
   // start toggle comment
@@ -506,12 +504,11 @@ function postcontainer({
             {likes?.length > 0 &&
               likes.map((like) => (
                 <List
+                  key={like.id}
                   listAvatar={like.profiles?.avatar}
                   listUsername={like.profiles.username}
                   profileLike={like.user_id}
                   myLike={like.user_id === myProfile?.id}
-                  followButton={follow}
-                  followStat={followstat}
                 />
               ))}
           </DialogContent>
