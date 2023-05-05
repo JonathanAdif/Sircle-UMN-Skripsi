@@ -45,6 +45,7 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
     (follows) => follows.user_id === myProfile?.id
   );
 
+
   function followlistToggle() {
     if (isFollowedByMe || isFollowByMe) {
       supabase
@@ -71,7 +72,7 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
   }
 
   return (
-    <List sx={{ width: "100%", maxWidth: 750, bgcolor: "background.paper" }}>
+    <List  sx={{ width: "100%", maxWidth: 750, bgcolor: "background.paper" }}>
       <ListItem className="!flex !flex-row !items-center">
         <div className="flex flex-row gap-5 items-center w-full h-fit">
           <Avatar url={listAvatar} />

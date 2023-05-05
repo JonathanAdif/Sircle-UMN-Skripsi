@@ -49,7 +49,7 @@ useEffect(() => {
     loadPosts().then(() => {});
     fetchfollowers();
   }
-  if (userId == myProfile?.id) {
+  if (myProfile?.id) {
     fetchfollowing();
   }
   return;
@@ -88,9 +88,6 @@ useEffect(() => {
       .then((result) => setFollow(result.data));
   }
 
-  const isFollowedByMe = !!follow?.find(
-    (follows) => follows.user_id === myProfile?.id
-  );
 
   function fetchfollowing() {
     supabase
@@ -100,6 +97,9 @@ useEffect(() => {
       .then((result) => setFollowing(result.data));
   }
 
+  const isFollowedByMe = !!follow?.find(
+    (follows) => follows.user_id === myProfile?.id
+  );
  
 
   function followToggle() {
