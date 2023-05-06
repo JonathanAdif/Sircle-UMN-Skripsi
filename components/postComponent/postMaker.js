@@ -23,7 +23,7 @@ import { FreeMode, Pagination } from "swiper";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { useState } from "react";
-import Spinner from "../addition/spinner";
+import Spinner from "../inpageComponent/addition/spinner";
 
 // icon
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";

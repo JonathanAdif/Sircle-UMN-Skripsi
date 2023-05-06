@@ -1,4 +1,4 @@
-import Avatar from "../avatarCover/avatar";
+import Avatar from "../inpageComponent/avatarCover/avatar";
 import { useContext } from "react";
 import { UserContext } from "@/context/userContext";
 

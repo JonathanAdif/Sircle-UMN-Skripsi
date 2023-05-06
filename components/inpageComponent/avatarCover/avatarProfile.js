@@ -2,7 +2,7 @@ import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
-import Avatar from "@mui/material/Avatar";
+import { Avatar } from "@mui/material";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useState } from "react";
 import { uploadProfileSectionImage } from "@/helper/userHelper";

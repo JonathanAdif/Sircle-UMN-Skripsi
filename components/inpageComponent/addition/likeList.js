@@ -37,7 +37,7 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
       fetchfollowers();
     }
     return;
-  }, [profileLike, userId]);
+  }, [profileLike]);
 
   function fetchfollowers() {
     supabase

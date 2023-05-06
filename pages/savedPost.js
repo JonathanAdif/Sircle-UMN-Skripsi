@@ -1,6 +1,6 @@
 import { useSession } from "@supabase/auth-helpers-react";
 import LoginPage from "@/pages/login";
-import SavedpostComponent from "@/components/componentPages/savedpostComponent";
+import SavedpostComponent from "@/components/pagesComponent/savedpostComponent";
 
 function savedPostPage() {
     const session = useSession();

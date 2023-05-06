@@ -1,8 +1,8 @@
-import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
-import PostMaker1 from "../postmaker/postMaker1";
-import Postcontainer from "../postcontainer/postcontainer";
-import Rightbar1 from "../rightbar/rightbar1";
+import Header from "../layoutComponent/header";
+import Sidebar from "../layoutComponent/sidebar";
+import PostMaker1 from "../postComponent/postMaker";
+import Postcontainer from "../postComponent/postcontainer";
+import Rightbar1 from "../layoutComponent/rightbar1";
 
 import { useSupabaseClient, useSession } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";

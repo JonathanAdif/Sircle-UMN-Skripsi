@@ -8,14 +8,13 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import Link from "next/link";
 import IconButton from "@mui/material/IconButton";
 
-import Avatar from "../avatarCover/avatar";
-import List from "../addition/list";
+import Avatar from "../inpageComponent/avatarCover/avatar";
+import List from "../inpageComponent/addition/likeList";
 import ReactTimeAgo from "react-time-ago";
 
 import { useContext, useState, useEffect, useRef } from "react";
 
 import { UserContext } from "@/context/userContext";
-import { globalContext } from "@/context/globalContext";
 
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";

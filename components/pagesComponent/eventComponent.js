@@ -1,8 +1,8 @@
-import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
-import EventBanner from "../banner/eventBanner";
-import EventPostCard from "../postcontainer/eventpostCard";
-import PaginationComponent from "../addition/pagination";
+import Header from "../layoutComponent/header";
+import Sidebar from "../layoutComponent/sidebar";
+import EventBanner from "../inpageComponent/banner/eventBanner";
+import EventPostCard from "../postComponent/eventpostCard";
+import PaginationComponent from "../inpageComponent/addition/pagination";
 
 function EventComponentPage() {
   return (

@@ -1,4 +1,4 @@
-import Home from "@/components/componentPages/login";
+import Home from "@/components/pagesComponent/login";
 import { useSession } from "@supabase/auth-helpers-react";
 import Index from "@/pages";
 

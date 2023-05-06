@@ -1,7 +1,7 @@
-import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
-import Postcontainer from "../postcontainer/postcontainer";
-import ProfileBanner from "../banner/profileBanner";
+import Header from "../layoutComponent/header";
+import Sidebar from "../layoutComponent/sidebar";
+import Postcontainer from "../postComponent/postcontainer";
+import ProfileBanner from "../inpageComponent/banner/profileBanner";
 import { useContext } from "react";
 
 import { UserContext } from "@/context/userContext";

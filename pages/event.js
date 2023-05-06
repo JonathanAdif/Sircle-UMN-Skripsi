@@ -1,4 +1,4 @@
-import EventComponentPage from "@/components/componentPages/eventComponent";
+import EventComponentPage from "@/components/pagesComponent/eventComponent";
 import { useSession } from "@supabase/auth-helpers-react";
 import LoginPage from "@/pages/login";
 

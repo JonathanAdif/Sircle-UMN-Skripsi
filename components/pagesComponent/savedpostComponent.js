@@ -1,8 +1,8 @@
-import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
+import Header from "../layoutComponent/header";
+import Sidebar from "../layoutComponent/sidebar";
 import { useEffect, useState } from "react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import Postcontainer from "../postcontainer/postcontainer";
+import Postcontainer from "../postComponent/postcontainer";
 import { UserContextProvider } from "@/context/userContext";
 
 function SavedpostComponent() {

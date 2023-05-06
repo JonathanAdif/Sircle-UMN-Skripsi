@@ -1,4 +1,4 @@
-import ProfileComponent from "@/components/componentPages/profileComponent";
+import ProfileComponent from "@/components/pagesComponent/profileComponent";
 import { useSession } from "@supabase/auth-helpers-react";
 import LoginPage from "@/pages/login";
 
