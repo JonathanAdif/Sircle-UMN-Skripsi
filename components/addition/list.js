@@ -14,7 +14,6 @@ import Link from "next/link";
 
 import { UserContext } from "@/context/userContext";
 
-
 function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
   const hasfollow =
     "!bg-green-600  disabled:!opacity-25 disabled:!text-white-sr !capitalize";
@@ -23,7 +22,14 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
   const [follow, setFollow] = useState([]);
 
   const { profile: myProfile } = useContext(UserContext);
-  const { supabase, fetchfollowing, userId, followToggle, isFollowedByMe} = useContext(globalContext);
+  const {
+    supabase,
+    fetchfollowing,
+    userId,
+    fetchfollowers: fetchFollow,
+    followToggle,
+    isFollowedByMe,
+  } = useContext(globalContext);
   const nfollow = userId != myProfile?.id;
 
   useEffect(() => {
@@ -31,7 +37,7 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
       fetchfollowers();
     }
     return;
-  }, [profileLike]);
+  }, [profileLike, userId]);
 
   function fetchfollowers() {
     supabase
@@ -44,7 +50,6 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
   const isFollowByMe = !!follow?.find(
     (follows) => follows.user_id === myProfile?.id
   );
-
 
   function followlistToggle() {
     if (isFollowedByMe || isFollowByMe) {
@@ -72,7 +77,7 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
   }
 
   return (
-    <List  sx={{ width: "100%", maxWidth: 750, bgcolor: "background.paper" }}>
+    <List sx={{ width: "100%", maxWidth: 750, bgcolor: "background.paper" }}>
       <ListItem className="!flex !flex-row !items-center">
         <div className="flex flex-row gap-5 items-center w-full h-fit">
           <Avatar url={listAvatar} />

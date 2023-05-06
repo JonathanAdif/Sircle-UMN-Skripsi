@@ -64,7 +64,7 @@ function postcontainer({
   const [isSaved, setIsSaved] = useState(false);
 
   const { profile: myProfile } = useContext(UserContext);
-  const { profile } = useContext(globalContext);
+
 
   const likedButton =
     "!w-full !font-medium !text-birulogo-sr !fill-birulogo-sr  !py-[10px]  hover:!bg-birulogo-sr hover:!text-white-sr   !bg-white-sr !capitalize !border-none !shadow-none !rounded-[5px]";
@@ -98,10 +98,10 @@ function postcontainer({
 
   function fetchLikes() {
     supabase
-      .from("likes")
+      .from('likes')
       .select("*, profiles(*)")
       .order("created_at", { ascending: false })
-      .eq("post_id", id)
+      .eq('post_id', id)
       .then((result) => setLikes(result.data));
   }
 
