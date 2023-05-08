@@ -32,6 +32,8 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
   } = useContext(globalContext);
   const nfollow = userId != myProfile?.id;
 
+  // start follow unfollow function in like list 
+
   useEffect(() => {
     if (profileLike) {
       fetchfollowers();
@@ -41,8 +43,9 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
 
   function fetchfollowers() {
     supabase
-      .from("followers")
-      .select()
+      .from("following")
+      .select("id, follow_id ,profiles(*)")
+      .eq("profiles.id", profileLike)
       .eq("follow_id", profileLike)
       .then((result) => setFollow(result.data));
   }
@@ -52,15 +55,22 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
   );
 
   function followlistToggle() {
-    if (isFollowedByMe || isFollowByMe) {
+    if (isFollowedByMe && isFollowByMe) {
       supabase
         .from("followers")
         .delete()
         .eq("user_id", myProfile?.id)
         .eq("follow_id", profileLike)
         .then(() => {
-          fetchfollowers();
-          fetchfollowing();
+          fetchfollowers() && fetchfollowing();
+        });
+        supabase
+        .from("following")
+        .delete()
+        .eq("user_id", myProfile?.id)
+        .eq("follow_id", profileLike)
+        .then(() => {
+          fetchfollowers() && fetchfollowing();
         });
       return;
     }
@@ -71,10 +81,21 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
         follow_id: profileLike,
       })
       .then((result) => {
-        fetchfollowers();
-        fetchfollowing();
+        fetchfollowers() && fetchfollowing();
       });
+      supabase
+      .from("following")
+      .insert({
+        user_id: myProfile?.id,
+        follow_id: profileLike,
+      })
+      .then((result) => {
+        fetchfollowers() && fetchfollowing();
+      });
+     
   }
+
+    // end follow unfollow function in like list 
 
   return (
     <List sx={{ width: "100%", maxWidth: 750, bgcolor: "background.paper" }}>

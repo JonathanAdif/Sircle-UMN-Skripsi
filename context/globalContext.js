@@ -17,15 +17,10 @@ export function UserProfileContextProvider({ children }) {
   const [following, setFollowing] = useState([]);
   const [follow, setFollow] = useState([]);
 
+  const [followersData, setFollowersdata] = useState([]);
+
   const myUser = userId === session?.user?.id;
   const { profile: myProfile } = useContext(UserContext);
-
-  useEffect(() => {
-    if (!userId) {
-      return;
-    }
-    fetchUser();
-  }, [userId]);
 
   function fetchUser() {
     supabase
@@ -42,18 +37,27 @@ export function UserProfileContextProvider({ children }) {
       });
   }
 
-// start function buat masukin post ke profile page
-
-useEffect(() => {
-  if (userId) {
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+    fetchUser();
     loadPosts().then(() => {});
     fetchfollowers();
-  }
-  if (myProfile?.id) {
-    fetchfollowing();
-  }
-  return;
-}, [myProfile?.id, userId]);
+    fetchfollowersData()
+  }, [userId]);
+  // start function buat masukin post ke profile page
+
+  // useEffect(() => {
+  //   if (userId) {
+  //     loadPosts().then(() => {});
+  //     fetchfollowers();
+  //   }
+  //   if (myProfile?.id ) {
+  //    fetchfollowers();
+  //   }
+  //   return;
+  // }, [myProfile?.id, userId]);
 
   async function loadPosts() {
     const posts = await userPosts(userId);
@@ -79,53 +83,107 @@ useEffect(() => {
 
   // end function buat masukin post ke profile page
 
-// start fungsi fungsi follow unfollow 
+  // start fungsi fungsi follow unfollow
   function fetchfollowers() {
     supabase
-      .from("followers")
-      .select("*")
-      .eq("follow_id", userId)
+      .from("follow")
+      .select()
+      // .eq("profiles.id", userId)
+      .eq("followers_id", userId)
       .then((result) => setFollow(result.data));
   }
 
-
-  function fetchfollowing() {
+  function fetchfollowersData() {
     supabase
-      .from("followers")
-      .select("*")
+      .from("following")
+      .select("*, profiles(*)")
+      .eq("profiles.id", myProfile?.id)
+      .eq("followers_id", userId)
       .eq("user_id", myProfile?.id)
-      .then((result) => setFollowing(result.data));
+      .then((result) => setFollowersdata(result.data));
   }
 
+  // function fetchfollowing() {
+  //   supabase
+  //     .from("following")
+  //     .select("*,profiles(*)")
+  //     .eq("profiles.id", userId)
+  //     .eq("follow_id", userId)
+  //     .then((result) => setFollowing(result.data));
+  // }
+
   const isFollowedByMe = !!follow?.find(
-    (follows) => follows.user_id === myProfile?.id
+    (follows) => follows.followers_id === userId
   );
- 
+
+  // const isFollowByMe = !!following?.find(
+  //   (follows) => follows.follow_id === userId
+  // );
 
   function followToggle() {
     if (isFollowedByMe) {
       supabase
+        .from("follow")
+        .delete()
+        .eq("user_id", myProfile.id)
+        .eq("followers_id", userId)
+        .then(() => {
+          fetchfollowers();
+          fetchfollowersData();
+        });
+        supabase
         .from("followers")
         .delete()
-        .eq("user_id", myProfile?.id)
-        .eq("follow_id", userId)
+        .eq("user_id", myProfile.id)
+        .eq("followers_id", userId)
         .then(() => {
-          fetchfollowers() && fetchfollowing();
+          fetchfollowers();
+          fetchfollowersData();
+        });
+        supabase
+        .from("following")
+        .delete()
+        .eq("user_id", myProfile.id)
+        .eq("followers_id", userId)
+        .then(() => {
+          fetchfollowers();
+          fetchfollowersData();
         });
       return;
     }
     supabase
-      .from("followers")
+      .from("follow")
       .insert({
-        user_id: myProfile?.id,
-        follow_id: userId,
+        user_id: myProfile.id,
+        followers_id: userId,
       })
       .then((result) => {
-        fetchfollowers() && fetchfollowing();
+        fetchfollowers();
+        fetchfollowersData();
+      });
+      supabase
+      .from("followers")
+      .insert({
+        user_id: myProfile.id,
+        followers_id: userId,
+      })
+      .then((result) => {
+        fetchfollowers();
+        fetchfollowersData();
+      });
+      supabase
+      .from("following")
+      .insert({
+        user_id: myProfile.id,
+        followers_id: userId,
+      })
+      .then((result) => {
+        fetchfollowers();
+        fetchfollowersData();
       });
   }
 
-  // end fungsi fungsi follow unfollow 
+  // end fungsi fungsi follow unfollow
 
   return (
     <globalContext.Provider
@@ -139,11 +197,11 @@ useEffect(() => {
         isFollowedByMe,
         fetchfollowers,
         follow,
-        fetchfollowing,
         userId,
         profile,
         posts,
         supabase,
+        followersData,
       }}
     >
       {children}
