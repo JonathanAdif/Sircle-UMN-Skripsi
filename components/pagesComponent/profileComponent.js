@@ -27,6 +27,7 @@ function profileComponent() {
     userId,
     followStat,
     followersData,
+    followingData,
   } = useContext(globalContext);
 
   const followingnotnull =
@@ -87,14 +88,14 @@ function profileComponent() {
                 </div>
                 <div
                   className={
-                    followersData?.length > 0 ? followingnotnull : followingnull
+                    follow?.length > 0 ? followingnotnull : followingnull
                   }
                   onClick={handleClickOpen("paper")}
                 >
                   <div>Followers</div>
-                  <div>{followersData?.length}</div>
+                  <div>{follow?.length}</div>
                 </div>
-                {followersData?.length > 0 && (
+                {follow?.length > 0 && (
                   <Dialog
                     open={open}
                     onClose={handleClose}
@@ -106,14 +107,14 @@ function profileComponent() {
                       Followers
                     </DialogTitle>
                     <DialogContent dividers={scroll === "paper"}>
-                      {followersData.length > 0 &&
-                        followersData.map((follow) => (
+                      {follow.length > 0 &&
+                        follow.map((follow) => (
                           <FollowStatList
-                            key={follow.id}
+                            key={follow?.id}
                             listAvatar={follow?.profiles?.avatar}
                             listUsername={follow?.profiles?.username}
-                            profileFollow={follow.user_id}
-                            myFollowstat={follow.user_id === myProfile?.id}
+                            // profileFollow={follow.user_id}
+                            // myFollowstat={follow.user_id === myProfile?.id}
                           />
                         ))}
                     </DialogContent>
@@ -122,15 +123,15 @@ function profileComponent() {
                 {/* {userId == myProfile?.id && (
                   <div
                     className={
-                      following?.length > 0 ? followingnotnull : followingnull
+                      followingData?.length > 0 ? followingnotnull : followingnull
                     }
                     onClick={handleClickOpen("paper")}
                   >
                     <div>Following</div>
-                    <div>{following?.length}</div>
+                    <div>{followingData?.length}</div>
                   </div>
-                )} */}
-                {/* {following?.length > 0 && (
+                )}
+                {followingData?.length > 0 && (
                   <Dialog
                     open={open}
                     onClose={handleClose}
@@ -142,8 +143,8 @@ function profileComponent() {
                       Following
                     </DialogTitle>
                     <DialogContent dividers={scroll === "paper"}>
-                      {following.length > 0 &&
-                        following.map((follows) => (
+                      {followingData.length > 0 &&
+                        followingData.map((follows) => (
                           <FollowStatList
                             key={follows.id}
                             listAvatar={follows?.profiles?.avatar}

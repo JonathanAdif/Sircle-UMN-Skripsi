@@ -18,6 +18,7 @@ export function UserProfileContextProvider({ children }) {
   const [follow, setFollow] = useState([]);
 
   const [followersData, setFollowersdata] = useState([]);
+  const [followingData, setFollowingdata] = useState([]);
 
   const myUser = userId === session?.user?.id;
   const { profile: myProfile } = useContext(UserContext);
@@ -37,27 +38,23 @@ export function UserProfileContextProvider({ children }) {
       });
   }
 
+
   useEffect(() => {
     if (!userId) {
       return;
     }
-    fetchUser();
-    loadPosts().then(() => {});
-    fetchfollowers();
-    fetchfollowersData()
-  }, [userId]);
-  // start function buat masukin post ke profile page
+    if (userId) {
+      fetchUser();
+      loadPosts().then(() => {});
+      fetchfollowersData();
+    }
+    if (myProfile?.id) {
 
-  // useEffect(() => {
-  //   if (userId) {
-  //     loadPosts().then(() => {});
-  //     fetchfollowers();
-  //   }
-  //   if (myProfile?.id ) {
-  //    fetchfollowers();
-  //   }
-  //   return;
-  // }, [myProfile?.id, userId]);
+      fetchfollowingData();
+    }
+  }, [myProfile?.id, userId]);
+
+  // start function buat masukin post ke profile page
 
   async function loadPosts() {
     const posts = await userPosts(userId);
@@ -84,102 +81,87 @@ export function UserProfileContextProvider({ children }) {
   // end function buat masukin post ke profile page
 
   // start fungsi fungsi follow unfollow
-  function fetchfollowers() {
-    supabase
-      .from("follow")
-      .select()
-      // .eq("profiles.id", userId)
-      .eq("followers_id", userId)
-      .then((result) => setFollow(result.data));
-  }
 
   function fetchfollowersData() {
-    supabase
-      .from("following")
-      .select("*, profiles(*)")
-      .eq("profiles.id", myProfile?.id)
-      .eq("followers_id", userId)
-      .eq("user_id", myProfile?.id)
-      .then((result) => setFollowersdata(result.data));
+    if (myProfile?.id == userId) {
+      supabase
+        .from("followers")
+        .select("id, followers_id , profiles(*)")
+        // .eq("profiles.id", userId)
+        .eq("user_id", myProfile?.id)
+        // .eq("followers_id", myProfile?.id)
+        .then((result) => setFollow(result.data));
+    } else {
+      supabase
+        .from("following")
+        .select("id, user_id , profiles(*)")
+        .eq("profiles.id", myProfile?.id)
+        .eq("followers_id", userId)
+        .then((result) => setFollow(result.data));
+    }
+    return;
   }
 
-  // function fetchfollowing() {
-  //   supabase
-  //     .from("following")
-  //     .select("*,profiles(*)")
-  //     .eq("profiles.id", userId)
-  //     .eq("follow_id", userId)
-  //     .then((result) => setFollowing(result.data));
-  // }
+
+  function fetchfollowingData() {
+    supabase
+      .from("followers")
+      .select("*, profiles(*)")
+      .eq("profiles.id", userId)
+      .eq("user_id", myProfile?.id)
+      // .eq("followers_id", userId)
+      .then((result) => setFollowing(result.data));
+  }
 
   const isFollowedByMe = !!follow?.find(
-    (follows) => follows.followers_id === userId
+    (follows) => follows.user_id === myProfile?.id
   );
 
-  // const isFollowByMe = !!following?.find(
-  //   (follows) => follows.follow_id === userId
-  // );
+  const isFollowByMe = !!following?.find(
+    (follows) => follows.user_id === myProfile?.id
+  );
 
   function followToggle() {
-    if (isFollowedByMe) {
+    if (isFollowedByMe || isFollowByMe) {
       supabase
-        .from("follow")
-        .delete()
-        .eq("user_id", myProfile.id)
-        .eq("followers_id", userId)
-        .then(() => {
-          fetchfollowers();
-          fetchfollowersData();
-        });
-        supabase
-        .from("followers")
-        .delete()
-        .eq("user_id", myProfile.id)
-        .eq("followers_id", userId)
-        .then(() => {
-          fetchfollowers();
-          fetchfollowersData();
-        });
-        supabase
         .from("following")
         .delete()
         .eq("user_id", myProfile.id)
         .eq("followers_id", userId)
         .then(() => {
-          fetchfollowers();
           fetchfollowersData();
+          fetchfollowingData();
+        });
+      supabase
+        .from("followers")
+        .delete()
+        .eq("user_id", myProfile.id)
+        .eq("followers_id", userId)
+        .then(() => {
+          fetchfollowersData();
+          fetchfollowingData();
         });
       return;
     }
     supabase
-      .from("follow")
+      .from("following")
       .insert({
         user_id: myProfile.id,
         followers_id: userId,
       })
       .then((result) => {
-        fetchfollowers();
         fetchfollowersData();
+        fetchfollowingData();
       });
-      supabase
+    supabase
       .from("followers")
       .insert({
         user_id: myProfile.id,
         followers_id: userId,
       })
       .then((result) => {
-        fetchfollowers();
         fetchfollowersData();
-      });
-      supabase
-      .from("following")
-      .insert({
-        user_id: myProfile.id,
-        followers_id: userId,
-      })
-      .then((result) => {
-        fetchfollowers();
-        fetchfollowersData();
+        fetchfollowingData();
       });
   }
 
@@ -195,13 +177,13 @@ export function UserProfileContextProvider({ children }) {
         followToggle,
         following,
         isFollowedByMe,
-        fetchfollowers,
         follow,
         userId,
         profile,
         posts,
         supabase,
         followersData,
+        followingData,
       }}
     >
       {children}
