@@ -85,15 +85,11 @@ export function UserProfileContextProvider({ children }) {
       supabase
         .from("followers")
         .select("id, followers_id , profiles(*)")
-        // .eq("profiles.id", userId)
-        // .eq("user_id", myProfile?.id)
         .eq("followers_id", myProfile?.id)
-        // .then((result) => setFollow(result.data));
         .then((result) => {
           supabase
           .from("following")
           .select("id, user_id , profiles(*)")
-          // .eq("profiles.id", myProfile?.id)
           .eq("followers_id", userId)
           .then((result) => setFollow(result.data));
         });
@@ -114,24 +110,20 @@ export function UserProfileContextProvider({ children }) {
       supabase
         .from("followers")
         .select("id, followers_id , profiles(*)")
-        // .eq("profiles.id", userId)
         .eq("user_id", myProfile?.id)
-        // .eq("followers_id", userId)
         .then((result) => setFollowing(result.data));
-        // .then((result) => {
-        //   supabase
-        //   .from("following")
-        //   .select("id, user_id , profiles(*)")
-        //   // .eq("profiles.id", myProfile?.id)
-        //   .eq("user_id", userId)
-        //   .then((result) => console.log(result.data));
-        // });
     } else {
       supabase
         .from("following")
         .select("id, user_id , profiles(*)")
         .eq("user_id", userId)
-        .then((result) => setFollowing(result.data));
+         .then((result) => {
+          supabase
+          .from("followers")
+          .select("id, followers_id , profiles(*)")
+          .eq("user_id",  userId)
+          .then((result) => setFollowing(result.data));
+        });
     }
     return;
   }

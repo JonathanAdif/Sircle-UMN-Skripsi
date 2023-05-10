@@ -7,30 +7,21 @@ import { useContext } from "react";
 import { UserContext } from "@/context/userContext";
 import { globalContext } from "@/context/globalContext";
 
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import FollowStatList from "../inpageComponent/addition/followStatList";
+import DialogData from "../inpageComponent/addition/dialog";
 
 import { useState, useRef, useEffect } from "react";
 
 function profileComponent() {
   const { profile: myProfile } = useContext(UserContext);
 
-  const {
-    followToggle,
-    following,
-    isFollowedByMe,
-    follow,
-    profile,
-    posts,
-  } = useContext(globalContext);
+  const { followToggle, following, isFollowedByMe, follow, profile, posts } =
+    useContext(globalContext);
 
   const followingnotnull =
     "flex flex-row w-full justify-between h-fit cursor-pointer";
   const followingnull = "flex flex-row w-full justify-between h-fit";
 
-  // start dialog
+  // start dialog followers
 
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState("paper");
@@ -39,6 +30,7 @@ function profileComponent() {
     setOpen(true);
     setScroll(scrollType);
   };
+  
 
   const handleClose = () => {
     setOpen(false);
@@ -54,7 +46,34 @@ function profileComponent() {
     }
   }, [open]);
 
-  // end dialog
+  // end dialog followers
+
+   // start dialog following
+
+   const [openPop, setOpenPop] = useState(false);
+   const [scrollPop, setScrollPop] = useState("paper");
+ 
+   const handleClickOpenPop = (scrollType) => () => {
+     setOpenPop(true);
+     setScrollPop(scrollType);
+   };
+   
+ 
+   const handleClosePop = () => {
+     setOpenPop(false);
+   };
+ 
+   const descriptionElementRefPop = useRef(null);
+   useEffect(() => {
+     if (openPop) {
+       const { current: descriptionElement } = descriptionElementRefPop;
+       if (descriptionElement !== null) {
+         descriptionElement.focus();
+       }
+     }
+   }, [openPop]);
+ 
+   // end dialog following
 
   return (
     <>
@@ -92,65 +111,33 @@ function profileComponent() {
                   <div>{follow?.length}</div>
                 </div>
                 {follow?.length > 0 && (
-                  <Dialog
+                  <DialogData
+                    title={"followers"}
                     open={open}
-                    onClose={handleClose}
+                    handleClose={handleClose}
+                    stat={follow}
                     scroll={scroll}
-                    aria-labelledby="scroll-dialog-title"
-                    aria-describedby="scroll-dialog-description"
-                  >
-                    <DialogTitle id="scroll-dialog-title">
-                      Followers
-                    </DialogTitle>
-                    <DialogContent dividers={scroll === "paper"}>
-                      {follow.length > 0 &&
-                        follow.map((follow) => (
-                          <FollowStatList
-                            key={follow?.id}
-                            listAvatar={follow?.profiles?.avatar}
-                            listUsername={follow?.profiles?.username}
-                            // profileFollow={follow.user_id}
-                            // myFollowstat={follow.user_id === myProfile?.id}
-                          />
-                        ))}
-                    </DialogContent>
-                  </Dialog>
+                  />
                 )}
 
                 <div
                   className={
                     following?.length > 0 ? followingnotnull : followingnull
                   }
-                  onClick={handleClickOpen("paper")}
+                  onClick={handleClickOpenPop("paper")}
                 >
                   <div>Following</div>
                   <div>{following?.length}</div>
                 </div>
 
-                {following?.length > 0 && (
-                  <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    scroll={scroll}
-                    aria-labelledby="scroll-dialog-title"
-                    aria-describedby="scroll-dialog-description"
-                  >
-                    <DialogTitle id="scroll-dialog-title">
-                      Following
-                    </DialogTitle>
-                    <DialogContent dividers={scroll === "paper"}>
-                      {following.length > 0 &&
-                        following.map((follows) => (
-                          <FollowStatList
-                            key={follows.id}
-                            listAvatar={follows?.profiles?.avatar}
-                            listUsername={follows?.profiles?.username}
-                            // profileFollow={follows.user_id}
-                            // myFollowstat={follows.user_id === myProfile?.id}
-                          />
-                        ))}
-                    </DialogContent>
-                  </Dialog>
+                {following?.length > 0 &&  (
+                  <DialogData
+                    title={"following"}
+                    open={openPop}
+                    handleClose={handleClosePop}
+                    stat={following}
+                    scroll={scrollPop}
+                  />
                 )}
               </div>
             </div>
