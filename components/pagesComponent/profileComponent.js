@@ -24,10 +24,6 @@ function profileComponent() {
     follow,
     profile,
     posts,
-    userId,
-    followStat,
-    followersData,
-    followingData,
   } = useContext(globalContext);
 
   const followingnotnull =
@@ -120,18 +116,18 @@ function profileComponent() {
                     </DialogContent>
                   </Dialog>
                 )}
-                {/* {userId == myProfile?.id && (
-                  <div
-                    className={
-                      followingData?.length > 0 ? followingnotnull : followingnull
-                    }
-                    onClick={handleClickOpen("paper")}
-                  >
-                    <div>Following</div>
-                    <div>{followingData?.length}</div>
-                  </div>
-                )}
-                {followingData?.length > 0 && (
+
+                <div
+                  className={
+                    following?.length > 0 ? followingnotnull : followingnull
+                  }
+                  onClick={handleClickOpen("paper")}
+                >
+                  <div>Following</div>
+                  <div>{following?.length}</div>
+                </div>
+
+                {following?.length > 0 && (
                   <Dialog
                     open={open}
                     onClose={handleClose}
@@ -143,19 +139,19 @@ function profileComponent() {
                       Following
                     </DialogTitle>
                     <DialogContent dividers={scroll === "paper"}>
-                      {followingData.length > 0 &&
-                        followingData.map((follows) => (
+                      {following.length > 0 &&
+                        following.map((follows) => (
                           <FollowStatList
                             key={follows.id}
                             listAvatar={follows?.profiles?.avatar}
                             listUsername={follows?.profiles?.username}
-                            profileFollow={follows.user_id}
-                            myFollowstat={follows.user_id === myProfile?.id}
+                            // profileFollow={follows.user_id}
+                            // myFollowstat={follows.user_id === myProfile?.id}
                           />
                         ))}
                     </DialogContent>
                   </Dialog>
-                )} */}
+                )}
               </div>
             </div>
           </div>

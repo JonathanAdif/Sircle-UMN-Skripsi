@@ -47,11 +47,9 @@ export function UserProfileContextProvider({ children }) {
       fetchUser();
       loadPosts().then(() => {});
       fetchfollowersData();
-    }
-    if (myProfile?.id) {
-
       fetchfollowingData();
     }
+ 
   }, [myProfile?.id, userId]);
 
   // start function buat masukin post ke profile page
@@ -112,13 +110,30 @@ export function UserProfileContextProvider({ children }) {
 
 
   function fetchfollowingData() {
-    supabase
-      .from("followers")
-      .select("*, profiles(*)")
-      .eq("profiles.id", userId)
-      .eq("user_id", myProfile?.id)
-      // .eq("followers_id", userId)
-      .then((result) => setFollowing(result.data));
+    if (myProfile?.id == userId) {
+      supabase
+        .from("followers")
+        .select("id, followers_id , profiles(*)")
+        // .eq("profiles.id", userId)
+        .eq("user_id", myProfile?.id)
+        // .eq("followers_id", userId)
+        .then((result) => setFollowing(result.data));
+        // .then((result) => {
+        //   supabase
+        //   .from("following")
+        //   .select("id, user_id , profiles(*)")
+        //   // .eq("profiles.id", myProfile?.id)
+        //   .eq("user_id", userId)
+        //   .then((result) => console.log(result.data));
+        // });
+    } else {
+      supabase
+        .from("following")
+        .select("id, user_id , profiles(*)")
+        .eq("user_id", userId)
+        .then((result) => setFollowing(result.data));
+    }
+    return;
   }
 
   const isFollowedByMe = !!follow?.find(
