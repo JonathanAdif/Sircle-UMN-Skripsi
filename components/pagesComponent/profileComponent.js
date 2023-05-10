@@ -110,15 +110,16 @@ function profileComponent() {
                   <div>Followers</div>
                   <div>{follow?.length}</div>
                 </div>
-                {follow?.length > 0 && (
+                {follow?.length > 0 &&  follow.map((follows) =>(
                   <DialogData
                     title={"followers"}
                     open={open}
                     handleClose={handleClose}
                     stat={follow}
                     scroll={scroll}
+                    roles_id={follows?.user_id}
                   />
-                )}
+                ))}
 
                 <div
                   className={
@@ -130,15 +131,16 @@ function profileComponent() {
                   <div>{following?.length}</div>
                 </div>
 
-                {following?.length > 0 &&  (
+                {following?.length > 0 &&  following?.map((follow) => (
                   <DialogData
                     title={"following"}
                     open={openPop}
                     handleClose={handleClosePop}
                     stat={following}
                     scroll={scrollPop}
+                    roles_id={follow.followers_id}
                   />
-                )}
+                ))}
               </div>
             </div>
           </div>

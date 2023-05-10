@@ -17,9 +17,6 @@ export function UserProfileContextProvider({ children }) {
   const [following, setFollowing] = useState([]);
   const [follow, setFollow] = useState([]);
 
-  const [followersData, setFollowersdata] = useState([]);
-  const [followingData, setFollowingdata] = useState([]);
-
   const myUser = userId === session?.user?.id;
   const { profile: myProfile } = useContext(UserContext);
 
@@ -197,8 +194,6 @@ export function UserProfileContextProvider({ children }) {
         profile,
         posts,
         supabase,
-        followersData,
-        followingData,
       }}
     >
       {children}

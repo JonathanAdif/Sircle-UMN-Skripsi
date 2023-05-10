@@ -3,7 +3,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import FollowStatList from "./followStatList";
 import Dialog from "@mui/material/Dialog";
 
-function DialogData({ title, stat, scroll, open, handleClose }) {
+function DialogData({ title, stat, scroll, open, handleClose, roles_id }) {
   return (
     <Dialog
       open={open}
@@ -20,7 +20,7 @@ function DialogData({ title, stat, scroll, open, handleClose }) {
               key={follow?.id}
               listAvatar={follow?.profiles?.avatar}
               listUsername={follow?.profiles?.username}
-              // profileFollow={follow.user_id}
+              profileFollow={roles_id}
               // myFollowstat={follow.user_id === myProfile?.id}
             />
           ))}

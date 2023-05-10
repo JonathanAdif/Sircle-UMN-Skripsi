@@ -15,19 +15,23 @@ import Link from "next/link";
 import { UserContext } from "@/context/userContext";
 
 
-function FollowStatList({ listAvatar, listUsername}) {
+
+function FollowStatList({ listAvatar, listUsername,  profileFollow}) {
+
+  const { userId } = useContext(globalContext);
+
     return (
         <List sx={{ width: "100%", maxWidth: 750, bgcolor: "background.paper" }}>
       <ListItem className="!flex !flex-row !items-center">
         <div className="flex flex-row gap-5 items-center w-full h-fit">
           <Avatar url={listAvatar} />
 
-          {/* <Link href={"/profile/" + profileLike}> */}
+          <Link href={"/profile/" +  profileFollow}>
             <ListItemText
               sx={{ width: "100%", maxWidth: 450 }}
               primary={listUsername}
             />
-          {/* </Link> */}
+          </Link>
 
           {/* {!myLike && (
             <Button
