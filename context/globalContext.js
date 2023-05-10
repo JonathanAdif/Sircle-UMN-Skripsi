@@ -88,9 +88,17 @@ export function UserProfileContextProvider({ children }) {
         .from("followers")
         .select("id, followers_id , profiles(*)")
         // .eq("profiles.id", userId)
-        .eq("user_id", myProfile?.id)
-        // .eq("followers_id", myProfile?.id)
-        .then((result) => setFollow(result.data));
+        // .eq("user_id", myProfile?.id)
+        .eq("followers_id", myProfile?.id)
+        // .then((result) => setFollow(result.data));
+        .then((result) => {
+          supabase
+          .from("following")
+          .select("id, user_id , profiles(*)")
+          // .eq("profiles.id", myProfile?.id)
+          .eq("followers_id", userId)
+          .then((result) => setFollow(result.data));
+        });
     } else {
       supabase
         .from("following")
