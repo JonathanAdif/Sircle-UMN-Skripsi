@@ -3,7 +3,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import FollowStatList from "./followStatList";
 import Dialog from "@mui/material/Dialog";
 
-function DialogData({ title, stat, scroll, open, handleClose, roles_id }) {
+function DialogData({ title, stat, scroll, open, handleClose, fstat }) {
   return (
     <Dialog
       open={open}
@@ -14,14 +14,24 @@ function DialogData({ title, stat, scroll, open, handleClose, roles_id }) {
     >
       <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
       <DialogContent dividers={scroll === "paper"}>
-        {stat.length > 0 &&
+        {stat?.length > 0 &&
           stat.map((follow) => (
             <FollowStatList
               key={follow?.id}
               listAvatar={follow?.profiles?.avatar}
               listUsername={follow?.profiles?.username}
-              profileFollow={roles_id}
-              // myFollowstat={follow.user_id === myProfile?.id}
+              profileFollow={follow?.user_id}
+              onClose={handleClose}
+            />
+          ))}
+        {fstat?.length > 0 &&
+          fstat.map((followss) => (
+            <FollowStatList
+              key={followss?.id}
+              listAvatar={followss?.profiles?.avatar}
+              listUsername={followss?.profiles?.username}
+              profileFollow={followss?.followers_id}
+              onClose={handleClose}
             />
           ))}
       </DialogContent>

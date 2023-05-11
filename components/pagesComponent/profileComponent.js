@@ -14,7 +14,7 @@ import { useState, useRef, useEffect } from "react";
 function profileComponent() {
   const { profile: myProfile } = useContext(UserContext);
 
-  const { followToggle, following, isFollowedByMe, follow, profile, posts } =
+  const { followToggle, following, isFollowedByMe, follow, profile, posts, userId } =
     useContext(globalContext);
 
   const followingnotnull =
@@ -112,12 +112,13 @@ function profileComponent() {
                 </div>
                 {follow?.length > 0 &&  follow.map((follows) =>(
                   <DialogData
+                    key={follows.id}
                     title={"followers"}
                     open={open}
                     handleClose={handleClose}
                     stat={follow}
                     scroll={scroll}
-                    roles_id={follows?.user_id}
+                    // roles_id={follows.user_id}
                   />
                 ))}
 
@@ -133,12 +134,13 @@ function profileComponent() {
 
                 {following?.length > 0 &&  following?.map((follow) => (
                   <DialogData
+                    key={follow.id}
                     title={"following"}
                     open={openPop}
                     handleClose={handleClosePop}
-                    stat={following}
+                    fstat={following}
                     scroll={scrollPop}
-                    roles_id={follow.followers_id}
+                    // roles_id={follow.followers_id}
                   />
                 ))}
               </div>

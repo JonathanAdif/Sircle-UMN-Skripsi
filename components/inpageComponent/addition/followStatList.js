@@ -16,7 +16,7 @@ import { UserContext } from "@/context/userContext";
 
 
 
-function FollowStatList({ listAvatar, listUsername,  profileFollow}) {
+function FollowStatList({ listAvatar, listUsername,  profileFollow, onClose}) {
 
   const { userId } = useContext(globalContext);
 
@@ -26,7 +26,7 @@ function FollowStatList({ listAvatar, listUsername,  profileFollow}) {
         <div className="flex flex-row gap-5 items-center w-full h-fit">
           <Avatar url={listAvatar} />
 
-          <Link href={"/profile/" +  profileFollow}>
+          <Link href={"/profile/" + profileFollow} onClick={onClose}>
             <ListItemText
               sx={{ width: "100%", maxWidth: 450 }}
               primary={listUsername}
