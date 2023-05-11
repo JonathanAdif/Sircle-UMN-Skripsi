@@ -1,7 +1,8 @@
 import Avatar from "../inpageComponent/avatarCover/avatar";
 import { useContext } from "react";
 import { UserContext } from "@/context/userContext";
-
+import IconButton from "@mui/material/IconButton";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import Link from "next/link";
 
 // Icon
@@ -16,7 +17,7 @@ function header() {
   const { profile } = useContext(UserContext);
 
   return (
-    <div className="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-sm flex items-center justify-between px-5 lg:px-[50px]">
+    <div className="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-sm flex items-center justify-between px-5 lg:px-[30px]">
       {/* <!-- start sidebar button  --> */}
       <span
         className="relative text-black-sr text-xl cursor-pointer lg:hidden"
@@ -32,21 +33,26 @@ function header() {
         <input
           type="text"
           placeholder="Search"
-          className="text-[14px] lg:text-base ml-2 w-[150px] lg:w-[305px] text-gray-sr bg-transparent focus:outline-none"
+          className="text-[14px] lg:text-base ml-2 w-[120px] lg:w-[305px] text-gray-sr bg-transparent focus:outline-none"
         />
       </div>
       {/* <!-- end search area  -->  */}
 
-      <Link href={"/profile/" + profile?.id}>
-        <div className="flex flex-row items-center lg:gap-5">
+      <div className="flex flex-row items-center gap-[15px] lg:gap-[15px]">
+        <IconButton
+          color="primary"
+          aria-label="edit"
+          component="label"
+          className=" !bg-white-sr !text-oldgray-sr"
+        >
+          <NotificationsNoneOutlinedIcon
+            sx={{ fontSize: { xs: 25, lg: 30 } }}
+          />
+        </IconButton>
+        <Link href={"/profile/" + profile?.id}>
           <Avatar url={profile?.avatar} />
-          <div className="h-fit ">
-            <span className="hidden lg:block text-base font-semibold cursor-pointer !capitalize lg:h-fit lg:max-w-[305px]  ">
-              {profile?.username}
-            </span>
-          </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </div>
   );
 }

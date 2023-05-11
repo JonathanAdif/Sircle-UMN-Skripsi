@@ -94,7 +94,6 @@ export function UserProfileContextProvider({ children }) {
       supabase
         .from("following")
         .select("id, user_id , profiles(*)")
-        // .eq("profiles.id", myProfile?.id)
         .eq("followers_id", userId)
         .then((result) => setFollow(result.data));
     }

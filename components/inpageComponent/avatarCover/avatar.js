@@ -2,7 +2,7 @@ function Avatar({ url }) {
   return (
     <img
       src={url}
-      className="w-[45px] lg:w-[45px] rounded-full cursor-pointer"
+      className="w-[35px] lg:w-[45px] rounded-full cursor-pointer shadow-sm "
       alt="Avatar"
     />
   );

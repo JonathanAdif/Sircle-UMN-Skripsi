@@ -110,7 +110,7 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
             />
           </Link>
 
-          {!myLike && (
+          {/* {!myLike && (
             <Button
               variant="contained"
               className={isFollowedByMe || isFollowByMe ? hasfollow : notfollow}
@@ -125,7 +125,7 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
             >
               {isFollowedByMe || isFollowByMe ? "Following" : "follow"}
             </Button>
-          )}
+          )} */}
         </div>
       </ListItem>
 
