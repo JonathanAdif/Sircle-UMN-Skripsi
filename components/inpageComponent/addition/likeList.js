@@ -34,68 +34,68 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
 
   // start follow unfollow function in like list 
 
-  useEffect(() => {
-    if (profileLike) {
-      fetchfollowers();
-    }
-    return;
-  }, [profileLike]);
+  // useEffect(() => {
+  //   if (profileLike) {
+  //     fetchfollowers();
+  //   }
+  //   return;
+  // }, [profileLike]);
 
-  function fetchfollowers() {
-    supabase
-      .from("following")
-      .select("id, follow_id ,profiles(*)")
-      .eq("profiles.id", profileLike)
-      .eq("follow_id", profileLike)
-      .then((result) => setFollow(result.data));
-  }
+  // function fetchfollowers() {
+  //   supabase
+  //     .from("following")
+  //     .select("id, follow_id ,profiles(*)")
+  //     .eq("profiles.id", profileLike)
+  //     .eq("follow_id", profileLike)
+  //     .then((result) => setFollow(result.data));
+  // }
 
-  const isFollowByMe = !!follow?.find(
-    (follows) => follows.user_id === myProfile?.id
-  );
+  // const isFollowByMe = !!follow?.find(
+  //   (follows) => follows.user_id === myProfile?.id
+  // );
 
-  function followlistToggle() {
-    if (isFollowedByMe && isFollowByMe) {
-      supabase
-        .from("followers")
-        .delete()
-        .eq("user_id", myProfile?.id)
-        .eq("follow_id", profileLike)
-        .then(() => {
-          fetchfollowers() && fetchfollowing();
-        });
-        supabase
-        .from("following")
-        .delete()
-        .eq("user_id", myProfile?.id)
-        .eq("follow_id", profileLike)
-        .then(() => {
-          fetchfollowers() && fetchfollowing();
-        });
-      return;
-    }
-    supabase
-      .from("followers")
-      .insert({
-        user_id: myProfile?.id,
-        follow_id: profileLike,
-      })
-      .then((result) => {
-        fetchfollowers() && fetchfollowing();
-      });
-      supabase
-      .from("following")
-      .insert({
-        user_id: myProfile?.id,
-        follow_id: profileLike,
-      })
-      .then((result) => {
-        fetchfollowers() && fetchfollowing();
-      });
+  // function followlistToggle() {
+  //   if (isFollowedByMe && isFollowByMe) {
+  //     supabase
+  //       .from("followers")
+  //       .delete()
+  //       .eq("user_id", myProfile?.id)
+  //       .eq("follow_id", profileLike)
+  //       .then(() => {
+  //         fetchfollowers() && fetchfollowing();
+  //       });
+  //       supabase
+  //       .from("following")
+  //       .delete()
+  //       .eq("user_id", myProfile?.id)
+  //       .eq("follow_id", profileLike)
+  //       .then(() => {
+  //         fetchfollowers() && fetchfollowing();
+  //       });
+  //     return;
+  //   }
+  //   supabase
+  //     .from("followers")
+  //     .insert({
+  //       user_id: myProfile?.id,
+  //       follow_id: profileLike,
+  //     })
+  //     .then((result) => {
+  //       fetchfollowers() && fetchfollowing();
+  //     });
+  //     supabase
+  //     .from("following")
+  //     .insert({
+  //       user_id: myProfile?.id,
+  //       follow_id: profileLike,
+  //     })
+  //     .then((result) => {
+  //       fetchfollowers() && fetchfollowing();
+  //     });
      
-  }
+  // }
 
-    // end follow unfollow function in like list 
+  //   // end follow unfollow function in like list 
 
   return (
     <List sx={{ width: "100%", maxWidth: 750, bgcolor: "background.paper" }}>

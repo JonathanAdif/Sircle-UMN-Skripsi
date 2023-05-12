@@ -229,7 +229,7 @@ function postcontainer({
     window.location.reload(false);
   };
 
-  // start open following popper
+  // start open popper
 
   const [anchorEl, setAnchorEl] = useState(null);
 

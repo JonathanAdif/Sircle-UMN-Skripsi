@@ -104,7 +104,7 @@ function sidebar() {
             </Button>
           </Link>
 
-          <Button
+          {/* <Button
             className="menu-btn menu-name "
             startIcon={
               <NotificationsNoneOutlinedIcon
@@ -113,7 +113,7 @@ function sidebar() {
             }
           >
             Notification
-          </Button>
+          </Button> */}
 
           <Link href="/event">
             <Button

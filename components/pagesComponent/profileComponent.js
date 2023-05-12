@@ -118,7 +118,7 @@ function profileComponent() {
                     handleClose={handleClose}
                     stat={follow}
                     scroll={scroll}
-                    // roles_id={follows.user_id}
+             
                   />
                 ))}
 
@@ -140,7 +140,7 @@ function profileComponent() {
                     handleClose={handleClosePop}
                     fstat={following}
                     scroll={scrollPop}
-                    // roles_id={follow.followers_id}
+              
                   />
                 ))}
               </div>

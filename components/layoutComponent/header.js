@@ -2,8 +2,16 @@ import Avatar from "../inpageComponent/avatarCover/avatar";
 import { useContext } from "react";
 import { UserContext } from "@/context/userContext";
 import IconButton from "@mui/material/IconButton";
+import Badge from "@mui/material/Badge";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import Link from "next/link";
+import Popover from "@mui/material/Popover";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+
+import { useState } from "react";
 
 // Icon
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -16,8 +24,39 @@ function header() {
 
   const { profile } = useContext(UserContext);
 
+  // start notification badge
+
+  function notificationsLabel(count) {
+    if (count === 0) {
+      return "no notifications";
+    }
+    if (count > 99) {
+      return "more than 99 notifications";
+    }
+    return `${count} notifications`;
+  }
+
+  // end notification badge
+
+  // start open popper
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handlepopperClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlepopperClose = () => {
+    setAnchorEl(null);
+  };
+
+  const openPop = Boolean(anchorEl);
+  const idPop = openPop ? "simple-popover" : undefined;
+
+  // end open popper
+
   return (
-    <div className="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-sm flex items-center justify-between px-5 lg:px-[30px]">
+    <div className="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-sm flex items-center justify-between px-5 lg:px-[50px]">
       {/* <!-- start sidebar button  --> */}
       <span
         className="relative text-black-sr text-xl cursor-pointer lg:hidden"
@@ -38,17 +77,49 @@ function header() {
       </div>
       {/* <!-- end search area  -->  */}
 
-      <div className="flex flex-row items-center gap-[15px] lg:gap-[15px]">
+      <div className="flex flex-row items-center gap-[15px] lg:gap-5">
         <IconButton
           color="primary"
-          aria-label="edit"
+          aria-label={notificationsLabel(100)}
           component="label"
           className=" !bg-white-sr !text-oldgray-sr"
+          onClick={handlepopperClick}
         >
-          <NotificationsNoneOutlinedIcon
-            sx={{ fontSize: { xs: 25, lg: 30 } }}
-          />
+          <Badge badgeContent={7} color="primary">
+            <NotificationsNoneOutlinedIcon
+              sx={{ fontSize: { xs: 25, lg: 30 } }}
+            />
+          </Badge>
         </IconButton>
+        <Popover
+          id={idPop}
+          open={openPop}
+          anchorEl={anchorEl}
+          onClose={handlepopperClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+        >
+          <List
+            sx={{ width: "100%", maxWidth: 750, bgcolor: "background.paper" }}
+          >
+            <ListItem className="!flex !flex-row !items-center">
+              <div className="flex flex-row gap-5 items-center w-full h-fit">
+                {/* <Avatar url={listAvatar} /> */}
+                    <div>jo has like your post</div>
+                {/* <Link href={"/profile/" + profileLike}> */}
+                  {/* <ListItemText
+                    sx={{ width: "100%", maxWidth: 450 }}
+                    primary={listUsername}
+                  /> */}
+                {/* </Link> */}
+              </div>
+            </ListItem>
+
+            <Divider variant="inset" component="li" />
+          </List>
+        </Popover>
         <Link href={"/profile/" + profile?.id}>
           <Avatar url={profile?.avatar} />
         </Link>

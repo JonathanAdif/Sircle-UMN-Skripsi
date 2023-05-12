@@ -9,24 +9,24 @@ import { useForm } from "react-hook-form";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useSession } from "@supabase/auth-helpers-react";
 
-
-
 // icon
-import PersonAddAlt1OutlinedIcon from '@mui/icons-material/PersonAddAlt1Outlined';
+import PersonAddAlt1OutlinedIcon from "@mui/icons-material/PersonAddAlt1Outlined";
 import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
-import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
+import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 
-function profileBanner({follow, followstat}) {
-  const { profile, myUser, fetchUser, setProfile } =
-    useContext(globalContext);
+function profileBanner({ follow, followstat }) {
+  const { profile, myUser, fetchUser, setProfile } = useContext(globalContext);
   const [editSection, seteditSection] = useState(false);
   const [username, setName] = useState("");
   const [bio, setBio] = useState("");
   const supabase = useSupabaseClient();
   const session = useSession();
 
-  const hasfollow = "!bg-green-600  disabled:!opacity-25 disabled:!text-white-sr !capitalize";
-  const notfollow = "!bg-birulogo-sr  disabled:!opacity-25 disabled:!text-white-sr !capitalize";
+  const hasfollow =
+    "!bg-green-600  disabled:!opacity-25 disabled:!text-white-sr !capitalize";
+  const notfollow =
+    "!bg-birulogo-sr  disabled:!opacity-25 disabled:!text-white-sr !capitalize";
 
   const {
     register,
@@ -145,11 +145,25 @@ function profileBanner({follow, followstat}) {
         {/* start button edit profile area  */}
         <div>
           {!myUser && (
-            <div className="w-full h-fit flex justify-end p-5 ">
+            <div className="w-full h-fit flex flex-row gap-[15px] justify-end items-center p-5 ">
+              <a href={`mailto:${profile?.email}`}>
+                <IconButton color="primary" aria-label="edit" component="label">
+                  <EmailOutlinedIcon
+                    className=" !text-birulogo-sr"
+                    sx={{ fontSize: { xs: 20, lg: 25 } }}
+                  />
+                </IconButton>
+              </a>
               <Button
                 variant="contained"
-                className={followstat ? hasfollow : notfollow }
-                startIcon={followstat ? <CheckOutlinedIcon   className="menu-icon" /> : <PersonAddAlt1OutlinedIcon  className="menu-icon" />}
+                className={followstat ? hasfollow : notfollow}
+                startIcon={
+                  followstat ? (
+                    <CheckOutlinedIcon className="menu-icon" />
+                  ) : (
+                    <PersonAddAlt1OutlinedIcon className="menu-icon" />
+                  )
+                }
                 onClick={follow}
               >
                 {followstat ? "Following" : "follow"}
