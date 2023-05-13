@@ -146,7 +146,7 @@ function profileBanner({ follow, followstat }) {
         <div>
           {!myUser && (
             <div className="w-full h-fit flex flex-row gap-[15px] justify-end items-center p-5 ">
-              <a href={`mailto:${profile?.email}`}>
+              <a href={`mailto:${profile?.email}`} target="_blank">
                 <IconButton color="primary" aria-label="edit" component="label">
                   <EmailOutlinedIcon
                     className=" !text-birulogo-sr"
