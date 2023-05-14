@@ -4,6 +4,8 @@ import Modal from "@mui/material/Modal";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 import IconButton from "@mui/material/IconButton";
 import Popover from "@mui/material/Popover";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
@@ -31,7 +33,12 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import SlideshowOutlinedIcon from "@mui/icons-material/SlideshowOutlined";
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 function postMaker1({ onPost }) {
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -51,6 +58,18 @@ function postMaker1({ onPost }) {
   const openPop = Boolean(anchorEl);
 
   // end popover
+
+  // start snackbar 
+  const [openSnk, setOpenSnk] = React.useState(false);
+
+  const handleCloseSnk = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnk(false);
+  };
+  // end snackbar
 
   // start add post
 
@@ -95,7 +114,8 @@ function postMaker1({ onPost }) {
               onPost();
             }
           }
-        });
+        })
+        setOpenSnk(true);
     } catch (error) {
       console.log(error);
     }
@@ -161,6 +181,8 @@ function postMaker1({ onPost }) {
   const isValid = watchContent;
   // const isValid = watchContent || photoUploads.length > 0 ;
   // end disabled button
+
+
 
   return (
     <>
@@ -373,6 +395,11 @@ function postMaker1({ onPost }) {
         </div>
       </Modal>
       {/* end modal  */}
+      <Snackbar open={openSnk} autoHideDuration={6000} onClose={handleCloseSnk}>
+        <Alert onClose={handleCloseSnk} severity="success" sx={{ width: '100%' }}>
+        Your post has been successfully posted!
+        </Alert>
+      </Snackbar>
     </>
   );
 }

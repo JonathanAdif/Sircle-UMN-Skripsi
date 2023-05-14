@@ -11,6 +11,7 @@ import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useState } from "react";
 
 // Icon
@@ -18,6 +19,11 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 function header() {
+
+  const supabase = useSupabaseClient();
+  const [profilesList,setProfileslist] = useState('');
+  const [input, setInput] = useState("");
+
   const openSidebar = (event) => {
     document.querySelector(".sidebar").classList.toggle("hidden");
   };
@@ -55,6 +61,21 @@ function header() {
 
   // end open popper
 
+  // start fetch profile list
+  const handleChange = (value) => {
+    // setInput(value);
+    supabase
+    .from("profiles")
+    .select("username, avatar")
+    .textSearch("username", value, {
+      type: 'websearch'
+    })
+    .then((result) => {
+      console.log(result.data);
+    });
+  };
+  // end fetch profile list 
+
   return (
     <div className="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-sm flex items-center justify-between px-5 lg:px-[50px]">
       {/* <!-- start sidebar button  --> */}
@@ -73,6 +94,8 @@ function header() {
           type="text"
           placeholder="Search"
           className="text-[14px] lg:text-base ml-2 w-[120px] lg:w-[305px] text-gray-sr bg-transparent focus:outline-none"
+          // value={input}
+          onChange={(e) => handleChange(e.target.value)}
         />
       </div>
       {/* <!-- end search area  -->  */}
