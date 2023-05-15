@@ -19,10 +19,9 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 function header() {
-
   const supabase = useSupabaseClient();
-  const [profilesList,setProfileslist] = useState('');
-  const [input, setInput] = useState("");
+  const [profilesList, setProfileslist] = useState("");
+  // const [input, setInput] = useState("");
 
   const openSidebar = (event) => {
     document.querySelector(".sidebar").classList.toggle("hidden");
@@ -65,16 +64,16 @@ function header() {
   const handleChange = (value) => {
     // setInput(value);
     supabase
-    .from("profiles")
-    .select("username, avatar")
-    .textSearch("username", value, {
-      type: 'websearch'
-    })
-    .then((result) => {
-      console.log(result.data);
-    });
+      .from("profiles")
+      .select("id, username, avatar")
+      .textSearch("username", value, {
+        type: "websearch",
+      })
+      .then((result) => {
+        setProfileslist(result.data);
+      });
   };
-  // end fetch profile list 
+  // end fetch profile list
 
   return (
     <div className="fixed z-10 top-0 h-[65px] sm:h-[100px] w-full lg:w-9/12 lg:right-0 bg-white-sr drop-shadow-sm flex items-center justify-between px-5 lg:px-[50px]">
@@ -88,15 +87,31 @@ function header() {
       {/* <!-- end sidebar button  --> */}
 
       {/* <!-- start search area  --> */}
-      <div className="search-area">
-        <SearchOutlinedIcon className="menu-icon" />
-        <input
-          type="text"
-          placeholder="Search"
-          className="text-[14px] lg:text-base ml-2 w-[120px] lg:w-[305px] text-gray-sr bg-transparent focus:outline-none"
-          // value={input}
-          onChange={(e) => handleChange(e.target.value)}
-        />
+      <div>
+        <div className="search-area">
+          <SearchOutlinedIcon className="menu-icon" />
+          <input
+            type="text"
+            placeholder="Search Sircle Users"
+            className="text-[14px] lg:text-base ml-2 w-[120px] lg:w-[305px] text-gray-sr bg-transparent focus:outline-none"
+            // value={input}
+            onChange={(e) => handleChange(e.target.value)}
+          />
+        </div>
+
+        {profilesList?.length > 0 && (
+          <div className="absolute h-fit p-2.5 bg-white-sr drop-shadow-xl rounded-[10px]  mt-2.5 w-[120px] lg:w-[500px] flex flex-col items-left gap-5">
+            {profilesList?.length > 0 &&
+              profilesList.map((plist) => (
+                <Link href={"/profile/" + plist?.id}>
+                  <div className="flex flex-row items-center gap-5 cursor-pointer w-full h-fit hover:bg-birulogo-sr rounded-[10px] hover:text-white-sr p-2.5">
+                    <Avatar url={plist.avatar} />
+                    <div>{plist.username}</div>
+                  </div>
+                </Link>
+              ))}
+          </div>
+        )}
       </div>
       {/* <!-- end search area  -->  */}
 
@@ -130,9 +145,9 @@ function header() {
             <ListItem className="!flex !flex-row !items-center">
               <div className="flex flex-row gap-5 items-center w-full h-fit">
                 {/* <Avatar url={listAvatar} /> */}
-                    <div>jo has like your post</div>
+                <div>jo has like your post</div>
                 {/* <Link href={"/profile/" + profileLike}> */}
-                  {/* <ListItemText
+                {/* <ListItemText
                     sx={{ width: "100%", maxWidth: 450 }}
                     primary={listUsername}
                   /> */}
