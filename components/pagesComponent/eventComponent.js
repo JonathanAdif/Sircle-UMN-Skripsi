@@ -17,14 +17,9 @@ function EventComponentPage() {
 
           <div className=" !w-full h-fit flex items-center  justify-evenly  flex-wrap gap-5">
             <EventPostCard />
-            <EventPostCard />
-            <EventPostCard />
-            <EventPostCard />
-            <EventPostCard />
-            <EventPostCard />
           </div>
 
-          <PaginationComponent />
+          {/* <PaginationComponent /> */}
         </div>
       </div>
     </>
