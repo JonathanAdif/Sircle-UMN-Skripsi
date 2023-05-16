@@ -13,6 +13,8 @@ import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOu
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 
 function EventBanner() {
+
+// start dialog function 
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
 
@@ -34,6 +36,10 @@ function EventBanner() {
       }
     }
   }, [open]);
+
+// end dialog function
+
+
 
   return (
     <div className="w-full h-fit bg-white-sr flex flex-col gap-5 rounded-[10px] shadow-sm px-2.5 py-[30px] lg:p-[50px] bg-center bg-cover bg-[url('https://xnkmteuovqoshalkgnyc.supabase.co/storage/v1/object/public/sircle-static-aset/event-banner.jpg')]">
@@ -82,14 +88,14 @@ function EventBanner() {
 
             <div className="font-bold text-xl text-black-sr">Event Times</div>
             <div className="flex flex-row gap-5">
-              <label for="startTime">Select Start time:</label>
+              <label htmlFor="startTime">Select Start time:</label>
               <input
                 required
                 type="time"
                 id="startTime"
                 className=" !font-normal !p-3 !text-base !text-black-sr !bg-transparent !w-[200px] !h-fit border border-solid focus:!outline-none"
               ></input>
-              <label for="endTime">Select End time:</label>
+              <label htmlFor="endTime">Select End time:</label>
               <input
                 required
                 type="time"
