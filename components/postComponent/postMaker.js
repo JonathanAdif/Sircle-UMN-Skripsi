@@ -37,7 +37,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function postMaker1({ onPost }) {
+function PostMaker1({ onPost }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -408,4 +408,4 @@ function postMaker1({ onPost }) {
   );
 }
 
-export default postMaker1;
+export default PostMaker1;

@@ -11,7 +11,7 @@ import DialogData from "../inpageComponent/addition/dialog";
 
 import { useState, useRef, useEffect } from "react";
 
-function profileComponent() {
+function ProfileComponent() {
   const { profile: myProfile } = useContext(UserContext);
 
   const { followToggle, following, isFollowedByMe, follow, profile, posts, userId } =
@@ -152,4 +152,4 @@ function profileComponent() {
   );
 }
 
-export default profileComponent;
+export default ProfileComponent;

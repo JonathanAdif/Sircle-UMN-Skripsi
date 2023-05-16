@@ -8,7 +8,7 @@ import { useSupabaseClient, useSession } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 
 
-function feed() {
+function Feed() {
   const supabase = useSupabaseClient();
   const [posts, setPosts] = useState([]);
   const session = useSession();
@@ -66,4 +66,4 @@ function feed() {
   );
 }
 
-export default feed;
+export default Feed;

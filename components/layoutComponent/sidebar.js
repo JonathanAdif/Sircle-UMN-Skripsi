@@ -15,7 +15,7 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 // start function untuk button close sidebar
-function sidebar() {
+function Sidebar() {
   const openSidebar = (event) => {
     document.querySelector(".sidebar").classList.toggle("hidden");
   };
@@ -166,4 +166,4 @@ function sidebar() {
   );
 }
 
-export default sidebar;
+export default Sidebar;
