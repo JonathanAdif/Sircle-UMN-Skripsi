@@ -116,48 +116,7 @@ function Header() {
       {/* <!-- end search area  -->  */}
 
       <div className="flex flex-row items-center gap-[15px] lg:gap-5">
-        <IconButton
-          color="primary"
-          aria-label={notificationsLabel(100)}
-          component="label"
-          className=" !bg-white-sr !text-oldgray-sr"
-          onClick={handlepopperClick}
-        >
-          <Badge badgeContent={7} color="primary">
-            <NotificationsNoneOutlinedIcon
-              sx={{ fontSize: { xs: 25, lg: 30 } }}
-            />
-          </Badge>
-        </IconButton>
-        <Popover
-          id={idPop}
-          open={openPop}
-          anchorEl={anchorEl}
-          onClose={handlepopperClose}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-        >
-          <List
-            sx={{ width: "100%", maxWidth: 750, bgcolor: "background.paper" }}
-          >
-            <ListItem className="!flex !flex-row !items-center">
-              <div className="flex flex-row gap-5 items-center w-full h-fit">
-                {/* <Avatar url={listAvatar} /> */}
-                <div>jo has like your post</div>
-                {/* <Link href={"/profile/" + profileLike}> */}
-                {/* <ListItemText
-                    sx={{ width: "100%", maxWidth: 450 }}
-                    primary={listUsername}
-                  /> */}
-                {/* </Link> */}
-              </div>
-            </ListItem>
-
-            <Divider variant="inset" component="li" />
-          </List>
-        </Popover>
+        
         <Link href={"/profile/" + profile?.id}>
           <Avatar url={profile?.avatar} />
         </Link>
