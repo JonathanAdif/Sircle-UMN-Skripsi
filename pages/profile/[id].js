@@ -2,7 +2,7 @@ import ProfileComponent from "@/components/pagesComponent/profileComponent";
 import { useSession } from "@supabase/auth-helpers-react";
 import LoginPage from "@/pages/login";
 
-function idprofilePage() {
+function IdprofilePage() {
   const session = useSession();
 
   if (!session) {
@@ -12,4 +12,4 @@ function idprofilePage() {
   return <ProfileComponent />;
 }
 
-export default idprofilePage;
+export default IdprofilePage;

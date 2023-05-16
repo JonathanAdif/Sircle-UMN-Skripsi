@@ -18,7 +18,7 @@ import { useState } from "react";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
-function header() {
+function Header() {
   const supabase = useSupabaseClient();
   const [profilesList, setProfileslist] = useState("");
   // const [input, setInput] = useState("");
@@ -166,4 +166,4 @@ function header() {
   );
 }
 
-export default header;
+export default Header;

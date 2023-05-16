@@ -15,7 +15,7 @@ import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 
-function profileBanner({ follow, followstat }) {
+function ProfileBanner({ follow, followstat }) {
   const { profile, myUser, fetchUser, setProfile } = useContext(globalContext);
   const [editSection, seteditSection] = useState(false);
   const [username, setName] = useState("");
@@ -220,4 +220,4 @@ function profileBanner({ follow, followstat }) {
   );
 }
 
-export default profileBanner;
+export default ProfileBanner;

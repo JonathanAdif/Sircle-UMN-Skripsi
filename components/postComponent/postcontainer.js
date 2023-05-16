@@ -39,7 +39,7 @@ import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined
 
 import Popover from "@mui/material/Popover";
 
-function postcontainer({
+function Postcontainer({
   id,
   content,
   profiles: writerprofile,
@@ -500,14 +500,14 @@ function postcontainer({
         >
           <DialogTitle id="scroll-dialog-title">Likes</DialogTitle>
           <DialogContent dividers={scroll === "paper"}>
-            {likes.length > 0 &&
-              likes.map((like) => (
+            {likes?.length > 0 &&
+              likes.map((likess) => (
                 <Listprp
-                  key={like.id}
-                  listAvatar={like.profiles?.avatar}
-                  listUsername={like.profiles.username}
-                  profileLike={like.user_id}
-                  myLike={like.user_id === myProfile?.id}
+                  key={likess.id}
+                  listAvatar={likess.profiles?.avatar}
+                  listUsername={likess.profiles.username}
+                  profileLike={likess.user_id}
+                  myLike={likess.user_id === myProfile?.id}
                 />
               ))}
           </DialogContent>
@@ -517,4 +517,4 @@ function postcontainer({
   );
 }
 
-export default postcontainer;
+export default Postcontainer;

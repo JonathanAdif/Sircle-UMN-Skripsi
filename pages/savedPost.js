@@ -2,7 +2,7 @@ import { useSession } from "@supabase/auth-helpers-react";
 import LoginPage from "@/pages/login";
 import SavedpostComponent from "@/components/pagesComponent/savedpostComponent";
 
-function savedPostPage() {
+function SavedPostPage() {
     const session = useSession();
 
     if (!session) {
@@ -12,4 +12,4 @@ function savedPostPage() {
     return <SavedpostComponent />;
 }
 
-export default savedPostPage;
+export default SavedPostPage;

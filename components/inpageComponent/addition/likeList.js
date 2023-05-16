@@ -14,7 +14,7 @@ import Link from "next/link";
 
 import { UserContext } from "@/context/userContext";
 
-function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
+function LikeList({ listAvatar, listUsername, myLike, profileLike }) {
   const hasfollow =
     "!bg-green-600  disabled:!opacity-25 disabled:!text-white-sr !capitalize";
   const notfollow =
@@ -134,4 +134,4 @@ function Listprp({ listAvatar, listUsername, myLike, profileLike }) {
   );
 }
 
-export default Listprp;
+export default LikeList;

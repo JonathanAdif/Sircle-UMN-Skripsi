@@ -16,7 +16,7 @@ import { UserContext } from "@/context/userContext";
 
 
 
-function FollowStatList({ listAvatar, listUsername,  profileFollow, onClose, key}) {
+function FollowStatList({ listAvatar, listUsername,  profileFollow, onClose}) {
 
   const { userId } = useContext(globalContext);
 
