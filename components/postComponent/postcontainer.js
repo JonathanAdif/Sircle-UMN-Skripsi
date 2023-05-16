@@ -345,7 +345,7 @@ function Postcontainer({
         >
           {photos?.length > 0 &&
             photos.map((photo) => (
-              <SwiperSlide className="!cursor-pointer !z-0 !h-[320px]">
+              <SwiperSlide className="!cursor-pointer !z-0 !h-[320px]"  key={photo}>
                 <a
                   data-fancybox="single"
                   // data-download-src="/slider-login/slider 1.jpg"
@@ -362,7 +362,7 @@ function Postcontainer({
 
           {videos?.length > 0 &&
             videos.map((video) => (
-              <SwiperSlide className="!cursor-pointer !z-0 !h-[320px]">
+              <SwiperSlide className="!cursor-pointer !z-0 !h-[320px]"  key={video}>
                 <a
                   data-fancybox="single"
                   // data-download-src="/slider-login/slider 1.jpg"

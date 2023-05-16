@@ -258,16 +258,16 @@ function PostMaker1({ onPost }) {
             >
               {photoUploads.length > 0 && (
                 <>
-                  {photoUploads.map((upload) => (
-                    <SwiperSlide className="cursor-pointer !rounded-[10px]">
+                  {photoUploads.map((uploadPhoto) => (
+                    <SwiperSlide className="cursor-pointer !rounded-[10px]" key={uploadPhoto}>
                       <a
                         data-fancybox="single"
                         // data-download-src="/slider-login/slider 1.jpg"
-                        href={upload}
+                        href={uploadPhoto}
                         className="!z-[100]"
                       >
                         <img
-                          src={upload}
+                          src={uploadPhoto}
                           alt="Media"
                           className="!object-center !object-fill !rounded-[10px] !w-[200px] !h-[200px]"
                         />
@@ -279,21 +279,21 @@ function PostMaker1({ onPost }) {
 
               {videoUploads.length > 0 && (
                 <>
-                  {videoUploads.map((upload) => {
-                    console.log(upload);
+                  {videoUploads.map((uploadVideo) => {
+                    console.log(uploadVideo);
                     return (
-                      <SwiperSlide className="cursor-pointer !rounded-[10px]">
+                      <SwiperSlide className="cursor-pointer !rounded-[10px]" key={uploadVideo}>
                         <a
                           data-fancybox="single"
                           // data-download-src="/slider-login/slider 1.jpg"
-                          href={upload}
+                          href={uploadVideo}
                           className="!z-[100]"
                         >
                           <video
                             controls
                             className=" !object-center !object-fill !rounded-[10px] !w-[200px] !h-[150px]"
                           >
-                            <source src={upload} type="video/mp4" />
+                            <source src={uploadVideo} type="video/mp4" />
                           </video>
                         </a>
                       </SwiperSlide>
