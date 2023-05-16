@@ -103,7 +103,7 @@ function Header() {
           <div className="absolute h-fit p-2.5 bg-white-sr drop-shadow-xl rounded-[10px]  mt-2.5 w-[120px] lg:w-[500px] flex flex-col items-left gap-5">
             {profilesList?.length > 0 &&
               profilesList.map((plist) => (
-                <Link href={"/profile/" + plist?.id}>
+                <Link href={"/profile/" + plist?.id} key={plist.id}>
                   <div className="flex flex-row items-center gap-5 cursor-pointer w-full h-fit hover:bg-birulogo-sr rounded-[10px] hover:text-white-sr p-2.5">
                     <Avatar url={plist.avatar} />
                     <div>{plist.username}</div>
