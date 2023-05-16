@@ -354,7 +354,7 @@ function postcontainer({
                   <img
                     src={photo}
                     alt="Media"
-                    className="!w-full !h-full !object-center !object-fill"
+                    className="!w-full !h-full !object-center !object-cover"
                   />
                 </a>
               </SwiperSlide>

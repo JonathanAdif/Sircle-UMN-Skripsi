@@ -1,11 +1,11 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import TextareaAutosize from "@mui/base/TextareaAutosize";
+import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import Popover from "@mui/material/Popover";
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
@@ -38,7 +38,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 function postMaker1({ onPost }) {
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -59,11 +58,11 @@ function postMaker1({ onPost }) {
 
   // end popover
 
-  // start snackbar 
+  // start snackbar
   const [openSnk, setOpenSnk] = React.useState(false);
 
   const handleCloseSnk = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -114,8 +113,8 @@ function postMaker1({ onPost }) {
               onPost();
             }
           }
-        })
-        setOpenSnk(true);
+        });
+      setOpenSnk(true);
     } catch (error) {
       console.log(error);
     }
@@ -182,8 +181,6 @@ function postMaker1({ onPost }) {
   // const isValid = watchContent || photoUploads.length > 0 ;
   // end disabled button
 
-
-
   return (
     <>
       <div className="w-full h-fit px-5 py-[30px] bg-white-sr rounded-[10px]  drop-shadow-sm flex flex-col gap-[15px]">
@@ -226,7 +223,10 @@ function postMaker1({ onPost }) {
             />
           </div>
           <form onSubmit={handleSubmit(createPost)}>
-            <TextareaAutosize
+            <TextField
+              id="outlined-multiline-static"
+              multiline
+              rows={4}
               className="w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none "
               placeholder="Whats going on in your beautiful mind..."
               {...register("content", {
@@ -254,7 +254,7 @@ function postMaker1({ onPost }) {
                 dynamicBullets: true,
               }}
               modules={[FreeMode, Pagination]}
-              className="mySwiper"
+              className="mySwiper mt-5"
             >
               {photoUploads.length > 0 && (
                 <>
@@ -269,7 +269,7 @@ function postMaker1({ onPost }) {
                         <img
                           src={upload}
                           alt="Media"
-                          className="!object-center !object-fill !rounded-[10px] !w-[200px] !h-[150px]"
+                          className="!object-center !object-fill !rounded-[10px] !w-[200px] !h-[200px]"
                         />
                       </a>
                     </SwiperSlide>
@@ -396,8 +396,12 @@ function postMaker1({ onPost }) {
       </Modal>
       {/* end modal  */}
       <Snackbar open={openSnk} autoHideDuration={6000} onClose={handleCloseSnk}>
-        <Alert onClose={handleCloseSnk} severity="success" sx={{ width: '100%' }}>
-        Your post has been successfully posted!
+        <Alert
+          onClose={handleCloseSnk}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Your post has been successfully posted!
         </Alert>
       </Snackbar>
     </>
