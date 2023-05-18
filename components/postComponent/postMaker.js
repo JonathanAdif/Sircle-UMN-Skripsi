@@ -226,8 +226,8 @@ function PostMaker1({ onPost }) {
             <TextField
               id="outlined-multiline-static"
               multiline
-              rows={4}
-              className="w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none "
+              rows={3}
+              className="w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none"
               placeholder="Whats going on in your beautiful mind..."
               {...register("content", {
                 minLength: {
@@ -238,7 +238,7 @@ function PostMaker1({ onPost }) {
             />
 
             {stilluploading && (
-              <div className="!w-full !h-full !m-auto flex flex-row gap-2.5 pb-2.5">
+              <div className="!w-full !h-full !m-auto flex flex-row gap-2.5 py-2.5">
                 <span className=" font-normal text-birulogo-sr text-xs ">
                   Uploading
                 </span>
