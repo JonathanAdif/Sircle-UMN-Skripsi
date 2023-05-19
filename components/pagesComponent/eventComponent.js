@@ -21,7 +21,7 @@ function EventComponentPage() {
       .select(
         "*, profiles(*)"
       )
-      .order("created_at", { ascending: false })
+      .order("event_date", { ascending: true})
       .then((result) => {
         console.log("events", result);
         setEvents(result.data);
