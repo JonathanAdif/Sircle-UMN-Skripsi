@@ -145,8 +145,8 @@ function ProfileBanner({ follow, followstat }) {
         {/* start button edit profile area  */}
         <div>
           {!myUser && (
-            <div className="w-full h-fit flex flex-row gap-[15px] justify-end items-center p-5 ">
-              <a href={`mailto:${profile?.email}`} target="_blank">
+            <div className="w-full h-fit flex lg:flex-row gap-[15px] justify-end items-center p-5 ">
+              <a href={`mailto:${profile?.email}`} target="_blank" className="hidden lg:block">
                 <IconButton color="primary" aria-label="edit" component="label">
                   <EmailOutlinedIcon
                     className=" !text-birulogo-sr"

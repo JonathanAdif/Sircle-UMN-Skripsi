@@ -229,6 +229,25 @@ function Postcontainer({
     window.location.reload(false);
   };
 
+  const deletingComment = async () => {
+    const { data, error } = await supabase
+      .from("posts")
+      .delete()
+      // .eq("id", id)
+      .eq("parent", id)
+      .eq("writer", myProfile.id);
+
+    if (error) {
+      console.log(error);
+    }
+
+    if (data) {
+      console.log(data);
+    }
+
+    window.location.reload(false);
+  };
+
   // start open popper
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -432,14 +451,14 @@ function Postcontainer({
         >
           Like
         </Button>
-        {!myPost && (
+        {/* {!myPost && (
           <Button
             className="ctapostbutton"
             startIcon={<LoopOutlinedIcon className="menu-icon" />}
           >
             Resircle
           </Button>
-        )}
+        )} */}
         <Button
           className="ctapostbutton"
           startIcon={<CommentOutlinedIcon className="menu-icon" />}
@@ -482,6 +501,9 @@ function Postcontainer({
                       </span>
                     </div>
                     <p className="text-sm">{comment.content}</p>
+                    { comment.writer == session.user.id && (
+                     <div className=" font-normal text-birulogo-sr text-xs mt-1 cursor-pointer" onClick={deletingComment}>Delete</div>
+                    )}
                   </div>
                 </div>
               ))}

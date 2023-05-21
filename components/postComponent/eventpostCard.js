@@ -37,14 +37,14 @@ function EventPostCard({
         className="!w-[270px] relative !h-[205px] bg-white-sr rounded-[10px] shadow-sm cursor-pointer "
         onClick={handleClickOpen}
       >
-        <div className="bg-white-sr absolute bottom-0 rounded-[10px] py-2.5 px-[15px] w-full z-10 ">
+        <div className="bg-white-sr absolute z-0 bottom-0 rounded-[10px] py-2.5 px-[15px] w-full ">
           <div className="font-semibold text-base text-black-sr">{Stitle}</div>
           <div className="font-semibold text-xs text-oldgray-sr">{date}</div>
         </div>
         <img
           className="w-full h-full  !rounded-[10px] z-0 object-center object-cover cursor-pointer"
           src={poster}
-          alt="postuyghjgjhgjhger"
+          alt="Event Poster"
         />
       </div>
 
@@ -60,19 +60,20 @@ function EventPostCard({
           sx={{ fontSize: { xs: 20, lg: 30 } }}
           onClick={handleClose}
         />
-        <div className="h-fit w-full lg:px-[300px] lg:py-[100px] text-left flex flex-col gap-5">
-          <h2 className="font-bold text-black-sr text-3xl capitalize">
+        <div className="h-fit w-full p-5 lg:px-[300px] lg:py-[100px] !text-left flex flex-col gap-3 lg:gap-5">
+          <h2 className="font-bold mt-5 lg:mt-0 text-black-sr text-2xl lg:text-3xl capitalize">
           {Ltitle}
           </h2>
-          <div className="flex flex-row gap-5 items-center">
-            <div>
+          <div className="flex flex-col lg:flex-row lg:gap-5 lg:items-center text-xs lg:text-base">
+            <div className="flex flex-row gap-[5px]">
+              <span className="text-birulogo-sr font-semibold  ">Posted</span>
               <ReactTimeAgo
                 // timeStyle={"twitter"}
                 date={new Date(created_at).getTime()}
               />
             </div>
-            <span>|</span>
-            <div>{writer.username}</div>
+            <span className="hidden lg:block">|</span>
+            <div className="flex flex-row gap-[5px]"><span className="text-birulogo-sr font-semibold">By</span> {writer.username}</div>
           </div>
 
           <img
@@ -81,22 +82,25 @@ function EventPostCard({
             className="w-full h-full object-center object-cover lg:rounded-[10px] lg:h-[450px] "
           />
 
-          <div className="font-semibold text-xl text-black-sr flex flex-row gap-10">
-            <div>
-              Tanggal Event : <span className="font-normal">{date}</span>
+          <div className="font-semibold text-base lg:text-xl text-black-sr flex flex-col lg:flex-row gap-3 lg:gap-10">
+            <div className="flex gap-[5px] flex-row">
+              <div className="text-birulogo-sr ">Date of Event :</div> 
+              <span className="font-normal text-black-sr">{date}</span>
             </div>
-            <div>
-              Waktu Event : <span className="font-normal">{eventStartTime}</span>-
-              <span className="font-normal">{eventEndTime}</span>
+            <div className="flex flex-row gap-[5px] text-birulogo-sr">
+              Time of Event : 
+              <span className="font-normal text-black-sr">{eventStartTime} WIB</span>
+              <span>-</span>
+              <span className="font-normal text-black-sr">{eventEndTime} WIB</span>
             </div>
           </div>
-          <div className=" flex flex-col gap-5">
-            <div className="font-semibold text-xl text-black-sr">
-              Tentang Event
+          <div className=" flex flex-col gap-3 lg:gap-5">
+            <div className="font-semibold text-base lg:text-xl text-birulogo-sr">
+              About Event
             </div>
-            <p>
+            <div className="text-xs lg:text-base h-fit break-words">
               {content}
-            </p>
+            </div>
           </div>
         </div>
       </Dialog>

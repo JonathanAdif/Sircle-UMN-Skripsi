@@ -13,7 +13,10 @@ function EventComponentPage() {
   }, []);
   
   const supabase = useSupabaseClient();
+
   const [events, setEvents] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(6);
 
   function fetchEvent() {
     supabase
@@ -28,6 +31,9 @@ function EventComponentPage() {
       });
   }
 
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = events.slice(firstPostIndex, lastPostIndex);
 
   return (
     <>
@@ -41,10 +47,15 @@ function EventComponentPage() {
 
           <div className=" !w-full h-fit flex items-center  justify-evenly  flex-wrap gap-5">
           {events?.length > 0 &&
-            events.map((eventss) => <EventPostCard   key={eventss.id} {...eventss} />)}
+            currentPosts.map((eventss) => <EventPostCard   key={eventss.id} {...eventss} />)}
           </div>
 
-          {/* <PaginationComponent /> */}
+          <PaginationComponent 
+           totalPosts={events.length}
+           postsPerPage={postsPerPage}
+           setCurrentPage={setCurrentPage}
+           currentPage={currentPage}
+           />
         </div>
       </div>
     </>

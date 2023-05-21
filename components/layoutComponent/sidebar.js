@@ -49,6 +49,7 @@ function Sidebar() {
   }, []);
 
   const theId = "/profile/" + session.user.id;
+  const theIds = "/followingPost/" + session.user.id;
 
   return (
     <div className="sidebar z-20 font-poppins drop-shadow-sm fixed top-0 bottom-0 lg:left-0 p-2 w-10/12 lg:w-3/12 overflow-y-auto text-center bg-white-sr hidden lg:block">
@@ -88,6 +89,19 @@ function Sidebar() {
               Global
             </Button>
           </Link>
+{/* 
+          <Link href={theIds}>
+            <Button
+              className={
+                pathname == "/followingPost/" + profile?.id ? activeClasses : nonActiveClasses
+              }
+              startIcon={
+                <PublicOutlinedIcon sx={{ fontSize: { xs: 20, lg: 25 } }} />
+              }
+            >
+              Following Post
+            </Button>
+          </Link> */}
 
           <Link href={theId}>
             <Button

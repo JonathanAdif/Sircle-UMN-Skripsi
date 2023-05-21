@@ -130,7 +130,7 @@ function EventBanner({ onPost }) {
         aria-label="upload picture"
         component="label"
         onClick={handleClickOpen("paper")}
-        className=" !absolute !top-[150px] !right-[100px] !bg-white-sr !p-2.5"
+        className=" !absolute !top-[150px] !right-5 lg:!right-[100px] !bg-white-sr !p-2.5"
       >
         <AddCircleOutlineOutlinedIcon
           className=" !text-birulogo-sr"
@@ -148,7 +148,7 @@ function EventBanner({ onPost }) {
         <form onSubmit={handleSubmit(createEvent)}>
           <DialogTitle id="scroll-dialog-title">Add Event</DialogTitle>
           <DialogContent dividers={scroll === "paper"}>
-            <div className="flex flex-col gap-5 w-[500px]">
+            <div className="flex flex-col gap-5 lg:w-[500px]">
               <div className="font-bold text-xl text-black-sr">Event Title</div>
               <TextField
                 required
@@ -189,7 +189,7 @@ function EventBanner({ onPost }) {
               ></input>
 
               <div className="font-bold text-xl text-black-sr">Event Times</div>
-              <div className="flex flex-row gap-5">
+              <div className="flex flex-col lg:flex-row gap-5">
                 <label htmlFor="startTime">Select Start time:</label>
                 <input
                   required
@@ -293,7 +293,7 @@ function EventBanner({ onPost }) {
           </DialogActions>
         </form>
       </Dialog>
-      <div className=" font-normal text-3xl text-white-sr w-full lg:max-w-[400px]  ">
+      <div className=" font-normal lg:text-3xl text-white-sr w-full lg:max-w-[400px]  ">
         Academic. Non Academic. See Events.
       </div>
       {/* <div className="bg-white-sr flex flex-col lg:flex-row justify-between p-5 rounded-[10px] gap-2.5 lg:max-w-[535px]">
