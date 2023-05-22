@@ -8,7 +8,7 @@ import Index from "@/pages";
 import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
 import GradeOutlinedIcon from "@mui/icons-material/GradeOutlined";
 
-function rightbar1() {
+function Rightbar1() {
   const url =
     "https://newsapi.org/v2/top-headlines?country=us&apiKey=8b735770d48147f28af4bd4db2d08ca0";
 
@@ -122,4 +122,4 @@ function rightbar1() {
   );
 }
 
-export default rightbar1;
+export default Rightbar1;
