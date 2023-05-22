@@ -14,7 +14,7 @@ import { useState, useRef, useEffect } from "react";
 function ProfileComponent() {
   const { profile: myProfile } = useContext(UserContext);
 
-  const { followToggle, following, isFollowedByMe, follow, profile, posts, userId } =
+  const { followToggle, following, isFollowedByMe, follow, profile, posts } =
     useContext(globalContext);
 
   const followingnotnull =
@@ -30,7 +30,6 @@ function ProfileComponent() {
     setOpen(true);
     setScroll(scrollType);
   };
-  
 
   const handleClose = () => {
     setOpen(false);
@@ -48,32 +47,31 @@ function ProfileComponent() {
 
   // end dialog followers
 
-   // start dialog following
+  // start dialog following
 
-   const [openPop, setOpenPop] = useState(false);
-   const [scrollPop, setScrollPop] = useState("paper");
- 
-   const handleClickOpenPop = (scrollType) => () => {
-     setOpenPop(true);
-     setScrollPop(scrollType);
-   };
-   
- 
-   const handleClosePop = () => {
-     setOpenPop(false);
-   };
- 
-   const descriptionElementRefPop = useRef(null);
-   useEffect(() => {
-     if (openPop) {
-       const { current: descriptionElement } = descriptionElementRefPop;
-       if (descriptionElement !== null) {
-         descriptionElement.focus();
-       }
-     }
-   }, [openPop]);
- 
-   // end dialog following
+  const [openPop, setOpenPop] = useState(false);
+  const [scrollPop, setScrollPop] = useState("paper");
+
+  const handleClickOpenPop = (scrollType) => () => {
+    setOpenPop(true);
+    setScrollPop(scrollType);
+  };
+
+  const handleClosePop = () => {
+    setOpenPop(false);
+  };
+
+  const descriptionElementRefPop = useRef(null);
+  useEffect(() => {
+    if (openPop) {
+      const { current: descriptionElement } = descriptionElementRefPop;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [openPop]);
+
+  // end dialog following
 
   return (
     <>
@@ -81,7 +79,10 @@ function ProfileComponent() {
       <Sidebar />
 
       <div className="mainLayout2">
-        <ProfileBanner follow={followToggle} followstat={isFollowedByMe} />
+        <ProfileBanner
+          follow={followToggle}
+          followstat={isFollowedByMe}
+        />
 
         <div className="flex flex-row gap-5">
           <div className="mainLeftlayout">
@@ -110,17 +111,17 @@ function ProfileComponent() {
                   <div>Followers</div>
                   <div>{follow?.length}</div>
                 </div>
-                {follow?.length > 0 &&  follow.map((follows) =>(
-                  <DialogData
-                    key={follows.id}
-                    title={"followers"}
-                    open={open}
-                    handleClose={handleClose}
-                    stat={follow}
-                    scroll={scroll}
-             
-                  />
-                ))}
+                {follow?.length > 0 &&
+                  follow.map((follows) => (
+                    <DialogData
+                      key={follows.id}
+                      title={"followers"}
+                      open={open}
+                      handleClose={handleClose}
+                      stat={follow}
+                      scroll={scroll}
+                    />
+                  ))}
 
                 <div
                   className={
@@ -132,17 +133,17 @@ function ProfileComponent() {
                   <div>{following?.length}</div>
                 </div>
 
-                {following?.length > 0 &&  following?.map((follow) => (
-                  <DialogData
-                    key={follow.id}
-                    title={"following"}
-                    open={openPop}
-                    handleClose={handleClosePop}
-                    fstat={following}
-                    scroll={scrollPop}
-              
-                  />
-                ))}
+                {following?.length > 0 &&
+                  following?.map((follow) => (
+                    <DialogData
+                      key={follow.id}
+                      title={"following"}
+                      open={openPop}
+                      handleClose={handleClosePop}
+                      fstat={following}
+                      scroll={scrollPop}
+                    />
+                  ))}
               </div>
             </div>
           </div>

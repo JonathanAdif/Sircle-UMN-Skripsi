@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { globalContext } from "@/context/globalContext";
 import AvatarProfile from "../avatarCover/avatarProfile";
 import CoverProfile from "../avatarCover/cover";
@@ -9,14 +9,18 @@ import { useForm } from "react-hook-form";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useSession } from "@supabase/auth-helpers-react";
 
+import DialogData from "../addition/dialog";
+
 // icon
 import PersonAddAlt1OutlinedIcon from "@mui/icons-material/PersonAddAlt1Outlined";
 import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import Link from "next/link";
 
-function ProfileBanner({ follow, followstat }) {
-  const { profile, myUser, fetchUser, setProfile } = useContext(globalContext);
+function ProfileBanner({ follow: followed, followstat }) {
+  const { profile, myUser, fetchUser, setProfile, following, follow, posts } =
+    useContext(globalContext);
   const [editSection, seteditSection] = useState(false);
   const [username, setName] = useState("");
   const [bio, setBio] = useState("");
@@ -64,6 +68,61 @@ function ProfileBanner({ follow, followstat }) {
   // const isValid = watchContent || photoUploads.length > 0 ;
   // end disabled button
 
+  const followingnotnull = "flex flex-col items-center cursor-pointer";
+  const followingnull = "flex flex-col items-center";
+
+  // start dialog followers
+
+  const [openMobile, setOpenMobile] = useState(false);
+  const [scrollMobile, setScrollMobile] = useState("paper");
+
+  const handleClickOpenMobile = (scrollType) => () => {
+    setOpenMobile(true);
+    setScrollMobile(scrollType);
+  };
+
+  const handleCloseMobile = () => {
+    setOpenMobile(false);
+  };
+
+  const descriptionElementRefMobile = useRef(null);
+  useEffect(() => {
+    if (openMobile) {
+      const { current: descriptionElement } = descriptionElementRefMobile;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [openMobile]);
+
+  // end dialog followers
+
+  // start dialog following
+
+  const [openPopMobile, setOpenPopMobile] = useState(false);
+  const [scrollPopMobile, setScrollPopMobile] = useState("paper");
+
+  const handleClickOpenPopMobile = (scrollType) => () => {
+    setOpenPopMobile(true);
+    setScrollPopMobile(scrollType);
+  };
+
+  const handleClosePopMobile = () => {
+    setOpenPopMobile(false);
+  };
+
+  const descriptionElementRefPopMobile = useRef(null);
+  useEffect(() => {
+    if (openPopMobile) {
+      const { current: descriptionElement } = descriptionElementRefPopMobile;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [openPopMobile]);
+
+  // end dialog following
+
   return (
     <div className="w-full bg-white-sr drop-shadow-sm rounded-[10px] h-fit flex flex-col">
       {/* start profile photo  */}
@@ -88,9 +147,55 @@ function ProfileBanner({ follow, followstat }) {
       >
         {/* start profile stat area  */}
         <div className="pt-[5px] pb-[35px] w-full h-fit">
-          <div className="w-full px-5 h-fit m-auto flex flex-col gap-2.5">
-            <div className="flex flex-col gap-[2px]">
-              <div className="font-bold text-xl lg:text-2xl !text-black-sr  ">
+          <div className="w-full px-5 h-fit m-auto flex flex-col mt-2.5 gap-2.5">
+            <div className="flex flex-col gap-5 lg:gap-[2px]">
+              <div className=" lg:hidden flex flex-row justify-between items-center px-5">
+                <div
+                  className={
+                    follow?.length > 0 ? followingnotnull : followingnull
+                  }
+                  onClick={handleClickOpenMobile("paper")}
+                >
+                  <div>Followers</div>
+                  <div>{follow?.length}</div>
+                </div>
+                {follow?.length > 0 &&
+                  follow.map((follows) => (
+                    <DialogData
+                      key={follows.id}
+                      title={"followers"}
+                      open={openMobile}
+                      handleClose={handleCloseMobile}
+                      stat={follow}
+                      scroll={scrollMobile}
+                    />
+                  ))}
+                <div className="flex flex-col items-center">
+                  <div>Post</div>
+                  <div>{posts?.length}</div>
+                </div>
+                <div
+                  className={
+                    following?.length > 0 ? followingnotnull : followingnull
+                  }
+                  onClick={handleClickOpenPopMobile("paper")}
+                >
+                  <div>Following</div>
+                  <div>{following?.length}</div>
+                </div>
+                {following?.length > 0 &&
+                  following?.map((follow) => (
+                    <DialogData
+                      key={follow.id}
+                      title={"following"}
+                      open={openPopMobile}
+                      handleClose={handleClosePopMobile}
+                      fstat={following}
+                      scroll={scrollPopMobile}
+                    />
+                  ))}
+              </div>
+              <div className="font-bold text-xl lg:text-2xl !text-black-sr text-center lg:text-left ">
                 {!editSection && profile?.username}
                 {editSection && (
                   <Input
@@ -108,7 +213,7 @@ function ProfileBanner({ follow, followstat }) {
                   />
                 )}
               </div>
-              <div className="!font-medium !text-sm lg:!text-base !text-oldgray-sr !flex !flex-row !gap-2.5">
+              <div className="!font-medium !text-sm lg:!text-base !text-oldgray-sr !flex !flex-row !gap-2.5 text-center lg:text-left">
                 {!editSection && profile?.email}
 
                 {editSection && (
@@ -120,7 +225,7 @@ function ProfileBanner({ follow, followstat }) {
                 )}
               </div>
             </div>
-            <p className="font-medium text-xs lg:text-sm text-black-sr">
+            <p className="font-medium text-xs lg:text-sm text-black-sr text-center lg:text-left">
               {!editSection && profile?.bio}
 
               {editSection && (
@@ -138,6 +243,16 @@ function ProfileBanner({ follow, followstat }) {
                 />
               )}
             </p>
+            {!myUser && (
+              <Link href={`mailto:${profile?.email}`} target="_blank">
+                <Button
+                  variant="contained"
+                  className="lg:!hidden !bg-birulogo-sr !w-full !capitalize "
+                >
+                  Email
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
         {/* end profile stat area  */}
@@ -146,7 +261,11 @@ function ProfileBanner({ follow, followstat }) {
         <div>
           {!myUser && (
             <div className="w-full h-fit flex lg:flex-row gap-[15px] justify-end items-center p-5 ">
-              <a href={`mailto:${profile?.email}`} target="_blank" className="hidden lg:block">
+              <a
+                href={`mailto:${profile?.email}`}
+                target="_blank"
+                className="hidden lg:block"
+              >
                 <IconButton color="primary" aria-label="edit" component="label">
                   <EmailOutlinedIcon
                     className=" !text-birulogo-sr"
@@ -164,7 +283,7 @@ function ProfileBanner({ follow, followstat }) {
                     <PersonAddAlt1OutlinedIcon className="menu-icon" />
                   )
                 }
-                onClick={follow}
+                onClick={followed}
               >
                 {followstat ? "Following" : "follow"}
               </Button>
