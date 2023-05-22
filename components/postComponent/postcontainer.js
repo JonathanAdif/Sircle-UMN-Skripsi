@@ -11,6 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import Avatar from "../inpageComponent/avatarCover/avatar";
 import Listprp from "../inpageComponent/addition/likeList";
 import ReactTimeAgo from "react-time-ago";
+import ReadMoreLess from "../inpageComponent/addition/readMoreLess";
 
 import { useContext, useState, useEffect, useRef } from "react";
 
@@ -350,7 +351,9 @@ function Postcontainer({
       {/* <!-- end header postingan  --> */}
 
       {/* <!-- start konten caption isi postingan  --> */}
-      <p className="font-medium text-black-sr text-sm">{content}</p>
+      <ReadMoreLess>
+        {content}
+      </ReadMoreLess>
       {/* <!-- end konten caption isi postingan  --> */}
       <div>
         {/* <!-- start komponen slider gambar postingan  --> */}
