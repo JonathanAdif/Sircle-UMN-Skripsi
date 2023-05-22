@@ -155,12 +155,17 @@ function EventBanner({ onPost }) {
                 fullWidth
                 label="Long Event Title"
                 id="fullWidth"
+                error={errors.el_title}
+                helperText={errors.el_title?.message}
                 {...register("el_title", {
                   minLength: {
-                    value: 1,
-                    message: "Please write the content",
+                    value: 10,
+                    message: "Min Character for long title is 10 Character",
                   },
-                  maxLength: 5,
+                  maxLength: {
+                    value: 60,
+                    message: "Max Character for long title is 60 Character",
+                  },
                 })}
               />
               <TextField
@@ -168,10 +173,16 @@ function EventBanner({ onPost }) {
                 fullWidth
                 label="Short Event Title"
                 id="fullWidth"
+                error={errors.es_title}
+                helperText={errors.es_title?.message}
                 {...register("es_title", {
                   minLength: {
-                    value: 1,
-                    message: "Please write the content",
+                    value: 5,
+                    message: "Min Character for short title is 5 Character",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "Max Character for short title is 10 Character",
                   },
                 })}
               />
@@ -227,10 +238,16 @@ function EventBanner({ onPost }) {
                 rows={10}
                 className="w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none "
                 placeholder="Write about your event here.."
+                error={errors.content}
+                helperText={errors.content?.message}
                 {...register("content", {
                   minLength: {
-                    value: 1,
-                    message: "Please write the content",
+                    value: 5,
+                    message: "Min Character for event content is 5 Character",
+                  },
+                  maxLength: {
+                    value: 800,
+                    message: "Max Character for event content is 800 Character",
                   },
                 })}
               />

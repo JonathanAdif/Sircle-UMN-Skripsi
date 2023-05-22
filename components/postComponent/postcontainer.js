@@ -328,7 +328,7 @@ function Postcontainer({
                 open={openPop}
                 anchorEl={anchorEl}
                 onClose={handlepopperClose}
-                className=" !left-[-65px] "
+                className=" lg:!left-[-65px] "
                 anchorOrigin={{
                   vertical: "bottom",
                   horizontal: "left",

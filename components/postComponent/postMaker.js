@@ -225,14 +225,21 @@ function PostMaker1({ onPost }) {
           <form onSubmit={handleSubmit(createPost)}>
             <TextField
               id="outlined-multiline-static"
+              error={errors.content}
               multiline
               rows={3}
               className="w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none"
               placeholder="Whats going on in your beautiful mind..."
+              // error
+              helperText={errors.content?.message}
               {...register("content", {
                 minLength: {
-                  value: 1,
-                  message: "Please write the content",
+                  value: 5,
+                  message: "Please write the content with minimum 5 words",
+                },
+                maxLength: {
+                  value: 1000,
+                  message: "Max Character is 1000 Character",
                 },
               })}
             />
