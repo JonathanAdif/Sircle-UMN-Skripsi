@@ -200,7 +200,7 @@ function ProfileBanner({ follow: followed, followstat }) {
                 {editSection && (
                   <Input
                     placeholder="Write down your name"
-                    className="!font-bold !text-xl !lg:text-2xl !text-black-sr !w-2/3"
+                    className="!font-bold !text-base !lg:text-2xl !text-black-sr  w-full lg:!w-2/3"
                     // onChange={ev => setName(ev.target.value)}
                     {...register("username", {
                       onChange: (e) => setName(e.target.value),
@@ -213,14 +213,14 @@ function ProfileBanner({ follow: followed, followstat }) {
                   />
                 )}
               </div>
-              <div className="!font-medium !text-sm lg:!text-base !text-oldgray-sr !flex !flex-row !gap-2.5 text-center lg:text-left">
+              <div className="!font-medium !text-sm lg:!text-base !text-oldgray-sr !text-center lg:!text-left">
                 {!editSection && profile?.email}
 
                 {editSection && (
                   <Input
                     disabled
                     defaultValue={profile?.email}
-                    className="!font-medium !text-sm lg:!text-base !text-oldgray-sr !w-2/3"
+                    className="!font-medium !text-sm lg:!text-base !text-oldgray-sr w-full lg:!w-2/3"
                   />
                 )}
               </div>
@@ -231,7 +231,7 @@ function ProfileBanner({ follow: followed, followstat }) {
               {editSection && (
                 <Input
                   placeholder="Write down your bio"
-                  className="!font-medium !text-xs lg:!text-sm !text-black-sr !w-2/3"
+                  className="!font-medium !text-xs lg:!text-sm !text-black-sr  w-full lg:!w-2/3"
                   {...register("bio", {
                     onChange: (e) => setBio(e.target.value),
                     minLength: {
@@ -252,6 +252,26 @@ function ProfileBanner({ follow: followed, followstat }) {
                   Email
                 </Button>
               </Link>
+            )}
+            {myUser && editSection && (
+              <div className="w-full h-fit flex py-2.5 px-[45px] flex-row gap-2.5 lg:hidden">
+                <Button
+                  disabled={!isValid}
+                  type="submit"
+                  variant="contained"
+                  className="!bg-birulogo-sr text-sm lg:text-base disabled:!opacity-25 disabled:!text-white-sr !capitalize "
+                >
+                  Save Profile
+                </Button>
+
+                <Button
+                  variant="contained"
+                  className=" !bg-red-700 disabled:!opacity-25 disabled:!text-white-sr !capitalize "
+                  onClick={() => seteditSection(false)}
+                >
+                  Cancel
+                </Button>
+              </div>
             )}
           </div>
         </div>
@@ -312,24 +332,29 @@ function ProfileBanner({ follow: followed, followstat }) {
           )}
 
           {myUser && editSection && (
-            <div className="w-full h-fit flex justify-end p-5 flex-row gap-2.5">
-              <Button
-                disabled={!isValid}
-                type="submit"
-                variant="contained"
-                className="!bg-birulogo-sr  disabled:!opacity-25 disabled:!text-white-sr !capitalize "
-              >
-                Save Profile
-              </Button>
+            <>
+              <div className="w-full  h-fit  justify-end p-10 lg:p-5 flex-row gap-2.5"></div>
+              <div className="w-full hidden lg:block h-fit  ">
+                <div className="flex flex-row gap-2.5 justify-end px-5">
+                  <Button
+                    disabled={!isValid}
+                    type="submit"
+                    variant="contained"
+                    className="!bg-birulogo-sr text-sm lg:text-base disabled:!opacity-25 disabled:!text-white-sr !capitalize "
+                  >
+                    Save Profile
+                  </Button>
 
-              <Button
-                variant="contained"
-                className=" !bg-red-700 disabled:!opacity-25 disabled:!text-white-sr !capitalize "
-                onClick={() => seteditSection(false)}
-              >
-                Cancel
-              </Button>
-            </div>
+                  <Button
+                    variant="contained"
+                    className=" !bg-red-700 disabled:!opacity-25 disabled:!text-white-sr !capitalize "
+                    onClick={() => seteditSection(false)}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </>
           )}
         </div>
 
