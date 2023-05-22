@@ -3,14 +3,19 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
-import Index from "@/pages";
 
 import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
 import GradeOutlinedIcon from "@mui/icons-material/GradeOutlined";
 
 function Rightbar1() {
-  const url =
-    "https://newsapi.org/v2/top-headlines?country=us&apiKey=8b735770d48147f28af4bd4db2d08ca0";
+  const url = {
+    method: "GET",
+    url: "https://api.newscatcherapi.com/v2/search",
+    params: { q: "Bitcoin", lang: "en", sort_by: "relevancy", page: "1" },
+    headers: {
+      "x-api-key": "AUrWBdQZUx_2STkcX5LCLTvzSV6D_dp_eodBDk09E8Q",
+    },
+  };
 
   useEffect(() => {
     fetchEvent();
@@ -34,7 +39,7 @@ function Rightbar1() {
 
   function fetchNews() {
     axios
-      .get(url)
+      .request(url)
       .then((response) => {
         setNews(response.data);
       })
@@ -60,12 +65,12 @@ function Rightbar1() {
               <div className=" flex flex-row gap-[15px]" key={index}>
                 <img
                   className="h-[50px] w-[80px] object-cover"
-                  src={newss.urlToImage}
+                  src={newss.media}
                   alt=""
                 />
 
                 <div className="flex flex-col">
-                  <Link href={newss.url} target="_blank">
+                  <Link href={newss.link} target="_blank">
                     <div className="text-base text-black-sr font-semibold">
                       {newss.title}
                     </div>
