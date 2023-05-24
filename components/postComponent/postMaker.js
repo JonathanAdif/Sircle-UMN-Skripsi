@@ -341,8 +341,8 @@ function PostMaker1({ onPost }) {
                 disableRestoreFocus
               >
                 <ul className="p-2.5">
-                  <li>test</li>
-                  <li>test</li>
+                  <li>Min Size for image Upload is 5 MB</li>
+                  <li>Min Size for video Upload is 15 MB</li>
                 </ul>
               </Popover>
 

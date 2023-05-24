@@ -83,7 +83,7 @@ function EventPostCard({
   return (
     <>
       <div
-        className="!w-[270px] relative !h-[205px] bg-white-sr rounded-[10px] shadow-sm cursor-pointer "
+        className="!w-full relative !h-[205px] bg-white-sr rounded-[10px] shadow-sm cursor-pointer "
         onClick={handleClickOpen}
       >
         <div className="bg-white-sr absolute z-0 bottom-0 rounded-[10px] py-2.5 px-[15px] w-full ">
@@ -113,8 +113,8 @@ function EventPostCard({
           <h2 className="font-bold mt-5 lg:mt-0 text-black-sr text-2xl lg:text-3xl capitalize">
             {Ltitle}
           </h2>
-          <div className="flex flex-col lg:flex-row lg:gap-5 lg:items-center text-xs lg:text-base justify-between">
-            <div className=" flex lg:flex-row lg:gap-5">
+          <div className="flex flex-row lg:flex-row lg:gap-5 lg:items-center text-xs lg:text-base justify-between">
+            <div className=" flex flex-col lg:flex-row lg:gap-5">
               <div className="flex flex-row gap-[5px]">
                 <span className="text-birulogo-sr font-semibold">Posted</span>
                 <ReactTimeAgo

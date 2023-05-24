@@ -8,14 +8,7 @@ import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
 import GradeOutlinedIcon from "@mui/icons-material/GradeOutlined";
 
 function Rightbar1() {
-  const url = {
-    method: "GET",
-    url: "https://api.newscatcherapi.com/v2/search",
-    params: { q: "Bitcoin", lang: "en", sort_by: "relevancy", page: "1" },
-    headers: {
-      "x-api-key": "AUrWBdQZUx_2STkcX5LCLTvzSV6D_dp_eodBDk09E8Q",
-    },
-  };
+  const url = "https://berita-indo-api.vercel.app/v1/cnn-news";
 
   useEffect(() => {
     fetchEvent();
@@ -39,7 +32,7 @@ function Rightbar1() {
 
   function fetchNews() {
     axios
-      .request(url)
+      .get(url)
       .then((response) => {
         setNews(response.data);
       })
@@ -50,7 +43,7 @@ function Rightbar1() {
 
   return (
     <div className="w-4/12 hidden lg:block">
-      <div className="w-[300px] h-[500px] overflow-auto px-[35px] py-[25px] bg-white-sr fixed drop-shadow-sm rounded-[10px] flex flex-col gap-[15px]">
+      <div className="w-[300px] h-2/3 overflow-auto px-[35px] py-[25px] bg-white-sr fixed drop-shadow-sm rounded-[10px] flex flex-col gap-[15px]">
         <div className="flex flex-col gap-[15px]">
           <div className="text-left font-bold text-black-sr text-xl flex flex-row gap-[5px]">
             <div>
@@ -61,23 +54,23 @@ function Rightbar1() {
             </div>
           </div>
           {news &&
-            news?.articles?.slice(0, 3).map((newss, index) => (
-              <div className=" flex flex-row gap-[15px]" key={index}>
+            news.data?.slice(0, 3).map((newss, index) => (
+              <div className=" flex flex-row gap-[15px]" key={index} >
                 <img
                   className="h-[50px] w-[80px] object-cover"
-                  src={newss.media}
+                  src={newss.image.small}
                   alt=""
                 />
 
                 <div className="flex flex-col">
                   <Link href={newss.link} target="_blank">
                     <div className="text-base text-black-sr font-semibold">
-                      {newss.title}
+                      {newss?.title}
                     </div>
                   </Link>
-                  <div className="text-xs text-oldgray-sr font-semibold">
+                  {/* <div className="text-xs text-oldgray-sr font-semibold">
                     {newss.author}
-                  </div>
+                  </div> */}
                 </div>
               </div>
             ))}

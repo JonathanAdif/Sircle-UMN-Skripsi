@@ -149,7 +149,7 @@ function EventBanner({ onPost }) {
           <DialogTitle id="scroll-dialog-title">Add Event</DialogTitle>
           <DialogContent dividers={scroll === "paper"}>
             <div className="flex flex-col gap-5 lg:w-[500px]">
-              <div className="font-bold text-xl text-black-sr">Event Title</div>
+              <div className="font-bold text-xl text-black-sr">Event Title <span className="text-red-600">*</span></div>
               <TextField
                 required
                 fullWidth
@@ -186,7 +186,7 @@ function EventBanner({ onPost }) {
                   },
                 })}
               />
-              <div className="font-bold text-xl text-black-sr">Event Date</div>
+              <div className="font-bold text-xl text-black-sr">Event Date <span className="text-red-600">*</span></div>
               <input
                 required
                 type="date"
@@ -199,7 +199,7 @@ function EventBanner({ onPost }) {
                 })}
               ></input>
 
-              <div className="font-bold text-xl text-black-sr">Event Times</div>
+              <div className="font-bold text-xl text-black-sr">Event Times <span className="text-red-600">*</span></div>
               <div className="flex flex-col lg:flex-row gap-5">
                 <label htmlFor="startTime">Select Start time:</label>
                 <input
@@ -229,7 +229,7 @@ function EventBanner({ onPost }) {
                 ></input>
               </div>
               <div className="font-bold text-xl text-black-sr">
-                Event Content
+                Event Content <span className="text-red-600">*</span>
               </div>
               <TextField
                 id="outlined-multiline-static"
@@ -254,7 +254,7 @@ function EventBanner({ onPost }) {
               <div className="flex flex-col gap-5">
                 <div className="flex flex-row items-center justify-between">
                   <div className="font-bold text-xl text-black-sr">
-                    Event Poster
+                    Event Poster <span className="text-red-600">*</span>
                   </div>
                   <IconButton
                     color="primary"
@@ -267,7 +267,6 @@ function EventBanner({ onPost }) {
                       hidden
                       accept="image/*"
                       type="file"
-                      multiple
                       onChange={addPhoto}
                     />
                     <ImageOutlinedIcon

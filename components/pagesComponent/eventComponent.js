@@ -45,7 +45,7 @@ function EventComponentPage() {
 
         <div className="flex w-full h-fit flex-col gap-[30px]">
 
-          <div className=" !w-full h-fit flex items-center  justify-evenly  flex-wrap gap-5">
+          <div className="columns-3 grid gap-5 grid-cols-3">
           {events?.length > 0 &&
             currentPosts.map((eventss) => <EventPostCard   key={eventss.id} {...eventss} />)}
           </div>
