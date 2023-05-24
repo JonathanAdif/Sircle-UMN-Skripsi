@@ -50,7 +50,7 @@ function Rightbar1() {
               <NewspaperOutlinedIcon />
             </div>
             <div>
-              <span className=" text-birulogo-sr">UMN </span> Daily
+              <span className=" text-birulogo-sr">Sircle </span> Daily
             </div>
           </div>
           {news &&
