@@ -1,4 +1,4 @@
-import Avatar from "../inpageComponent/avatarCover/avatar";
+import Avatarr from "../inpageComponent/avatarCover/avatar";
 import { useContext } from "react";
 import { UserContext } from "@/context/userContext";
 import IconButton from "@mui/material/IconButton";
@@ -105,7 +105,7 @@ function Header() {
               profilesList.map((plist) => (
                 <Link href={"/profile/" + plist?.id} key={plist.id}>
                   <div className="flex flex-row items-center gap-5 cursor-pointer w-full h-fit hover:bg-birulogo-sr rounded-[10px] hover:text-white-sr p-2.5">
-                    <Avatar url={plist.avatar} />
+                    <Avatarr url={plist.avatar} />
                     <div className="text-sm lg:text-base">{plist.username}</div>
                   </div>
                 </Link>
@@ -118,7 +118,7 @@ function Header() {
       <div className="flex flex-row items-center gap-[15px] lg:gap-5">
         
         <Link href={"/profile/" + profile?.id}>
-          <Avatar url={profile?.avatar} />
+          <Avatarr url={profile?.avatar} />
         </Link>
       </div>
     </div>

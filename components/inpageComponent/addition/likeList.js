@@ -3,7 +3,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
-import Avatar from "../avatarCover/avatar";
+import Avatarr from "../avatarCover/avatar";
 import Button from "@mui/material/Button";
 import { useContext, useState, useEffect } from "react";
 import { globalContext } from "@/context/globalContext";
@@ -101,7 +101,7 @@ function LikeList({ listAvatar, listUsername, myLike, profileLike }) {
     <List sx={{ width: "100%", maxWidth: 750, bgcolor: "background.paper" }}>
       <ListItem className="!flex !flex-row !items-center">
         <div className="flex flex-row gap-5 items-center w-full h-fit">
-          <Avatar url={listAvatar} />
+          <Avatarr url={listAvatar} />
 
           <Link href={"/profile/" + profileLike}>
             <ListItemText

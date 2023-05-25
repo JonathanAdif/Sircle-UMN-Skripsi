@@ -8,7 +8,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import Link from "next/link";
 import IconButton from "@mui/material/IconButton";
 
-import Avatar from "../inpageComponent/avatarCover/avatar";
+import Avatarr from "../inpageComponent/avatarCover/avatar";
 import Listprp from "../inpageComponent/addition/likeList";
 import ReactTimeAgo from "react-time-ago";
 import ReadMoreLess from "../inpageComponent/addition/readMoreLess";
@@ -271,7 +271,7 @@ function Postcontainer({
       {/* <!-- start header postingan  --> */}
       <div className="flex flex-row justify-between items-start">
         <div className="flex flex-row gap-2.5 items-center">
-          <Avatar url={writerprofile.avatar} />
+          <Avatarr url={writerprofile.avatar} />
           <div>
             <Link href={"/profile/" + writerprofile.id}>
               <div className="text-base font-semibold text-black-sr h-fit pr-5 ">
@@ -474,7 +474,7 @@ function Postcontainer({
       {toggle ? (
         <div className="flex flex-col gap-[15px]">
           <div className="flex flex-row items-center gap-2.5 !w-full h-fit">
-            <Avatar url={myProfile?.avatar} />
+            <Avatarr url={myProfile?.avatar} />
             <form onSubmit={postComment} className="w-full h-fit">
               <input
                 className="!w-full h-fit py-2.5 px-2.5 resize-none focus:!outline-none !font-normal "
@@ -488,7 +488,7 @@ function Postcontainer({
             {comments.length > 0 &&
               comments.map((comment) => (
                 <div key={comment.id} className="mt-2 flex gap-2 items-center">
-                  <Avatar url={comment.profiles.avatar} />
+                  <Avatarr url={comment.profiles.avatar} />
                   <div className=" bg-gray-sr bg-opacity-20 py-2 px-4 rounded-[10px]">
                     <div className="flex flex-row gap-2.5">
                       <Link href={"/profile/" + comment.profiles.id}>

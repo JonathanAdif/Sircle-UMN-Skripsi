@@ -2,11 +2,11 @@ import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
-import { Avatar } from "@mui/material";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useState } from "react";
 import { uploadProfileSectionImage } from "@/helper/userHelper";
 import Spinner from "../addition/spinner";
+import Avatar from "@mui/material/Avatar";
 
 // icon
 import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
@@ -37,11 +37,11 @@ function AvatarProfile({ url, editable, onChange }) {
 
   return (
     <div>
-      <a data-fancybox="single" href={url}>
-        <img
-          src={url}
-          className="w-[150px]  z-10 lg:w-[180px] rounded-full absolute cursor-pointer top-[145px] lg:top-[115px] left-5 lg:left-[30px] ring ring-birulogo-sr  ring-offset-0"
+      <a data-fancybox="single" href={url}  className=" z-10 rounded-full absolute cursor-pointer top-[145px] lg:top-[115px] left-5 lg:left-[30px] ring ring-birulogo-sr  ring-offset-0">
+        <Avatar
           alt="Avatar Profile"
+          src={url}
+          className="!w-[150px] !h-[150px] lg:!w-[180px] lg:!h-[180px]"
         />
       </a>
 
