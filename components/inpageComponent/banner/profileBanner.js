@@ -5,6 +5,7 @@ import CoverProfile from "../avatarCover/cover";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
+import TextField from '@mui/material/TextField';
 import { useForm } from "react-hook-form";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useSession } from "@supabase/auth-helpers-react";
@@ -147,8 +148,8 @@ function ProfileBanner({ follow: followed, followstat }) {
       >
         {/* start profile stat area  */}
         <div className="pt-[5px] pb-[35px] w-full h-fit">
-          <div className="w-full px-5 h-fit m-auto flex flex-col mt-2.5 gap-2.5">
-            <div className="flex flex-col gap-5 lg:gap-[2px]">
+          <div className="w-full px-5 h-fit m-auto flex flex-col mt-2.5 gap-5">
+            <div className="flex flex-col gap-5 lg:gap-[5px]">
               <div className=" lg:hidden flex flex-row justify-between items-center px-5">
                 <div
                   className={
@@ -198,15 +199,22 @@ function ProfileBanner({ follow: followed, followstat }) {
               <div className="font-bold text-xl lg:text-2xl !text-black-sr text-center lg:text-left ">
                 {!editSection && profile?.username}
                 {editSection && (
-                  <Input
+                  <TextField
+                    required
                     placeholder="Write down your name"
                     className="!font-bold !text-base !lg:text-2xl !text-black-sr  w-full lg:!w-2/3"
                     // onChange={ev => setName(ev.target.value)}
+                    error={errors.username}
+                    helperText={errors.username?.message}
                     {...register("username", {
                       onChange: (e) => setName(e.target.value),
                       minLength: {
                         value: 1,
                         message: "Please write down your name",
+                      },
+                      maxLength: {
+                        value: 40,
+                        message: "Max Character for username is 40 Character",
                       },
                     })}
                     value={username}
@@ -217,7 +225,7 @@ function ProfileBanner({ follow: followed, followstat }) {
                 {!editSection && profile?.email}
 
                 {editSection && (
-                  <Input
+                  <TextField
                     disabled
                     defaultValue={profile?.email}
                     className="!font-medium !text-sm lg:!text-base !text-oldgray-sr w-full lg:!w-2/3"
@@ -229,14 +237,20 @@ function ProfileBanner({ follow: followed, followstat }) {
               {!editSection && profile?.bio}
 
               {editSection && (
-                <Input
+                <TextField
                   placeholder="Write down your bio"
                   className="!font-medium !text-xs lg:!text-sm !text-black-sr  w-full lg:!w-2/3"
+                  error={errors.bio}
+                  helperText={errors.bio?.message}
                   {...register("bio", {
                     onChange: (e) => setBio(e.target.value),
                     minLength: {
                       value: 1,
                       message: "Please write down your bio",
+                    },
+                    maxLength: {
+                      value: 100,
+                      message: "Max Character for bio is 100 Character",
                     },
                   })}
                   value={bio}
