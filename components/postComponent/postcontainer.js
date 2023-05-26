@@ -39,9 +39,10 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
 import Popover from "@mui/material/Popover";
+import Comments from "../inpageComponent/addition/comments";
 
 function Postcontainer({
-  id,
+  id:post_id,
   content,
   profiles: writerprofile,
   created_at,
@@ -85,7 +86,7 @@ function Postcontainer({
     supabase
       .from("savedpost")
       .select()
-      .eq("post_id", id)
+      .eq("post_id", post_id)
       .eq("user_id", myProfile?.id)
       .then((result) => {
         if (result.data.length > 0) {
@@ -101,16 +102,16 @@ function Postcontainer({
       .from('likes')
       .select("*, profiles(*)")
       .order("created_at", { ascending: false })
-      .eq('post_id', id)
+      .eq('post_id', post_id)
       .then((result) => setLikes(result.data));
   }
 
   function fetchComments() {
     supabase
       .from("posts")
-      .select("*, profiles(*)")
+      .select("id, content, created_at, writer, parent, profiles(*)")
       .order("created_at", { ascending: false })
-      .eq("parent", id)
+      .eq("parent", post_id)
       .then((result) => setComments(result.data));
   }
 
@@ -123,7 +124,7 @@ function Postcontainer({
       supabase
         .from("likes")
         .delete()
-        .eq("post_id", id)
+        .eq("post_id", post_id)
         .eq("user_id", myProfile.id)
         .then(() => {
           fetchLikes();
@@ -133,7 +134,7 @@ function Postcontainer({
     supabase
       .from("likes")
       .insert({
-        post_id: id,
+        post_id: post_id,
         user_id: myProfile.id,
       })
       .then((result) => {
@@ -152,7 +153,7 @@ function Postcontainer({
       .insert({
         content: commentText,
         writer: myProfile.id,
-        parent: id,
+        parent: post_id,
       })
       .then((result) => {
         console.log(result);
@@ -192,7 +193,7 @@ function Postcontainer({
       supabase
         .from("savedpost")
         .delete()
-        .eq("post_id", id)
+        .eq("post_id", post_id)
         .eq("user_id", myProfile?.id)
         .then((result) => {
           setIsSaved(false);
@@ -204,7 +205,7 @@ function Postcontainer({
         .from("savedpost")
         .insert({
           user_id: myProfile.id,
-          post_id: id,
+          post_id: post_id,
         })
         .then((result) => {
           setIsSaved(true);
@@ -216,7 +217,7 @@ function Postcontainer({
     const { data, error } = await supabase
       .from("posts")
       .delete()
-      .eq("id", id)
+      .eq("id", post_id)
       .eq("writer", myProfile.id);
 
     if (error) {
@@ -230,24 +231,7 @@ function Postcontainer({
     window.location.reload(false);
   };
 
-  const deletingComment = async () => {
-    const { data, error } = await supabase
-      .from("posts")
-      .delete()
-      // .eq("id", id)
-      .eq("parent", id)
-      .eq("writer", myProfile.id);
-
-    if (error) {
-      console.log(error);
-    }
-
-    if (data) {
-      console.log(data);
-    }
-
-    window.location.reload(false);
-  };
+  
 
   // start open popper
 
@@ -265,6 +249,7 @@ function Postcontainer({
   const idPop = openPop ? "simple-popover" : undefined;
 
   // end open popper
+
 
   return (
     <div className="w-full h-fit bg-white-sr px-5 py-[30px] rounded-[10px] drop-shadow-sm flex flex-col gap-5">
@@ -481,35 +466,14 @@ function Postcontainer({
                 placeholder={"comment as " + myProfile?.username + " ..."}
                 value={commentText}
                 onChange={(ev) => setCommentText(ev.target.value)}
-                maxlength="50"
+                maxLength="50"
               />
             </form>
           </div>
           <div>
             {comments.length > 0 &&
               comments.map((comment) => (
-                <div key={comment.id} className="mt-2 flex gap-2 items-center">
-                  <Avatarr url={comment.profiles.avatar} />
-                  <div className=" bg-gray-sr bg-opacity-20 py-2 px-4 rounded-[10px]">
-                    <div className="flex flex-row gap-2.5">
-                      <Link href={"/profile/" + comment.profiles.id}>
-                        <span className="hover:underline font-semibold mr-1">
-                          {comment.profiles.username}
-                        </span>
-                      </Link>
-                      <span className="text-sm text-oldgray-sr">
-                        <ReactTimeAgo
-                          timeStyle={"twitter"}
-                          date={new Date(comment.created_at).getTime()}
-                        />
-                      </span>
-                    </div>
-                    <p className="text-sm">{comment.content}</p>
-                    { comment.writer == session.user.id && (
-                     <div className=" font-normal text-birulogo-sr text-xs mt-1 cursor-pointer" onClick={deletingComment}>Delete</div>
-                    )}
-                  </div>
-                </div>
+               <Comments key={comment.id} {...comment}/>
               ))}
           </div>
         </div>
