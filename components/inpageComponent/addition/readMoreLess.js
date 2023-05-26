@@ -14,7 +14,7 @@ function ReadMoreLess({ children }) {
   let length = text.length;
 
   return (
-    <div className="font-medium text-black-sr text-sm !break-words">
+    <div className="font-medium text-black-sr text-sm !break-words whitespace-pre-line">
       {readMoreShow ? children : children.substr(0,200)}
       <span className={length < 200 ? hideButton : showButton} onClick={toggleReadMore}>
        <span className="text-black-sr"></span> {readMoreShow ? "..Read Less" : "Read More.." } 

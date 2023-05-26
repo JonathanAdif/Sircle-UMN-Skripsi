@@ -481,6 +481,7 @@ function Postcontainer({
                 placeholder={"comment as " + myProfile?.username + " ..."}
                 value={commentText}
                 onChange={(ev) => setCommentText(ev.target.value)}
+                maxlength="50"
               />
             </form>
           </div>
