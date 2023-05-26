@@ -53,7 +53,7 @@ function Comments({
             />
           </span>
         </div>
-        <p className="text-sm">{content}</p>
+        <p className="text-sm !w-fit !max-w-[220px] lg:!max-w-[320px] !break-words">{content}</p>
         {writer == session.user.id && (
           <div
             className=" font-normal text-birulogo-sr text-xs mt-1 cursor-pointer"
